@@ -5,3 +5,5 @@ server/.env
 .DS_Store
 .netlify/
 *.log
+*.zip
+nastroblu-hostinger-public_html.zip

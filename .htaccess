@@ -1,0 +1,25 @@
+# Force HTTPS + clean URLs on Hostinger Apache (public_html)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirect www → apex
+  RewriteCond %{HTTP_HOST} ^www\.nastroblu\.in$ [NC]
+  RewriteRule ^(.*)$ https://nastroblu.in/$1 [R=301,L]
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Pretty paths
+  RewriteRule ^about/?$ about.html [L]
+  RewriteRule ^product/?$ product.html [L,QSA]
+  RewriteRule ^admin/?$ admin/index.html [L]
+</IfModule>
+
+# Security / cache basics
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+Options -Indexes
