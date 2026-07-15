@@ -9,6 +9,11 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+[[headers]]
+  for = "/assets/og-image.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[redirects]]
   from = "/product"
   to = "/product.html"
@@ -18,3 +23,10 @@
   from = "/about"
   to = "/about.html"
   status = 200
+
+# Keep www → apex once domain is connected on Netlify
+[[redirects]]
+  from = "https://www.nastroblu.in/*"
+  to = "https://nastroblu.in/:splat"
+  status = 301
+  force = true
