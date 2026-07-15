@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product — Nastro Blu</title>
+  <meta name="description" content="Nastro Blu product specification — packaging details, MRP, SKU, ingredients." />
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="platform-bar">
+    <div class="wrap platform-bar__inner">
+      <span>Product registry · Packaging specification</span>
+      <a href="index.html#shop">← Back to catalog</a>
+    </div>
+  </div>
+
+  <header class="nav solid" id="nav">
+    <div class="wrap nav__inner">
+      <a href="index.html" class="brand" aria-label="Nastro Blu home">
+        <img class="brand__logo" src="assets/logo.png" alt="Nastro Blu" />
+        <span>
+          <span class="brand__name">Nastro Blu</span>
+          <span class="brand__sub">Eat Better</span>
+        </span>
+      </a>
+      <nav class="nav__links" id="navLinks">
+        <a href="index.html#shop">Shop</a>
+        <a href="about.html">About</a>
+        <a href="index.html#visit">Visit</a>
+        <a href="https://wa.me/919063048255?text=Hi%20Nastro%20Blu!" class="btn btn--gold nav__cta">WhatsApp</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:.7rem">
+        <button type="button" class="nav__cart" id="cartBtn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L5 3H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.3" fill="currentColor"/><circle cx="18" cy="20" r="1.3" fill="currentColor"/></svg>
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+        <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap product-page" id="productPage">
+    <p class="product-loading">Loading product…</p>
+  </main>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="drawer__head">
+      <h3>Your cart</h3>
+      <button type="button" class="modal__close" id="closeCart" aria-label="Close cart">×</button>
+    </div>
+    <div class="drawer__body" id="cartBody"></div>
+    <div class="drawer__foot">
+      <div class="drawer__total"><span>Total</span><span id="cartTotal">₹0</span></div>
+      <a class="btn btn--gold btn--block" id="checkoutWa" href="https://wa.me/919063048255" target="_blank" rel="noopener">Checkout on WhatsApp</a>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status"></div>
+
+  <footer class="foot">
+    <div class="wrap foot__bottom" style="border:0;padding-top:0">
+      <span class="foot__tag">Nastro Blu · Eat Better</span>
+      <span>Packaging data is for catalog reference — confirm live pack for batch dates.</span>
+    </div>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="shared.js"></script>
+  <script src="product-page.js"></script>
+</body>
+</html>

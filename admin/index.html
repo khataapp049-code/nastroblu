@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nastro Blu Admin</title>
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div id="loginView" class="auth">
+    <form id="loginForm" class="auth-card">
+      <img src="../assets/logo.png" alt="Nastro Blu" class="auth-logo" />
+      <h1>Nastro Blu Admin</h1>
+      <p>Manage products, descriptions &amp; MRP</p>
+      <label>Email<input type="email" id="email" required value="admin@nastroblu.in" /></label>
+      <label>Password<input type="password" id="password" required /></label>
+      <button type="submit">Sign in</button>
+      <p id="loginError" class="error" hidden></p>
+    </form>
+  </div>
+
+  <div id="appView" class="app" hidden>
+    <header class="top">
+      <div>
+        <strong>Nastro Blu Admin</strong>
+        <span id="adminEmail" class="muted"></span>
+      </div>
+      <div class="top-actions">
+        <a href="/" target="_blank">View storefront</a>
+        <button type="button" id="btnNew" class="primary">+ Add product</button>
+        <button type="button" id="btnLogout">Logout</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="list-panel">
+        <div class="list-head">
+          <h2>Products</h2>
+          <input type="search" id="search" placeholder="Search name / SKU" />
+        </div>
+        <div id="productList" class="list"></div>
+      </section>
+
+      <section class="form-panel">
+        <h2 id="formTitle">Edit product</h2>
+        <form id="productForm">
+          <input type="hidden" id="docId" />
+          <div class="grid2">
+            <label>Product name *<input id="name" required /></label>
+            <label>Brand<input id="brand" value="Nastro Blu" /></label>
+            <label>Category
+              <select id="category">
+                <option value="produce">Naturally Grown Produce</option>
+                <option value="oils">Cold Pressed Oils</option>
+                <option value="spices">Kerala Spices</option>
+                <option value="honey">Honey</option>
+                <option value="dryfruits">Kashmiri Dry Fruits</option>
+                <option value="sweets">Traditional Sweets & Snacks</option>
+                <option value="ghee">Dairy & Ghee</option>
+              </select>
+            </label>
+            <label>Tag / badge<input id="tag" placeholder="Best Seller / New" /></label>
+            <label>Selling price (₹) *<input id="price" type="number" min="0" step="1" required /></label>
+            <label>MRP (₹) *<input id="mrp" type="number" min="0" step="1" required /></label>
+            <label>Net quantity / weight<input id="netQuantity" placeholder="500 g / 1 L" /></label>
+            <label>Unit label<input id="unit" placeholder="500 g" /></label>
+            <label>SKU<input id="sku" /></label>
+            <label>Barcode<input id="barcode" /></label>
+            <label>Packed on<input id="packedOn" /></label>
+            <label>Best before / expiry<input id="bestBefore" /></label>
+            <label>Image path<input id="image" placeholder="assets/products/...." /></label>
+            <label>Slug / URL id<input id="slug" placeholder="auto from name if empty" /></label>
+          </div>
+          <label>Short blurb<input id="blurb" /></label>
+          <label>Product description *<textarea id="description" rows="4" required></textarea></label>
+          <label>Ingredients<textarea id="ingredients" rows="2"></textarea></label>
+          <label>Specifications (one per line)<textarea id="specifications" rows="3"></textarea></label>
+          <label>Other packaging text (one per line)<textarea id="packagingText" rows="3"></textarea></label>
+          <div class="grid2">
+            <label>Storage<input id="storage" /></label>
+            <label>Origin<input id="origin" /></label>
+          </div>
+          <label class="check"><input type="checkbox" id="active" checked /> Active on storefront</label>
+          <div class="form-actions">
+            <button type="submit" class="primary">Save product</button>
+            <button type="button" id="btnArchive" class="danger">Archive</button>
+            <p id="formMsg" class="msg" hidden></p>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
