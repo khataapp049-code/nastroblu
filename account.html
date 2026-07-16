@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account - Nastro Blu</title>
+  <meta name="description" content="Sign in or create your Nastro Blu customer account. Manage profile and delivery details securely." />
+  <link rel="canonical" href="https://nastroblu.in/account.html" />
+  <link rel="icon" href="assets/logo.png" />
+  <meta name="theme-color" content="#2D431F" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav solid" id="nav">
+    <div class="wrap nav__inner">
+      <a href="index.html" class="brand" aria-label="Nastro Blu home">
+        <span class="brand__mark">
+          <img class="brand__logo" src="assets/brand/nastroblu-logo.png" alt="" />
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">Nastro Blu</span>
+          <span class="brand__sub">Eat Better</span>
+        </span>
+      </a>
+      <nav class="nav__links" id="navLinks">
+        <a href="index.html#shop">Shop</a>
+        <a href="about.html">About</a>
+        <a href="account.html" data-account-label>Login</a>
+        <a href="https://wa.me/919063048255?text=Hi%20Nastro%20Blu!" class="btn btn--gold nav__cta">WhatsApp</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="band band--parch account-page">
+    <div class="wrap account-wrap">
+      <div id="authGate">
+        <div class="account-card">
+          <span class="eyebrow">Customer account</span>
+          <h1 class="display">Welcome back</h1>
+          <p class="lede account-lede">Sign in to save your details for faster WhatsApp orders. New here? Create an account in a minute.</p>
+
+          <div class="auth-tabs" role="tablist">
+            <button type="button" class="auth-tab active" data-auth-tab="login">Sign in</button>
+            <button type="button" class="auth-tab" data-auth-tab="register">Create account</button>
+          </div>
+
+          <form id="loginForm" class="account-form" data-auth-panel="login" autocomplete="on">
+            <label>Email<input id="loginEmail" type="email" required autocomplete="username" placeholder="you@example.com" /></label>
+            <label>Password<input id="loginPassword" type="password" required autocomplete="current-password" minlength="8" /></label>
+            <p class="form-msg" id="loginMsg" hidden></p>
+            <button type="submit" class="btn btn--wine btn--block">Sign in</button>
+          </form>
+
+          <form id="registerForm" class="account-form" data-auth-panel="register" hidden autocomplete="on">
+            <label>Full name<input id="regName" type="text" required autocomplete="name" placeholder="Your name" /></label>
+            <label>Email<input id="regEmail" type="email" required autocomplete="email" placeholder="you@example.com" /></label>
+            <label>Phone (optional)<input id="regPhone" type="tel" autocomplete="tel" placeholder="+91 ..." /></label>
+            <label>Password<input id="regPassword" type="password" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters, letters + numbers" /></label>
+            <p class="form-hint">We use industry-standard password hashing. Your password is never stored in plain text.</p>
+            <p class="form-msg" id="registerMsg" hidden></p>
+            <button type="submit" class="btn btn--wine btn--block">Create account</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="accountDash" hidden>
+        <div class="account-card">
+          <div class="account-dash-head">
+            <div>
+              <span class="eyebrow">Your account</span>
+              <h1 class="display">Hello, <span id="welcomeName">there</span></h1>
+              <p class="lede account-lede">Manage your profile and delivery details. Orders still confirm on WhatsApp.</p>
+            </div>
+            <button type="button" class="btn btn--ghost" id="logoutBtn" style="border-color:var(--wine);color:var(--wine)">Sign out</button>
+          </div>
+          <p class="form-msg" id="dashMsg" hidden></p>
+
+          <section class="account-orders">
+            <h2 class="account-section-title">Your orders</h2>
+            <p class="form-hint">Orders are saved to your account with a clear order number, then confirmed on WhatsApp.</p>
+            <div id="ordersList" class="orders-list"><p class="form-hint">Loading orders…</p></div>
+          </section>
+
+          <form id="profileForm" class="account-form" style="margin-top:2rem">
+            <h2 class="account-section-title">Profile</h2>
+            <div class="form-grid">
+              <label>Full name<input id="profileName" type="text" required /></label>
+              <label>Email<input id="profileEmail" type="email" readonly /></label>
+              <label>Phone<input id="profilePhone" type="tel" /></label>
+            </div>
+
+            <h2 class="account-section-title">Delivery address</h2>
+            <div class="form-grid">
+              <label class="span-2">Address line 1<input id="addrLine1" type="text" /></label>
+              <label class="span-2">Address line 2<input id="addrLine2" type="text" /></label>
+              <label>City<input id="addrCity" type="text" /></label>
+              <label>State<input id="addrState" type="text" /></label>
+              <label>PIN code<input id="addrPin" type="text" /></label>
+            </div>
+            <p class="form-msg" id="profileMsg" hidden></p>
+            <button type="submit" class="btn btn--wine">Save profile</button>
+          </form>
+
+          <form id="passwordForm" class="account-form" style="margin-top:2rem">
+            <h2 class="account-section-title">Change password</h2>
+            <div class="form-grid">
+              <label>Current password<input id="currentPassword" type="password" required autocomplete="current-password" /></label>
+              <label>New password<input id="newPassword" type="password" required autocomplete="new-password" minlength="8" /></label>
+              <label>Confirm new password<input id="confirmPassword" type="password" required autocomplete="new-password" minlength="8" /></label>
+            </div>
+            <p class="form-msg" id="passwordMsg" hidden></p>
+            <button type="submit" class="btn btn--ghost" style="border-color:var(--wine);color:var(--wine)">Update password</button>
+          </form>
+
+          <div class="account-actions">
+            <a href="index.html#shop" class="btn btn--gold">Continue shopping</a>
+            <a href="https://wa.me/919063048255?text=Hi%20Nastro%20Blu!" class="btn btn--ghost" style="border-color:var(--wine);color:var(--wine)" target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__bottom">
+        <span class="foot__tag">Know your farmer. Know your food.</span>
+        <span>© 2026 Nastro Blu</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="account.js"></script>
+</body>
+</html>
