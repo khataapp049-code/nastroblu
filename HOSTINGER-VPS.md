@@ -1,4 +1,4 @@
-# Hostinger VPS — nastroblu.in + MongoDB + Admin
+# Hostinger VPS - nastroblu.in + MongoDB + Admin
 
 This guide deploys the Nastro Blu storefront, MongoDB product database, and admin panel on a **Hostinger VPS**.
 
@@ -7,16 +7,15 @@ This guide deploys the Nastro Blu storefront, MongoDB product database, and admi
 | URL | Purpose |
 |-----|---------|
 | `https://nastroblu.in/` | Public shop |
-| `https://nastroblu.in/admin/` | Admin login — add/edit products, description, MRP |
+| `https://nastroblu.in/admin/` | Admin login - add/edit products, description, MRP |
 | `https://nastroblu.in/api/products` | Product API (MongoDB) |
 | `https://nastroblu.in/api/health` | Health check |
 
 ## Default admin (change after first login)
 
-- **Email:** `admin@nastroblu.in`
-- **Password:** `NastroBlu@Admin2026`
-
-Set your own values in `.env` on the VPS (`ADMIN_EMAIL`, `ADMIN_PASSWORD`, `JWT_SECRET`).
+- **Email / password:** only in the VPS `.env` (`ADMIN_EMAIL`, `ADMIN_PASSWORD`, `JWT_SECRET`)
+- Never put credentials in HTML, git, or chat. Rotate if exposed.
+- After deploy: `./deploy/security-check.sh https://nastroblu.in 'YOUR_PASSWORD'`
 
 ---
 
@@ -65,7 +64,7 @@ This installs Docker + Nginx, starts **MongoDB + API**, and configures `nastrobl
 ```bash
 cd /var/www/nastroblu
 cp server/.env.example .env
-# edit .env — set strong JWT_SECRET + ADMIN_PASSWORD
+# edit .env - set strong JWT_SECRET + ADMIN_PASSWORD
 
 docker compose up -d --build mongo api
 
@@ -85,7 +84,7 @@ certbot --nginx -d nastroblu.in -d www.nastroblu.in
 2. Login with admin email/password
 3. Click **+ Add product** or select a product
 4. Edit **name, description, MRP, selling price, SKU, quantity**, etc.
-5. **Save product** — storefront updates from MongoDB
+5. **Save product** - storefront updates from MongoDB
 
 Archived products are hidden from the public shop.
 
@@ -107,7 +106,7 @@ Useful commands:
 cd /var/www/nastroblu
 docker compose ps
 docker compose logs -f api
-docker compose exec api node src/seed.js          # re-seed catalog + sync admin password from .env
+docker compose exec api node src/seed.js # re-seed catalog + sync admin password from .env
 docker compose exec mongo mongosh nastroblu
 ```
 

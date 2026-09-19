@@ -1,0 +1,12 @@
+services:
+  api:
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/nastroblu
+      JWT_SECRET: local-qa-test-jwt-secret-please-use-32chars-min
+      ADMIN_EMAIL: admin@nastroblu.in
+      ADMIN_PASSWORD: LocalQaTestPass123!
+      CORS_ORIGIN: "*"
+      NODE_ENV: development

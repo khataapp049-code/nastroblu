@@ -1,11 +1,11 @@
 # Hostinger DNS + hosting for nastroblu.in
 
-Your domain is currently on **Hostinger DNS parking** (`apollo.dns-parking.com` → `2.57.91.91`).  
+Your domain is currently on **Hostinger DNS parking** (`apollo.dns-parking.com` → `2.57.91.91`). 
 That is why the site is not reachable. Point it to your **Hostinger hosting / VPS** instead.
 
 ---
 
-## Step 0 — Pick your Hostinger product
+## Step 0 - Pick your Hostinger product
 
 | You have | Use this path |
 |----------|----------------|
@@ -14,37 +14,37 @@ That is why the site is not reachable. Point it to your **Hostinger hosting / VP
 
 ---
 
-## Option A — Hostinger Web / Cloud hosting (static shop)
+## Option A - Hostinger Web / Cloud hosting (static shop)
 
 ### A1. Connect domain in hPanel
 
-1. Login: https://hpanel.hostinger.com  
-2. **Websites** → **Add website** / **Connect domain** → choose **nastroblu.in**  
-3. Open the site **Dashboard** → **Plan Details**  
+1. Login: https://hpanel.hostinger.com 
+2. **Websites** → **Add website** / **Connect domain** → choose **nastroblu.in** 
+3. Open the site **Dashboard** → **Plan Details** 
 4. Copy the values shown there:
-   - **Nameservers** (ns1… / ns2…)  
-   - **Server IP** (for A record method)
+ - **Nameservers** (ns1… / ns2…) 
+ - **Server IP** (for A record method)
 
 ### A2. DNS (recommended: Nameservers)
 
 If domain is registered at Hostinger:
 
-1. **Domains** → **nastroblu.in** → **DNS / Nameservers**  
-2. Set nameservers to the **exact** ones from Plan Details (not parking)  
+1. **Domains** → **nastroblu.in** → **DNS / Nameservers** 
+2. Set nameservers to the **exact** ones from Plan Details (not parking) 
 3. Save
 
 Typical Hostinger nameservers look like:
 
 ```text
-ns1.dns-parking.com   ❌ parking — do NOT keep these
-ns1.Hostinger.com     ✅ example only — use YOUR panel values
+ns1.dns-parking.com ❌ parking - do NOT keep these
+ns1.Hostinger.com ✅ example only - use YOUR panel values
 ns2.Hostinger.com
 ```
 
 If domain is registered elsewhere (GoDaddy, Namecheap, etc.):
 
-1. At that registrar → Nameservers  
-2. Replace with the Hostinger nameservers from Plan Details  
+1. At that registrar → Nameservers 
+2. Replace with the Hostinger nameservers from Plan Details 
 3. Save (propagation up to 24h)
 
 ### A3. DNS (alternate: A records)
@@ -60,8 +60,8 @@ Delete any old A record for `@` pointing to `2.57.91.91`.
 
 ### A4. Upload website files
 
-1. hPanel → **Files** → **File Manager**  
-2. Open `public_html` for nastroblu.in  
+1. hPanel → **Files** → **File Manager** 
+2. Open `public_html` for nastroblu.in 
 3. Upload these files/folders from the `nastroblu` project:
 
 ```text
@@ -74,7 +74,7 @@ products.js
 shared.js
 product-page.js
 assets/
-admin/          (UI only — needs API for full save)
+admin/ (UI only - needs API for full save)
 ```
 
 4. Also upload `.htaccess` (in this repo root) into `public_html`
@@ -95,7 +95,7 @@ curl -I https://nastroblu.in
 
 ---
 
-## Option B — Hostinger VPS (shop + MongoDB admin)
+## Option B - Hostinger VPS (shop + MongoDB admin)
 
 Use this if you want `/admin` to save products to MongoDB.
 
@@ -132,7 +132,7 @@ Details: [`HOSTINGER-VPS.md`](./HOSTINGER-VPS.md)
 
 Admin after deploy:
 
-- https://nastroblu.in/admin/  
+- https://nastroblu.in/admin/ 
 - `admin@nastroblu.in` / password from VPS `.env`
 
 ---
@@ -141,7 +141,7 @@ Admin after deploy:
 
 OG tags are already in `index.html` using:
 
-- Title / description  
+- Title / description 
 - Image: `https://nastroblu.in/assets/og-image.png`
 
 After DNS + SSL work, scrape once:
@@ -152,12 +152,12 @@ https://developers.facebook.com/tools/debug/ → `https://nastroblu.in/`
 
 ## Checklist
 
-- [ ] Domain connected to Hostinger hosting or VPS  
-- [ ] Nameservers / A records no longer parking (`2.57.91.91` gone)  
-- [ ] Files in `public_html` (shared) **or** Docker running on VPS  
-- [ ] Free SSL enabled  
-- [ ] https://nastroblu.in opens  
-- [ ] WhatsApp preview scraped  
+- [ ] Domain connected to Hostinger hosting or VPS 
+- [ ] Nameservers / A records no longer parking (`2.57.91.91` gone) 
+- [ ] Files in `public_html` (shared) **or** Docker running on VPS 
+- [ ] Free SSL enabled 
+- [ ] https://nastroblu.in opens 
+- [ ] WhatsApp preview scraped 
 
 ---
 
@@ -165,8 +165,8 @@ https://developers.facebook.com/tools/debug/ → `https://nastroblu.in/`
 
 Reply with:
 
-1. Hostinger type: **Web hosting** or **VPS**  
-2. **Server IP** from hPanel (Plan Details / VPS)  
+1. Hostinger type: **Web hosting** or **VPS** 
+2. **Server IP** from hPanel (Plan Details / VPS) 
 3. Nameservers shown in Plan Details (copy/paste)
 
 Then we can confirm exact DNS rows and finish deploy.

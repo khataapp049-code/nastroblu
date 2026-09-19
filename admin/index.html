@@ -3,41 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-store" />
   <title>Nastro Blu Admin</title>
-  <link rel="icon" href="../assets/logo.png" />
-  <link rel="stylesheet" href="admin.css" />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="/assets/logo.png" />
+  <link rel="stylesheet" href="/admin/admin.css?v=20260718a" />
 </head>
 <body>
   <div id="loginView" class="auth">
     <form id="loginForm" class="auth-card">
-      <img src="../assets/logo.png" alt="Nastro Blu" class="auth-logo" />
+      <img src="/assets/logo.png" alt="Nastro Blu" class="auth-logo" />
       <h1>Nastro Blu Admin</h1>
-      <p>Manage products, descriptions &amp; MRP</p>
-      <label>Email<input type="email" id="email" required value="admin@nastroblu.in" /></label>
-      <label>Password<input type="password" id="password" required /></label>
-      <button type="submit">Sign in</button>
-      <p id="loginError" class="error" hidden></p>
+      <p>Authorized staff only. Sign in with your credentials.</p>
+      <label>Email
+        <input type="email" id="email" required autocomplete="username" placeholder="you@example.com" />
+      </label>
+      <label>Password
+        <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••••••" />
+      </label>
+      <button type="submit" id="btnLogin">Sign in</button>
+      <p id="loginError" class="error is-hidden"></p>
     </form>
   </div>
 
-  <div id="appView" class="app" hidden>
+  <div id="appView" class="app is-hidden">
     <header class="top">
       <div>
         <strong>Nastro Blu Admin</strong>
         <span id="adminEmail" class="muted"></span>
+        <span id="loginOk" class="ok-pill">Signed in</span>
       </div>
       <div class="top-actions">
-        <a href="/" target="_blank">View storefront</a>
+        <a href="/" target="_blank" rel="noopener">View storefront</a>
         <button type="button" id="btnNew" class="primary">+ Add product</button>
         <button type="button" id="btnLogout">Logout</button>
       </div>
     </header>
 
-    <main class="layout">
+    <nav class="admin-tabs" aria-label="Admin sections">
+      <button type="button" class="admin-tab active" data-tab="products">Products</button>
+      <button type="button" class="admin-tab" data-tab="orders">Orders</button>
+      <button type="button" class="admin-tab" data-tab="customers">Customers</button>
+      <button type="button" class="admin-tab" data-tab="special">Today's Special</button>
+    </nav>
+
+    <main class="layout" id="panelProducts" data-panel="products">
       <section class="list-panel">
         <div class="list-head">
           <h2>Products</h2>
-          <input type="search" id="search" placeholder="Search name / SKU" />
+          <input type="search" id="search" placeholder="Search name / SKU / tag" />
+          <select id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="available">Available</option>
+            <option value="unavailable">Temporarily unavailable</option>
+            <option value="archived">Archived</option>
+          </select>
         </div>
         <div id="productList" class="list"></div>
       </section>
@@ -60,17 +80,37 @@
                 <option value="ghee">Dairy & Ghee</option>
               </select>
             </label>
-            <label>Tag / badge<input id="tag" placeholder="Best Seller / New" /></label>
+            <label>Primary badge / tag<input id="tag" placeholder="Best Seller / New" /></label>
+            <label>Extra tags (comma separated)<input id="tags" placeholder="organic, gift, festive" /></label>
+            <label>Sort order (lower = first)<input id="sortOrder" type="number" step="1" value="100" /></label>
             <label>Selling price (₹) *<input id="price" type="number" min="0" step="1" required /></label>
             <label>MRP (₹) *<input id="mrp" type="number" min="0" step="1" required /></label>
+            <label>Cost / costing (₹)<input id="cost" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Availability
+              <select id="status">
+                <option value="available">Available on storefront</option>
+                <option value="unavailable">Temporarily not available</option>
+                <option value="archived">Archived (hidden)</option>
+              </select>
+            </label>
             <label>Net quantity / weight<input id="netQuantity" placeholder="500 g / 1 L" /></label>
             <label>Unit label<input id="unit" placeholder="500 g" /></label>
             <label>SKU<input id="sku" /></label>
             <label>Barcode<input id="barcode" /></label>
             <label>Packed on<input id="packedOn" /></label>
             <label>Best before / expiry<input id="bestBefore" /></label>
-            <label>Image path<input id="image" placeholder="assets/products/...." /></label>
             <label>Slug / URL id<input id="slug" placeholder="auto from name if empty" /></label>
+          </div>
+          <div class="image-upload">
+            <label>Product image
+              <input id="image" placeholder="assets/products/.... or upload below" />
+            </label>
+            <div class="image-upload-row">
+              <input type="file" id="imageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
+              <button type="button" id="btnUploadImage" class="primary">Upload image</button>
+            </div>
+            <p id="uploadMsg" class="msg is-hidden"></p>
+            <img id="imagePreview" class="image-preview is-hidden" alt="Product preview" />
           </div>
           <label>Short blurb<input id="blurb" /></label>
           <label>Product description *<textarea id="description" rows="4" required></textarea></label>
@@ -81,17 +121,149 @@
             <label>Storage<input id="storage" /></label>
             <label>Origin<input id="origin" /></label>
           </div>
-          <label class="check"><input type="checkbox" id="active" checked /> Active on storefront</label>
           <div class="form-actions">
             <button type="submit" class="primary">Save product</button>
+            <button type="button" id="btnUnavailable">Mark unavailable</button>
             <button type="button" id="btnArchive" class="danger">Archive</button>
-            <p id="formMsg" class="msg" hidden></p>
+            <button type="button" id="btnDelete" class="danger">Delete forever</button>
+            <p id="formMsg" class="msg is-hidden"></p>
           </div>
         </form>
       </section>
     </main>
+
+    <main class="orders-layout is-hidden" id="panelOrders" data-panel="orders">
+      <section class="orders-panel">
+        <div class="list-head orders-head">
+          <h2>Customer orders</h2>
+          <select id="orderStatusFilter">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="packed">Packed</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button type="button" id="btnRefreshOrders" class="primary">Refresh</button>
+        </div>
+        <p class="hint">Orders placed from the storefront (logged-in customers). Click a row for customer details and items.</p>
+        <div id="ordersTableWrap" class="orders-table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Payment</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+        <p id="ordersEmpty" class="meta is-hidden">No orders yet.</p>
+      </section>
+      <aside class="order-detail-panel" id="orderDetailPanel">
+        <h2>Order details</h2>
+        <p id="orderDetailEmpty" class="hint">Select an order to see customer details and line items.</p>
+        <div id="orderDetail" class="order-detail is-hidden"></div>
+      </aside>
+    </main>
+
+    <main class="orders-layout is-hidden" id="panelCustomers" data-panel="customers">
+      <section class="orders-panel">
+        <div class="list-head orders-head">
+          <h2>Customer database</h2>
+          <input type="search" id="customerSearch" placeholder="Search name, email, phone" />
+          <select id="customerActiveFilter">
+            <option value="">All accounts</option>
+            <option value="1">Active only</option>
+            <option value="0">Deactivated</option>
+          </select>
+          <button type="button" id="btnRefreshCustomers" class="primary">Refresh</button>
+        </div>
+        <p class="hint" id="customersMeta">Registered storefront customers — click a row for address, orders, and wishlist.</p>
+        <div id="customersTableWrap" class="orders-table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Orders</th>
+                <th>Spent</th>
+                <th>Wishlist</th>
+                <th>Status</th>
+                <th>Joined</th>
+              </tr>
+            </thead>
+            <tbody id="customersBody"></tbody>
+          </table>
+        </div>
+        <p id="customersEmpty" class="meta is-hidden">No customers yet.</p>
+      </section>
+      <aside class="order-detail-panel" id="customerDetailPanel">
+        <h2>Customer profile</h2>
+        <p id="customerDetailEmpty" class="hint">Select a customer to see full details, recent orders, and wishlist.</p>
+        <div id="customerDetail" class="order-detail is-hidden"></div>
+      </aside>
+    </main>
+
+    <main class="special-layout is-hidden" id="panelSpecial" data-panel="special">
+      <section class="special-panel">
+        <h2>Today's Special popup</h2>
+        <p class="hint">Shown creatively to visitors on the website. Upload a photo, write the story, link a product for Add to cart.</p>
+        <form id="specialForm" class="special-form">
+          <label class="check">
+            <input type="checkbox" id="specialEnabled" />
+            Show Today's Special popup on the website
+          </label>
+          <label class="check">
+            <input type="checkbox" id="specialOncePerDay" checked />
+            Show once per visitor per day (recommended)
+          </label>
+          <div class="grid2">
+            <label>Badge text<input id="specialBadge" placeholder="Today's Special" /></label>
+            <label>Button label<input id="specialCta" placeholder="Add to cart" /></label>
+          </div>
+          <label>Title *<input id="specialTitle" required placeholder="Cold-pressed coconut oil - limited jars" /></label>
+          <label>Product description *<textarea id="specialDescription" rows="4" required placeholder="Why this is special today…"></textarea></label>
+          <label>Link to product (for Add to cart) *
+            <select id="specialProductId" required>
+              <option value="">Select a product…</option>
+            </select>
+          </label>
+          <div class="image-upload">
+            <label>Special photo path
+              <input id="specialImage" placeholder="assets/uploads/products/...." required />
+            </label>
+            <div class="image-upload-row">
+              <input type="file" id="specialImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
+              <button type="button" id="btnUploadSpecialImage" class="primary">Upload photo</button>
+            </div>
+            <p id="specialUploadMsg" class="msg is-hidden"></p>
+            <img id="specialImagePreview" class="image-preview is-hidden" alt="Today's special preview" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary">Save Today's Special</button>
+            <p id="specialMsg" class="msg is-hidden"></p>
+          </div>
+        </form>
+        <div class="special-preview-card" aria-hidden="true">
+          <p class="hint">Visitor preview</p>
+          <div class="special-preview-inner" id="specialPreviewCard">
+            <span class="special-preview-badge">Today's Special</span>
+            <img id="specialPreviewImg" alt="" />
+            <strong id="specialPreviewTitle">Your title</strong>
+            <p id="specialPreviewDesc">Description appears here.</p>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <script src="admin.js"></script>
+  <script src="/admin/admin.js?v=20260718a"></script>
 </body>
 </html>

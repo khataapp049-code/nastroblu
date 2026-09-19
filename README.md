@@ -1,40 +1,33 @@
-# Nastro Blu — Eat Better
+# Nastro Blu - Eat Better
 
 Shop + MongoDB admin for [nastroblu.in](https://nastroblu.in) / Hostinger VPS.
 
 ## Quick links
 
-- **Hostinger VPS deploy (MongoDB + admin):** see [`HOSTINGER-VPS.md`](./HOSTINGER-VPS.md)
-- **Admin panel:** `/admin/` after deploy
-- **Default admin:** `admin@nastroblu.in` / `NastroBlu@Admin2026` (change in `.env`)
+- **Hostinger VPS deploy:** [`HOSTINGER-VPS.md`](./HOSTINGER-VPS.md)
+- **Admin panel:** `/admin/` (requires server-side login; credentials live only in `.env`)
 
-## Local static preview
+## Security
+
+- Never put admin passwords in HTML, JS, or docs.
+- `.env` is gitignored. Use `.env.example` for placeholders only.
+- Product **cost** is returned only to authenticated admins.
+- `GET /api/products?all=1` and mutating APIs require a JWT.
+- Run `./deploy/security-check.sh https://nastroblu.in` after deploy.
+
+If an old default password was ever published, rotate `ADMIN_PASSWORD` and `JWT_SECRET` immediately.
+
+## Local full stack
 
 ```bash
-python3 -m http.server 5173
-```
-
-## Local full stack (Mongo + admin)
-
-```bash
+cp .env.example .env # set strong JWT_SECRET + ADMIN_PASSWORD
 docker compose up -d --build
-# Shop http://localhost:4000
-# Admin http://localhost:4000/admin/
-```
-
-Or:
-
-```bash
-docker compose up -d mongo
-cd server && cp .env.example .env && npm install && npm run seed && npm run dev
 ```
 
 ## Admin can edit
 
-- Product name
-- Description
-- MRP + selling price
-- Quantity / weight, SKU, barcode
-- Ingredients, packaging text, dates
+- Product name, description, tags, sort order
+- MRP, selling price, **cost** (admin-only)
+- Availability, images (upload), packaging fields
 
-Changes save to **MongoDB** and appear on the storefront via `/api/products`.
+Changes save to MongoDB and appear on the storefront via `/api/products`.

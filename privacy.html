@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Privacy Policy | Nastro Blu</title>
+ <meta name="description" content="How Nastro Blu collects, uses, and protects your personal information." />
+ <link rel="canonical" href="https://nastroblu.in/privacy.html" />
+ <link rel="icon" href="assets/logo.png" />
+ <meta name="theme-color" content="#2D431F" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+ <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+ <header class="nav solid" id="nav">
+ <div class="wrap nav__inner">
+ <a href="index.html" class="brand" aria-label="Nastro Blu home">
+ <span class="brand__mark"><img class="brand__logo" src="assets/brand/nastroblu-logo.png" alt="" /></span>
+ <span class="brand__text"><span class="brand__name">Nastro Blu</span><span class="brand__sub">Eat Better</span></span>
+ </a>
+ <nav class="nav__links" id="navLinks">
+ <a href="index.html#story">Our Story</a>
+ <a href="index.html#believe">Beliefs</a>
+ <a href="index.html#shop">Shop</a>
+ <a href="about.html#about-us">About</a>
+ <a href="index.html#visit">Visit</a>
+ <a href="account.html#wishlist">Wishlist</a>
+ <a href="account.html" data-account-label>Login</a>
+ <a href="https://www.instagram.com/nastroblu.eatbetter/" target="_blank" rel="noopener">Instagram</a>
+ <a href="https://wa.me/919063048255?text=Hi%20Nastro%20Blu!%20I'd%20like%20to%20place%20an%20order." class="btn btn--gold nav__cta">Order on WhatsApp</a>
+ </nav>
+ <div style="display:flex;align-items:center;gap:.7rem">
+  <a href="index.html#shop" class="nav__cart" aria-label="Cart">
+   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L5 3H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.3" fill="currentColor"/><circle cx="18" cy="20" r="1.3" fill="currentColor"/></svg>
+   <span class="cart-count" data-cart-count>0</span>
+  </a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+ </div>
+ </div>
+ </header>
+ <main class="legal">
+ <div class="wrap legal__inner">
+ <p class="eyebrow">Legal</p>
+ <h1 class="display">Privacy Policy</h1>
+ <p class="legal__updated">Last Updated: July 28, 2026</p>
+ <div class="legal__body">
+
+ <p>At Nastro Blu, we value your privacy and are committed to protecting your personal information.</p>
+ <h2>Information We Collect</h2>
+ <p>We may collect your name, contact details, billing and delivery address, and order information when you place an order or contact us.</p>
+ <h2>How We Use Your Information</h2>
+ <p>We use your information to:</p>
+ <ul>
+ <li>Process and deliver your orders.</li>
+ <li>Respond to your enquiries.</li>
+ <li>Improve our products, services, and website.</li>
+ <li>Send order updates and, where permitted, promotional communications.</li>
+ </ul>
+ <h2>Information Sharing</h2>
+ <p>We do not sell or rent your personal information. We may share it only with trusted service providers such as payment gateways, delivery partners, or where required by law.</p>
+ <h2>Cookies</h2>
+ <p>Our website may use cookies to improve your browsing experience and analyze website usage. You can manage cookie preferences through your browser settings.</p>
+ <h2>Data Security</h2>
+ <p>We take reasonable measures to protect your personal information. However, no method of online transmission or storage is completely secure.</p>
+ <h2>Your Rights</h2>
+ <p>You may request access to, correction of, or deletion of your personal information by contacting us, subject to applicable laws.</p>
+ <h2>Changes to This Policy</h2>
+ <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page.</p>
+ <h2>Contact Us</h2>
+ <p>For any questions regarding this Privacy Policy, please contact us through the details provided on our website, or email <a href="mailto:nastroblu.eatbetter@gmail.com">nastroblu.eatbetter@gmail.com</a>.</p>
+ <p>By using our website, you agree to this Privacy Policy.</p>
+
+ </div>
+ <p class="legal__back"><a href="index.html">← Back to shop</a> · <a href="about.html#about-us">About</a></p>
+ </div>
+ </main>
+ <footer class="foot">
+ <div class="wrap">
+ <div class="foot__bottom">
+ <span class="foot__tag">Choose Better. Eat Better.</span>
+ <span>© 2026 Nastro Blu · Hyderabad</span>
+ </div>
+ </div>
+ </footer>
+ <script src="shared.js"></script>
+ <script>
+ document.getElementById("navToggle").addEventListener("click", function () {
+ document.getElementById("navLinks").classList.toggle("open");
+ });
+ if (window.Nastro) Nastro.updateCartBadges();
+ </script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+[
+  {
+    "id": "7.1",
+    "area": "Public API",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "200 {'ok': True, 'service': 'nastroblu-api', 'time': '2026-07-16T19:52:05.347Z'}",
+    "severity": ""
+  },
+  {
+    "id": "7.2",
+    "area": "Public API",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "count=142 statuses=['available'] cost_leaks=0 archived_in_list=0 cats=8",
+    "severity": ""
+  },
+  {
+    "id": "7.3",
+    "area": "Public API",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "7.4",
+    "area": "Public API",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "200 returned 0 products for operator-like category",
+    "severity": ""
+  },
+  {
+    "id": "7.8",
+    "area": "Public API",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "200 cats=8",
+    "severity": ""
+  },
+  {
+    "id": "5.2",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Invalid email or password'}",
+    "severity": ""
+  },
+  {
+    "id": "5.3",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "400 {'error': 'Email and password required'}",
+    "severity": ""
+  },
+  {
+    "id": "5.5-local",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "default password against local: 401 {'error': 'Invalid email or password'}",
+    "severity": ""
+  },
+  {
+    "id": "5.1",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "200 token_len=264",
+    "severity": ""
+  },
+  {
+    "id": "5.8-ok",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "200 {'admin': {'email': 'admin@nastroblu.in', 'name': 'Nastro Blu Admin'}}",
+    "severity": ""
+  },
+  {
+    "id": "5.8-none",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "5.8-bearer-case",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "lowercase bearer: 401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "5.7",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Invalid or expired session'}",
+    "severity": ""
+  },
+  {
+    "id": "5.4",
+    "area": "Admin auth",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "login attempt status codes: [401, 401, 401, 401, 429, 429, 429, 429, 429, 429, 429, 429]",
+    "severity": ""
+  },
+  {
+    "id": "6.16-post",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "6.16-put",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "6.16-del",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "6.2",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "missing name: 400 {'error': 'Product name is required'}",
+    "severity": ""
+  },
+  {
+    "id": "6.3",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "missing price: 400 {'error': 'MRP and selling price are required'}",
+    "severity": ""
+  },
+  {
+    "id": "6.4",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "non-numeric price: 500 {'error': 'Product validation failed: price: Cast to Number failed for value \"NaN\" (type number) at path \"price\", mrp: Cast to Number failed for value \"NaN\" (type number) at path \"mrp\", sizes.0.price: Cast to Number failed for value \"NaN\" (type number) at path \"price\"'}",
+    "severity": ""
+  },
+  {
+    "id": "6.5",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "price>mrp allowed: 201 product=qa-price-gt-mrp-1784231527",
+    "severity": "Low"
+  },
+  {
+    "id": "6.6",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "negative price: 201 {'product': {'id': 'qa-neg-1784231527', '_id': '6a59366718265438e3115a6b', 'name': 'QA Negative', 'brand': 'Nastro Blu', 'category': 'honey', 'tag': None, 'tags': [], 'price': -10, 'mrp': -5, 'netQuantity': '', 'unit': '', 'sku': '', 'barcode': '', 'packedOn': '', 'bestBefore': '', 'ingredients': '', 'specifications': [], 'packagingText': [], 'storage': '', 'origin': '', 'sizes': [{'label': '1 unit', 'price': -10, 'sku': ''}], 'blurb': '', 'description': 'neg', 'image': 'assets/products/grains.jpg', 'rating': 0, 'reviews': 0, 'status': 'available', 'active': True, 'sortOrder': 100, 'createdAt': '2026-07-16T19:52:07.253Z', 'updatedAt': '2026-07-16T19:52:07.253Z', 'cost': 0}}",
+    "severity": "Medium"
+  },
+  {
+    "id": "6.7",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "unknown category saved: 201 cat=not-a-real-category",
+    "severity": "Medium"
+  },
+  {
+    "id": "6.9-create",
+    "area": "Admin CRUD / XSS",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "create xss product: 201",
+    "severity": ""
+  },
+  {
+    "id": "6.9-api",
+    "area": "Admin CRUD / XSS",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "public API returns raw HTML in name: True name=<img src=x onerror=\"window.__xss=true\">",
+    "severity": "High"
+  },
+  {
+    "id": "6.9-storefront-code",
+    "area": "Admin CRUD / XSS",
+    "env": "local-code",
+    "result": "Fail",
+    "evidence": "app.js product cards build HTML with unescaped p.name (escapeHtml absent in app.js=True); product-page has escapeHtml for reviews=True",
+    "severity": "Critical"
+  },
+  {
+    "id": "6.9-dom",
+    "area": "Admin CRUD / XSS",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "card HTML would embed live tag: <h3><a><img src=x onerror=\"window.__xss=true\"></a></h3>",
+    "severity": "Critical"
+  },
+  {
+    "id": "6.10-image",
+    "area": "Admin CRUD / XSS",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "javascript: image allowed: 201 image=javascript:alert(1)",
+    "severity": "Medium"
+  },
+  {
+    "id": "6.11",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "partial put kept name, updated blurb: name_ok=True blurb=updated-blurb-only",
+    "severity": ""
+  },
+  {
+    "id": "6.13-public",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "archived GET public: 404 {'error': 'Product not found'}",
+    "severity": ""
+  },
+  {
+    "id": "6.13-admin-flag",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "unauth ?admin=1: 401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "6.13-admin-ok",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "auth ?admin=1: 200",
+    "severity": ""
+  },
+  {
+    "id": "6.18",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "mass assign reviews/rating: reviews=99999 rating=11 code=201",
+    "severity": "Medium"
+  },
+  {
+    "id": "9.1",
+    "area": "Business logic",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "empty sizes via PUT: code=200 sizes_len=1",
+    "severity": ""
+  },
+  {
+    "id": "6.8",
+    "area": "Admin CRUD",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "concurrent creates codes=[201, 500, 201, 201] slugs=['qa-race-product-1784231527', 'qa-race-product-1784231527-7375', 'qa-race-product-1784231527-7377']",
+    "severity": ""
+  },
+  {
+    "id": "7.6",
+    "area": "Public API",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "3MB description: 413 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>PayloadTooLargeError: request entity too large<br> &nbsp; &nbsp;at readStream (/app/server/node_",
+    "severity": ""
+  },
+  {
+    "id": "orders-admin",
+    "area": "Orders",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "reviews-auth",
+    "area": "Reviews",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "401 {'error': 'Login required'}",
+    "severity": ""
+  },
+  {
+    "id": "reviews-register",
+    "area": "Reviews",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "201 token=True",
+    "severity": ""
+  },
+  {
+    "id": "reviews-create",
+    "area": "Reviews",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "201 {'review': {'id': '6a5936670081b11d2800d9cc', 'productSlug': 'ajmeri-kalakand-jaggery-250g', 'customerName': 'QA User', 'rating': 5, 'comment': 'Really enjoyed this product a lot', 'createdAt': '2026-07-16T19:52:07.753Z', 'updatedAt': '2026-07-16T19:52:07.753Z'}, 'summary': {'rating': 5, 'reviews': 1}}",
+    "severity": ""
+  },
+  {
+    "id": "customer-xss-name",
+    "area": "Customer",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "200 {'customer': {'id': '6a59366718265438e3115a93', 'email': 'qa_1784231527@example.com', 'name': '<img src=x onerror=alert(9)>', 'phone': '9999999999', 'address': {'line1': '', 'line2': '', 'city': '', 'state': '', 'pincode': ''}, 'createdAt': '2026-07-16T19:52:07.743Z', 'updatedAt': '2026-07-16T19:52:",
+    "severity": "High"
+  },
+  {
+    "id": "7.5",
+    "area": "Public API",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "404 {'error': 'Product not found'}",
+    "severity": ""
+  },
+  {
+    "id": "8.4-compose",
+    "area": "Infra",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "200 served compose",
+    "severity": "High"
+  },
+  {
+    "id": "8.4-env",
+    "area": "Infra",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "404",
+    "severity": ""
+  },
+  {
+    "id": "8.5",
+    "area": "Infra",
+    "env": "local",
+    "result": "Fail",
+    "evidence": "robots: 404",
+    "severity": "Low"
+  },
+  {
+    "id": "1.5",
+    "area": "Catalog",
+    "env": "local",
+    "result": "Pass",
+    "evidence": "under999 count=138 price_eq_999_count=0 (strict < confirmed in app.js)",
+    "severity": ""
+  },
+  {
+    "id": "1.9",
+    "area": "Catalog",
+    "env": "local-code",
+    "result": "Pass",
+    "evidence": "renderFeatured uses slice(0, 4)",
+    "severity": ""
+  },
+  {
+    "id": "3.7-code",
+    "area": "Cart",
+    "env": "local-code",
+    "result": "Pass",
+    "evidence": "loadCart wraps JSON.parse in try/catch",
+    "severity": ""
+  },
+  {
+    "id": "4.5-outdated",
+    "area": "Checkout",
+    "env": "local-code",
+    "result": "Pass",
+    "evidence": "Test plan claim 'no server-side order record' is OUTDATED \u2014 /api/orders persists orders with requireCustomer + DB price revalidation",
+    "severity": ""
+  }
+]

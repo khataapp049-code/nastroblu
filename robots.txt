@@ -1,0 +1,17 @@
+# Nastro Blu — https://nastroblu.in
+User-agent: *
+Allow: /
+Allow: /about.html
+Allow: /product.html
+Allow: /assets/
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /account.html
+Disallow: /account
+Disallow: /docker-compose.yml
+Disallow: /.env
+Disallow: /server/
+Disallow: /deploy/
+
+Sitemap: https://nastroblu.in/sitemap.xml

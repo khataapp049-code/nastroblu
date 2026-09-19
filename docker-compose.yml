@@ -24,7 +24,7 @@ services:
       NODE_ENV: production
     ports:
       - "127.0.0.1:4100:4000"
-    # Serve live files from host so admin UI updates apply without rebuild
+    # Serve live files from host so storefront/admin updates apply without rebuild
     volumes:
       - ./admin:/app/admin:ro
       - ./assets:/app/assets
@@ -32,12 +32,23 @@ services:
       - ./about.html:/app/about.html:ro
       - ./product.html:/app/product.html:ro
       - ./account.html:/app/account.html:ro
+      - ./terms.html:/app/terms.html:ro
+      - ./privacy.html:/app/privacy.html:ro
+      - ./shipping.html:/app/shipping.html:ro
+      - ./returns.html:/app/returns.html:ro
+      - ./disclaimer.html:/app/disclaimer.html:ro
+      - ./food-safety.html:/app/food-safety.html:ro
+      - ./robots.txt:/app/robots.txt:ro
       - ./styles.css:/app/styles.css:ro
       - ./app.js:/app/app.js:ro
       - ./account.js:/app/account.js:ro
       - ./products.js:/app/products.js:ro
       - ./shared.js:/app/shared.js:ro
       - ./product-page.js:/app/product-page.js:ro
+      - ./todays-special.js:/app/todays-special.js:ro
+      - ./google-reviews.js:/app/google-reviews.js:ro
+      - ./delivery-info.js:/app/delivery-info.js:ro
+      - ./wishlist.js:/app/wishlist.js:ro
       - ./server/src:/app/server/src:ro
 
 volumes:

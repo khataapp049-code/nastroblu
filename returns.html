@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Return & Refund Policy | Nastro Blu</title>
+ <meta name="description" content="Nastro Blu return, refund, and cancellation policy for food products." />
+ <link rel="canonical" href="https://nastroblu.in/returns.html" />
+ <link rel="icon" href="assets/logo.png" />
+ <meta name="theme-color" content="#2D431F" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+ <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+ <header class="nav solid" id="nav">
+ <div class="wrap nav__inner">
+ <a href="index.html" class="brand" aria-label="Nastro Blu home">
+ <span class="brand__mark"><img class="brand__logo" src="assets/brand/nastroblu-logo.png" alt="" /></span>
+ <span class="brand__text"><span class="brand__name">Nastro Blu</span><span class="brand__sub">Eat Better</span></span>
+ </a>
+ <nav class="nav__links" id="navLinks">
+ <a href="index.html#story">Our Story</a>
+ <a href="index.html#believe">Beliefs</a>
+ <a href="index.html#shop">Shop</a>
+ <a href="about.html#about-us">About</a>
+ <a href="index.html#visit">Visit</a>
+ <a href="account.html#wishlist">Wishlist</a>
+ <a href="account.html" data-account-label>Login</a>
+ <a href="https://www.instagram.com/nastroblu.eatbetter/" target="_blank" rel="noopener">Instagram</a>
+ <a href="https://wa.me/919063048255?text=Hi%20Nastro%20Blu!%20I'd%20like%20to%20place%20an%20order." class="btn btn--gold nav__cta">Order on WhatsApp</a>
+ </nav>
+ <div style="display:flex;align-items:center;gap:.7rem">
+  <a href="index.html#shop" class="nav__cart" aria-label="Cart">
+   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L5 3H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.3" fill="currentColor"/><circle cx="18" cy="20" r="1.3" fill="currentColor"/></svg>
+   <span class="cart-count" data-cart-count>0</span>
+  </a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+ </div>
+ </div>
+ </header>
+ <main class="legal">
+ <div class="wrap legal__inner">
+ <p class="eyebrow">Policies</p>
+ <h1 class="display">Return &amp; Refund Policy</h1>
+ 
+ <div class="legal__body">
+
+ <p>At Nastro Blu, customer satisfaction is important to us. As our products are food items, the following policy applies:</p>
+ <h2>Returns</h2>
+ <p>Due to the perishable nature of our products, we do not accept returns once an order has been delivered.</p>
+ <h2>Damaged or Incorrect Orders</h2>
+ <p>If you receive a damaged, defective, or incorrect product, please contact us within 24 hours of delivery with your order details and clear photographs. We will review the issue and, where appropriate, offer a replacement or refund.</p>
+ <h2>Refunds</h2>
+ <p>Approved refunds will be processed to the original payment method within a reasonable timeframe. The time taken for the refund to reflect may vary depending on your bank or payment provider.</p>
+ <h2>Order Cancellation</h2>
+ <p>Orders may be cancelled before they are processed for dispatch. Once an order has been prepared or dispatched, it cannot be cancelled.</p>
+ <h2>Contact Us</h2>
+ <p>Call &amp; WhatsApp +91 90630 48255 / +91 40 4540 8385 · <a href="mailto:nastroblu.eatbetter@gmail.com">nastroblu.eatbetter@gmail.com</a></p>
+
+ </div>
+ <p class="legal__back"><a href="index.html">← Back to shop</a> · <a href="about.html#about-us">About</a></p>
+ </div>
+ </main>
+ <footer class="foot">
+ <div class="wrap">
+ <div class="foot__bottom">
+ <span class="foot__tag">Choose Better. Eat Better.</span>
+ <span>© 2026 Nastro Blu · Hyderabad</span>
+ </div>
+ </div>
+ </footer>
+ <script src="shared.js"></script>
+ <script>
+ document.getElementById("navToggle").addEventListener("click", function () {
+ document.getElementById("navLinks").classList.toggle("open");
+ });
+ if (window.Nastro) Nastro.updateCartBadges();
+ </script>
+</body>
+</html>

@@ -19,13 +19,18 @@ mkdir -p "$APP_DIR"
 cd "$APP_DIR"
 
 if [ ! -f .env ]; then
+  ADMIN_PASS="$(openssl rand -base64 24 | tr -d '=+/' | cut -c1-20)!Aa1"
   cat > .env <<EOF
 JWT_SECRET=$(openssl rand -hex 32)
 ADMIN_EMAIL=admin@nastroblu.in
-ADMIN_PASSWORD=NastroBlu@Admin2026
+ADMIN_PASSWORD=${ADMIN_PASS}
 CORS_ORIGIN=https://nastroblu.in,https://www.nastroblu.in
 EOF
-  echo "Created .env — change ADMIN_PASSWORD immediately."
+  chmod 600 .env
+  echo "Created .env with a random ADMIN_PASSWORD (shown once below)."
+  echo "  ADMIN_EMAIL=admin@nastroblu.in"
+  echo "  ADMIN_PASSWORD=${ADMIN_PASS}"
+  echo "Store this password securely — it is not printed again."
 fi
 
 echo "==> Starting MongoDB + API"
@@ -46,7 +51,7 @@ echo ""
 echo "Done."
 echo "Storefront: https://$DOMAIN"
 echo "Admin:      https://$DOMAIN/admin/"
-echo "Login:      admin@nastroblu.in  (password in $APP_DIR/.env)"
+echo "Login:      admin@nastroblu.in  (password only in $APP_DIR/.env — never commit it)"
 echo ""
 echo "Useful:"
 echo "  cd $APP_DIR && docker compose logs -f api"

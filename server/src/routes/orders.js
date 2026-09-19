@@ -150,11 +150,19 @@ router.post("/", requireCustomer, async (req, res) => {
     order.whatsappMessage = buildWhatsappMessage(order);
     await order.save();
 
+    const WA_MAX = 1800;
+    let text = order.whatsappMessage;
+    let whatsappUrl = "https://wa.me/919063048255?text=" + encodeURIComponent(text);
+    if (whatsappUrl.length > WA_MAX) {
+      text =
+        `Hi Nastro Blu! Order ${order.orderNumber} for ${formatInr(order.total)} ` +
+        `(${order.items.length} items). Please confirm — full details are in your admin panel.`;
+      whatsappUrl = "https://wa.me/919063048255?text=" + encodeURIComponent(text);
+    }
+
     res.status(201).json({
       order: order.toPublic(),
-      whatsappUrl:
-        "https://wa.me/919063048255?text=" +
-        encodeURIComponent(order.whatsappMessage),
+      whatsappUrl,
     });
   } catch (err) {
     console.error("Create order error", err);
@@ -162,19 +170,36 @@ router.post("/", requireCustomer, async (req, res) => {
   }
 });
 
-/** Admin: list all orders (must be before /:id) */
+/** Admin: list all orders with customer details (must be before /:id) */
 router.get("/admin/all", requireAdmin, async (req, res) => {
   try {
     const filter = {};
     if (req.query.status) filter.status = req.query.status;
-    const orders = await Order.find(filter).sort({ createdAt: -1 }).limit(200);
+    const orders = await Order.find(filter)
+      .populate("customer", "name email phone address createdAt lastLoginAt")
+      .sort({ createdAt: -1 })
+      .limit(200);
+
     res.json({
-      orders: orders.map((o) => ({
-        ...o.toPublic(),
-        customerId: o.customer?.toString?.() || o.customer,
-      })),
+      orders: orders.map((o) => {
+        const pub = o.toPublic();
+        const live = o.customer && o.customer._id ? o.customer : null;
+        return {
+          ...pub,
+          customerId: live ? live._id.toString() : o.customer?.toString?.() || "",
+          customerDetails: {
+            name: (live && live.name) || pub.customer?.name || "",
+            email: (live && live.email) || pub.customer?.email || "",
+            phone: (live && live.phone) || pub.customer?.phone || "",
+            address: (live && live.address) || pub.shippingAddress || {},
+            accountCreatedAt: live ? live.createdAt : null,
+            lastLoginAt: live ? live.lastLoginAt : null,
+          },
+        };
+      }),
     });
   } catch (err) {
+    console.error("Admin orders list error", err);
     res.status(500).json({ error: "Could not load orders" });
   }
 });

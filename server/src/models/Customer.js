@@ -34,6 +34,7 @@ customerSchema.methods.toSafeJSON = function toSafeJSON() {
     name: this.name,
     phone: this.phone || "",
     address: this.address || {},
+    isActive: this.isActive !== false,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     lastLoginAt: this.lastLoginAt,

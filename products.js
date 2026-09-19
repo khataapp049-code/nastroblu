@@ -1,875 +1,6035 @@
-/* Nastro Blu catalog — packaging-complete product registry */
 window.NASTRO_BRAND = {
-  name: "Nastro Blu",
-  legalName: "Nastro Blu — Eat Better",
-  tagline: "Know Your Farmer. Know Your Food.",
-  email: "nastroblu.eatbetter@gmail.com",
-  whatsapp: "919063048255",
-  phone: "+91 40 4540 8385",
-  whatsappDisplay: "+91 90630 48255",
-  instagram: "https://www.instagram.com/nastroblu.eatbetter/",
-  address: "2-2-18/15/C, Plot No-10, D.D. Colony, Bagh Amberpet, Hyderabad – 500013",
-  fssai: "Available on pack / ask in store",
-  city: "Hyderabad",
+ name: "Nastro Blu",
+ tagline: "Eat Better",
+ whatsapp: "919063048255",
+ phone: "+91 40 4540 8385",
+ whatsappDisplay: "+91 90630 48255",
+ email: "nastroblu.eatbetter@gmail.com",
+ instagram: "https://www.instagram.com/nastroblu.eatbetter/",
+ address:
+  "2-2-18/15/C, Plot no -10, Durgabai Deshmukh Colony, Bagh Amberpet, Hyderabad, Telangana 500013",
+ hours: "Sun – Sat · 8 am – 8 pm",
+ fssai: "23624030000782",
 };
 
 window.NASTRO_CATALOG = {
-  categories: [
-    { id: "all", name: "All Products", icon: "✦" },
-    { id: "produce", name: "Naturally Grown Produce", icon: "🌿" },
-    { id: "oils", name: "Cold Pressed Oils", icon: "🫒" },
-    { id: "spices", name: "Kerala Spices", icon: "🌶" },
-    { id: "honey", name: "Honey", icon: "🍯" },
-    { id: "dryfruits", name: "Kashmiri Dry Fruits", icon: "🥜" },
-    { id: "sweets", name: "Traditional Sweets & Snacks", icon: "🍬" },
-    { id: "ghee", name: "Dairy & Ghee", icon: "🧈" },
-  ],
-  products: [
-    {
-      id: "kala-namak-rice",
-      name: "Kala Namak Rice",
-      brand: "Nastro Blu",
-      category: "produce",
-      tag: "Best Seller",
-      price: 320,
-      mrp: 380,
-      netQuantity: "1 kg",
-      unit: "1 kg",
-      sku: "NB-GRN-KNR-1KG",
-      barcode: "8906123401001",
-      packedOn: "June 2026",
-      bestBefore: "June 2027",
-      ingredients: "100% Kala Namak (Buddha) Rice — naturally grown",
-      specifications: [
-        "Variety: Kala Namak / Buddha rice",
-        "Type: Raw / aromatic indigenous rice",
-        "Processing: Cleaned & packed",
-        "Allergen: None declared",
-      ],
-      packagingText: [
-        "Know Your Farmer. Know Your Food.",
-        "Naturally Grown · Farm Direct",
-        "No artificial colours | No preservatives",
-        "Store in a cool, dry place away from sunlight",
-        "For complaints: nastroblu.eatbetter@gmail.com",
-      ],
-      storage: "Airtight container in a cool, dry place",
-      origin: "India — farm-direct supply",
-      sizes: [
-        { label: "500 g", price: 180, sku: "NB-GRN-KNR-500G" },
-        { label: "1 kg", price: 320, sku: "NB-GRN-KNR-1KG" },
-        { label: "5 kg", price: 1450, sku: "NB-GRN-KNR-5KG" },
-      ],
-      blurb: "Buddha rice · Aromatic · Low GI",
-      description:
-        "Naturally grown Kala Namak (Buddha) rice — fragrant, soft-cooking, and sourced from farmers who still grow this indigenous variety the traditional way. Perfect for daily meals and festive biryanis.",
-      image: "assets/products/rice.jpg",
-      rating: 4.9,
-      reviews: 86,
-    },
-    {
-      id: "yellow-jowar",
-      name: "Yellow Jowar",
-      brand: "Nastro Blu",
-      category: "produce",
-      tag: "Must Try",
-      price: 110,
-      mrp: 140,
-      netQuantity: "1 kg",
-      unit: "1 kg",
-      sku: "NB-GRN-YJW-1KG",
-      barcode: "8906123401002",
-      packedOn: "June 2026",
-      bestBefore: "June 2027",
-      ingredients: "100% Yellow Jowar (Sorghum) grain",
-      specifications: [
-        "Grain: Yellow sorghum / jowar",
-        "Gluten: Naturally gluten-free",
-        "Use: Roti, porridge, millet mixes",
-      ],
-      packagingText: [
-        "Indigenous seed · Naturally grown",
-        "Gluten-free whole grain",
-        "Store cool & dry",
-      ],
-      storage: "Cool, dry place in airtight pack",
-      origin: "India",
-      sizes: [
-        { label: "1 kg", price: 110, sku: "NB-GRN-YJW-1KG" },
-        { label: "2 kg", price: 210, sku: "NB-GRN-YJW-2KG" },
-      ],
-      blurb: "Gluten-free · Stone-ready · Native sorghum",
-      description:
-        "Sun-dried yellow jowar (sorghum) from indigenous seed lines. Rich in fibre and naturally gluten-free — ideal for rotis, porridge, and millet mixes.",
-      image: "assets/products/jowar.jpg",
-      rating: 4.8,
-      reviews: 42,
-    },
-    {
-      id: "paigambari-wheat",
-      name: "Paigambari Wheat",
-      brand: "Nastro Blu",
-      category: "produce",
-      tag: null,
-      price: 95,
-      mrp: 120,
-      netQuantity: "1 kg",
-      unit: "1 kg",
-      sku: "NB-GRN-PGW-1KG",
-      barcode: "8906123401003",
-      packedOn: "June 2026",
-      bestBefore: "June 2027",
-      ingredients: "100% Paigambari Wheat whole grain",
-      specifications: [
-        "Variety: Paigambari desi wheat",
-        "Best for: Soft chapati / roti",
-        "Form: Whole wheat grain",
-      ],
-      packagingText: [
-        "Desi wheat · Farm direct",
-        "Naturally grown produce",
-        "MRP inclusive of all taxes (where applicable)",
-      ],
-      storage: "Cool, dry place",
-      origin: "India",
-      sizes: [
-        { label: "1 kg", price: 95, sku: "NB-GRN-PGW-1KG" },
-        { label: "5 kg", price: 440, sku: "NB-GRN-PGW-5KG" },
-      ],
-      blurb: "Soft rotis · Desi wheat · Farm-direct",
-      description:
-        "Paigambari wheat — a soft, desi variety loved for fluffy chapati. Grown without chemical shortcuts and packed fresh for your kitchen.",
-      image: "assets/products/wheat.jpg",
-      rating: 4.7,
-      reviews: 58,
-    },
-    {
-      id: "khapli-wheat",
-      name: "Khapli Wheat (Emmer)",
-      brand: "Nastro Blu",
-      category: "produce",
-      tag: "Trending",
-      price: 185,
-      mrp: 220,
-      netQuantity: "1 kg",
-      unit: "1 kg",
-      sku: "NB-GRN-KHW-1KG",
-      barcode: "8906123401004",
-      packedOn: "June 2026",
-      bestBefore: "June 2027",
-      ingredients: "100% Khapli (Emmer) Wheat",
-      specifications: [
-        "Ancient grain / emmer wheat",
-        "Lower gluten vs modern wheat",
-        "Higher fibre profile",
-      ],
-      packagingText: [
-        "Support Indigenous Seeds",
-        "Ancient grain · Naturally grown",
-        "Eat Better — Nastro Blu",
-      ],
-      storage: "Cool, dry place",
-      origin: "India",
-      sizes: [
-        { label: "1 kg", price: 185, sku: "NB-GRN-KHW-1KG" },
-        { label: "2 kg", price: 350, sku: "NB-GRN-KHW-2KG" },
-        { label: "5 kg", price: 850, sku: "NB-GRN-KHW-5KG" },
-      ],
-      blurb: "Ancient grain · Low gluten · High fibre",
-      description:
-        "Khapli (emmer) wheat — an ancient indigenous grain with lower gluten and higher fibre than modern wheat. Slow-digested and deeply nourishing.",
-      image: "assets/products/grains.jpg",
-      rating: 4.9,
-      reviews: 124,
-    },
-    {
-      id: "khapli-atta",
-      name: "Khapli Wheat Atta",
-      brand: "Nastro Blu",
-      category: "produce",
-      tag: "New",
-      price: 210,
-      mrp: 250,
-      netQuantity: "1 kg",
-      unit: "1 kg",
-      sku: "NB-GRN-KHA-1KG",
-      barcode: "8906123401005",
-      packedOn: "July 2026",
-      bestBefore: "January 2027",
-      ingredients: "100% Stone-ground Khapli (Emmer) Wheat flour",
-      specifications: [
-        "Milling: Stone-ground, small batch",
-        "Texture: Soft roti atta",
-        "GI: Relatively lower GI grain base",
-      ],
-      packagingText: [
-        "Stone ground · Fresh milled feel",
-        "No maida blend",
-        "Keep refrigerated after opening in humid weather",
-      ],
-      storage: "Airtight; refrigerate in humid climates",
-      origin: "India",
-      sizes: [
-        { label: "1 kg", price: 210, sku: "NB-GRN-KHA-1KG" },
-        { label: "2 kg", price: 400, sku: "NB-GRN-KHA-2KG" },
-        { label: "5 kg", price: 950, sku: "NB-GRN-KHA-5KG" },
-      ],
-      blurb: "Stone-ground · Soft rotis · Low GI",
-      description:
-        "Stone-ground Khapli atta milled in small batches. Soft rotis with a nutty aroma — a smarter everyday swap for refined flour.",
-      image: "assets/products/atta.jpg",
-      rating: 4.8,
-      reviews: 97,
-    },
-    {
-      id: "groundnut-oil",
-      name: "Cold-Pressed Groundnut Oil",
-      brand: "Nastro Blu",
-      category: "oils",
-      tag: "Best Seller",
-      price: 425,
-      mrp: 480,
-      netQuantity: "1 L",
-      unit: "1 L",
-      sku: "NB-OIL-GND-1L",
-      barcode: "8906123402001",
-      packedOn: "July 2026",
-      bestBefore: "July 2027",
-      ingredients: "100% Cold-pressed Groundnut (Peanut) Oil",
-      specifications: [
-        "Process: Cold-pressed in-store",
-        "Filter: Single-filtered, unrefined",
-        "Allergen: Contains peanut",
-      ],
-      packagingText: [
-        "Cold pressed in Bagh Amberpet store",
-        "Unrefined · Full aroma",
-        "Not a blended oil",
-        "Allergen warning: Peanut",
-      ],
-      storage: "Away from heat & direct sunlight",
-      origin: "Pressed in Hyderabad",
-      sizes: [
-        { label: "500 ml", price: 230, sku: "NB-OIL-GND-500ML" },
-        { label: "1 L", price: 425, sku: "NB-OIL-GND-1L" },
-        { label: "5 L", price: 1990, sku: "NB-OIL-GND-5L" },
-      ],
-      blurb: "Single-pressed in-store · Full aroma",
-      description:
-        "Native groundnuts cold-pressed in our Bagh Amberpet store. Single-filtered, unrefined, and rich in natural flavour — for tadka, frying, and everyday cooking.",
-      image: "assets/products/oil.jpg",
-      rating: 4.9,
-      reviews: 210,
-    },
-    {
-      id: "sesame-oil",
-      name: "Cold-Pressed Sesame Oil",
-      brand: "Nastro Blu",
-      category: "oils",
-      tag: null,
-      price: 480,
-      mrp: 540,
-      netQuantity: "1 L",
-      unit: "1 L",
-      sku: "NB-OIL-SES-1L",
-      barcode: "8906123402002",
-      packedOn: "July 2026",
-      bestBefore: "July 2027",
-      ingredients: "100% Cold-pressed Sesame (Gingelly) Oil",
-      specifications: [
-        "Process: Slow cold-pressed",
-        "Style: Unrefined gingelly oil",
-        "Use: Cooking, traditional rituals",
-      ],
-      packagingText: [
-        "Gingelly / sesame oil",
-        "Cold pressed · Unrefined",
-        "Store upright after opening",
-      ],
-      storage: "Cool place, away from light",
-      origin: "Pressed in Hyderabad",
-      sizes: [
-        { label: "500 ml", price: 260, sku: "NB-OIL-SES-500ML" },
-        { label: "1 L", price: 480, sku: "NB-OIL-SES-1L" },
-      ],
-      blurb: "Gingelly · Unrefined · In-store pressed",
-      description:
-        "Slow cold-pressed sesame (gingelly) oil with a deep nutty character. Ideal for South Indian cooking, hair care rituals, and traditional recipes.",
-      image: "assets/products/sesame.jpg",
-      rating: 4.8,
-      reviews: 76,
-    },
-    {
-      id: "mustard-oil",
-      name: "Cold-Pressed Mustard Oil",
-      brand: "Nastro Blu",
-      category: "oils",
-      tag: "Must Try",
-      price: 395,
-      mrp: 450,
-      netQuantity: "1 L",
-      unit: "1 L",
-      sku: "NB-OIL-MST-1L",
-      barcode: "8906123402003",
-      packedOn: "July 2026",
-      bestBefore: "July 2027",
-      ingredients: "100% Cold-pressed Black Mustard Oil",
-      specifications: [
-        "Seed: Black mustard",
-        "Process: Cold-pressed, single-filtered",
-        "Character: Pungent & clean",
-      ],
-      packagingText: [
-        "Cold pressed mustard oil",
-        "For cooking & pickles",
-        "Shake gently if natural sediment appears",
-      ],
-      storage: "Cool, dark place",
-      origin: "Pressed in Hyderabad",
-      sizes: [
-        { label: "500 ml", price: 210, sku: "NB-OIL-MST-500ML" },
-        { label: "1 L", price: 395, sku: "NB-OIL-MST-1L" },
-        { label: "5 L", price: 1850, sku: "NB-OIL-MST-5L" },
-      ],
-      blurb: "Black mustard · Sharp & clean",
-      description:
-        "Cold-pressed black mustard oil — pungent, clean, and single-filtered. Perfect for pickles, sabzis, and winter cooking.",
-      image: "assets/products/mustard-oil.jpg",
-      rating: 4.7,
-      reviews: 64,
-    },
-    {
-      id: "coconut-oil",
-      name: "Virgin Coconut Oil",
-      brand: "Nastro Blu",
-      category: "oils",
-      tag: null,
-      price: 450,
-      mrp: 520,
-      netQuantity: "500 ml",
-      unit: "500 ml",
-      sku: "NB-OIL-CCO-500ML",
-      barcode: "8906123402004",
-      packedOn: "July 2026",
-      bestBefore: "July 2027",
-      ingredients: "100% Virgin Coconut Oil (cold-pressed)",
-      specifications: [
-        "Type: Virgin / unrefined",
-        "Source: Fresh copra",
-        "Use: Cooking, skin & hair",
-      ],
-      packagingText: [
-        "Virgin coconut oil",
-        "No refining · No fragrance added",
-        "May solidify below room temperature — natural",
-      ],
-      storage: "Room temperature; solidifies when cool",
-      origin: "India",
-      sizes: [
-        { label: "250 ml", price: 240, sku: "NB-OIL-CCO-250ML" },
-        { label: "500 ml", price: 450, sku: "NB-OIL-CCO-500ML" },
-      ],
-      blurb: "Cold-pressed · Unrefined · Multi-use",
-      description:
-        "Virgin coconut oil cold-pressed from fresh copra. Pure enough for cooking, skin, and hair — no refining, no fragrance.",
-      image: "assets/products/coconut-oil.jpg",
-      rating: 4.9,
-      reviews: 55,
-    },
-    {
-      id: "forest-raw-honey",
-      name: "Forest Raw Honey",
-      brand: "Nastro Blu",
-      category: "honey",
-      tag: "New",
-      price: 450,
-      mrp: 520,
-      netQuantity: "500 g",
-      unit: "500 g",
-      sku: "NB-HNY-FRH-500G",
-      barcode: "8906123403004",
-      packedOn: "July 2026",
-      bestBefore: "July 2028",
-      ingredients: "100% Forest Raw Honey — unprocessed",
-      specifications: [
-        "Origin: Kerala Western Ghats",
-        "Type: Raw / unprocessed forest honey",
-        "Form: Natural liquid honey in glass jar",
-        "No added sugar · No artificial flavour",
-      ],
-      packagingText: [
-        "FOREST RAW HONEY FROM KERALA WESTERN GHATS",
-        "NASTRO BLU · EAT BETTER",
-        "Call & WhatsApp +91 90630 48255 / +91 40 4540 8385",
-        "Follow @nastroblu.eatbetter",
-        "2-2-18/15/C, Plot No-10, Durgabai Deshmukh Colony, Bagh Amberpet, HYD-500013",
-      ],
-      storage: "Cool, dry place away from direct sunlight",
-      origin: "Kerala Western Ghats",
-      sizes: [
-        { label: "250 g", price: 260, sku: "NB-HNY-FRH-250G" },
-        { label: "500 g", price: 450, sku: "NB-HNY-FRH-500G" },
-      ],
-      blurb: "Kerala Western Ghats · Raw · Unprocessed",
-      description:
-        "Forest raw honey sourced from Kerala’s Western Ghats — amber, aromatic, and unprocessed. A pure pantry staple for everyday wellness and traditional recipes.",
-      image: "assets/products/forest-honey.png",
-      rating: 4.9,
-      reviews: 38,
-    },
-    {
-      id: "salem-turmeric",
-      name: "Salem Turmeric Powder",
-      brand: "Nastro Blu",
-      category: "spices",
-      tag: "Best Seller",
-      price: 170,
-      mrp: 210,
-      netQuantity: "200 g",
-      unit: "200 g",
-      sku: "NB-SPC-STM-200G",
-      barcode: "8906123403001",
-      packedOn: "June 2026",
-      bestBefore: "June 2028",
-      ingredients: "100% Salem Turmeric (Curcuma longa) powder",
-      specifications: [
-        "Origin style: Salem / single-origin sourcing",
-        "Form: Fine powder, stone-ground feel",
-        "Colour: Naturally vibrant yellow-orange",
-      ],
-      packagingText: [
-        "Kerala / South Indian spice pantry",
-        "No added colour · No fillers",
-        "Prefer Naturally Grown Produce",
-      ],
-      storage: "Airtight, away from moisture",
-      origin: "Salem region supply chain",
-      sizes: [
-        { label: "100 g", price: 95, sku: "NB-SPC-STM-100G" },
-        { label: "200 g", price: 170, sku: "NB-SPC-STM-200G" },
-        { label: "500 g", price: 380, sku: "NB-SPC-STM-500G" },
-      ],
-      blurb: "Single-origin · High curcumin · Vibrant colour",
-      description:
-        "Single-origin Salem turmeric, sun-dried and stone-ground. Bright colour, earthy aroma, and naturally high curcumin — the backbone of an honest kitchen.",
-      image: "assets/products/turmeric.jpg",
-      rating: 4.9,
-      reviews: 188,
-    },
-    {
-      id: "kerala-pepper",
-      name: "Kerala Black Pepper",
-      brand: "Nastro Blu",
-      category: "spices",
-      tag: null,
-      price: 180,
-      mrp: 220,
-      netQuantity: "100 g",
-      unit: "100 g",
-      sku: "NB-SPC-KBP-100G",
-      barcode: "8906123403002",
-      packedOn: "June 2026",
-      bestBefore: "June 2028",
-      ingredients: "100% Whole Black Peppercorns",
-      specifications: [
-        "Region: Kerala / Malabar style",
-        "Form: Whole peppercorns",
-        "Grind fresh for best aroma",
-      ],
-      packagingText: [
-        "Kerala Spices",
-        "Whole pepper · Farm linked",
-        "Crush or grind before use",
-      ],
-      storage: "Airtight jar",
-      origin: "Kerala",
-      sizes: [
-        { label: "100 g", price: 180, sku: "NB-SPC-KBP-100G" },
-        { label: "250 g", price: 420, sku: "NB-SPC-KBP-250G" },
-      ],
-      blurb: "Malabar coast · Whole peppercorns",
-      description:
-        "Bold Malabar black pepper from Kerala farms. Freshly sourced whole peppercorns with sharp heat and floral notes.",
-      image: "assets/products/pepper.jpg",
-      rating: 4.8,
-      reviews: 71,
-    },
-    {
-      id: "kerala-spice-box",
-      name: "Kerala Everyday Spice Box",
-      brand: "Nastro Blu",
-      category: "spices",
-      tag: "New",
-      price: 650,
-      mrp: 780,
-      netQuantity: "Assorted gift box",
-      unit: "Box",
-      sku: "NB-SPC-BOX-001",
-      barcode: "8906123403003",
-      packedOn: "July 2026",
-      bestBefore: "See individual packs inside",
-      ingredients: "Turmeric, Chilli, Black Pepper, Coriander — see inner packs",
-      specifications: [
-        "Contents: 4 everyday Kerala staples",
-        "Format: Gift / pantry starter box",
-        "Ideal for: Home kitchens & gifting",
-      ],
-      packagingText: [
-        "Kerala Everyday Spice Box",
-        "Eat Better · Nastro Blu",
-        "Check inner labels for net wt & dates",
-      ],
-      storage: "Cool, dry place",
-      origin: "Assembled in Hyderabad",
-      sizes: [{ label: "Gift box", price: 650, sku: "NB-SPC-BOX-001" }],
-      blurb: "Turmeric · Chilli · Pepper · Coriander",
-      description:
-        "A curated set of Kerala staples — turmeric, chilli, pepper, and coriander — packed for everyday cooking and gifting.",
-      image: "assets/products/spices.jpg",
-      rating: 4.8,
-      reviews: 33,
-    },
-    {
-      id: "kashmiri-almonds",
-      name: "Kashmiri Almonds",
-      brand: "Nastro Blu",
-      category: "dryfruits",
-      tag: "Trending",
-      price: 450,
-      mrp: 520,
-      netQuantity: "250 g",
-      unit: "250 g",
-      sku: "NB-DFR-ALM-250G",
-      barcode: "8906123404001",
-      packedOn: "July 2026",
-      bestBefore: "January 2027",
-      ingredients: "100% Kashmiri Almonds (Badam)",
-      specifications: [
-        "Grade: Hand-sorted premium",
-        "Form: Whole almonds",
-        "Allergen: Tree nut",
-      ],
-      packagingText: [
-        "Kashmiri Dry Fruits",
-        "Contains tree nuts",
-        "Soak overnight for softer bite",
-      ],
-      storage: "Airtight; refrigerate in warm weather",
-      origin: "Kashmir supply",
-      sizes: [
-        { label: "250 g", price: 450, sku: "NB-DFR-ALM-250G" },
-        { label: "500 g", price: 860, sku: "NB-DFR-ALM-500G" },
-      ],
-      blurb: "Hand-sorted · Sweet & crunchy",
-      description:
-        "Premium Kashmiri almonds — hand-sorted for size and sweetness. Soak overnight or roast lightly for a wholesome snack.",
-      image: "assets/products/nuts.jpg",
-      rating: 4.9,
-      reviews: 92,
-    },
-    {
-      id: "kashmiri-walnuts",
-      name: "Kashmiri Walnuts",
-      brand: "Nastro Blu",
-      category: "dryfruits",
-      tag: null,
-      price: 520,
-      mrp: 600,
-      netQuantity: "250 g",
-      unit: "250 g",
-      sku: "NB-DFR-WLN-250G",
-      barcode: "8906123404002",
-      packedOn: "July 2026",
-      bestBefore: "January 2027",
-      ingredients: "100% Kashmiri Walnut Kernels",
-      specifications: [
-        "Form: Shelled kernels",
-        "Profile: Buttery, omega-rich",
-        "Allergen: Tree nut",
-      ],
-      packagingText: [
-        "Kashmiri walnuts",
-        "Contains tree nuts",
-        "Best consumed fresh after opening",
-      ],
-      storage: "Refrigerate after opening",
-      origin: "Kashmir supply",
-      sizes: [
-        { label: "250 g", price: 520, sku: "NB-DFR-WLN-250G" },
-        { label: "500 g", price: 980, sku: "NB-DFR-WLN-500G" },
-      ],
-      blurb: "Fresh kernels · Brain food classic",
-      description:
-        "Fresh Kashmiri walnut kernels with a clean, buttery bite. Rich in omega-3s — a pantry essential for winter and wellness.",
-      image: "assets/products/nuts.jpg",
-      rating: 4.8,
-      reviews: 61,
-    },
-    {
-      id: "cashews",
-      name: "Whole Cashews",
-      brand: "Nastro Blu",
-      category: "dryfruits",
-      tag: null,
-      price: 380,
-      mrp: 440,
-      netQuantity: "250 g",
-      unit: "250 g",
-      sku: "NB-DFR-CSH-250G",
-      barcode: "8906123404003",
-      packedOn: "July 2026",
-      bestBefore: "January 2027",
-      ingredients: "100% Whole Cashew Nuts",
-      specifications: [
-        "Grade: W320 style whole cashews",
-        "Form: Whole, creamy",
-        "Allergen: Tree nut / cashew",
-      ],
-      packagingText: [
-        "Whole cashews",
-        "Contains cashew nuts",
-        "No broken bits preferred pack",
-      ],
-      storage: "Airtight, cool place",
-      origin: "India",
-      sizes: [
-        { label: "250 g", price: 380, sku: "NB-DFR-CSH-250G" },
-        { label: "500 g", price: 720, sku: "NB-DFR-CSH-500G" },
-      ],
-      blurb: "W320 grade · Creamy & whole",
-      description:
-        "Whole creamy cashews selected for snacking, sweets, and festival cooking. No broken bits, no additives.",
-      image: "assets/products/grains.jpg",
-      rating: 4.7,
-      reviews: 48,
-    },
-    {
-      id: "kaju-katli",
-      name: "Kaju Katli",
-      brand: "Nastro Blu",
-      category: "sweets",
-      tag: "Best Seller",
-      price: 450,
-      mrp: 520,
-      netQuantity: "250 g",
-      unit: "250 g",
-      sku: "NB-SWT-KKL-250G",
-      barcode: "8906123405001",
-      packedOn: "Made fresh — ask batch date in store",
-      bestBefore: "Consume within 7–10 days of packing",
-      ingredients: "Cashew nuts, cane sugar, ghee (as used in preparation)",
-      specifications: [
-        "Style: Traditional kaju katli",
-        "Sweetener: Real sugar (no artificial sweetener)",
-        "Clean label: No silver leaf, no artificial colour/essence",
-      ],
-      packagingText: [
-        "No artificial colours · No essence",
-        "No preservatives · No silver leaf",
-        "Traditional Sweets — made fresh",
-        "Contains nuts & dairy",
-      ],
-      storage: "Cool place; refrigerate in warm weather",
-      origin: "Made in Hyderabad store kitchen",
-      sizes: [
-        { label: "250 g", price: 450, sku: "NB-SWT-KKL-250G" },
-        { label: "500 g", price: 860, sku: "NB-SWT-KKL-500G" },
-      ],
-      blurb: "No silver leaf · Real cashew · Fresh",
-      description:
-        "Classic kaju katli made in-house with real cashews and cane sugar — no artificial colours, essence, preservatives, or silver leaf.",
-      image: "assets/products/sweets.jpg",
-      rating: 4.9,
-      reviews: 156,
-    },
-    {
-      id: "besan-ladoo",
-      name: "Besan Ladoo",
-      brand: "Nastro Blu",
-      category: "sweets",
-      tag: null,
-      price: 220,
-      mrp: 260,
-      netQuantity: "250 g",
-      unit: "250 g",
-      sku: "NB-SWT-BLD-250G",
-      barcode: "8906123405002",
-      packedOn: "Made fresh — ask batch date in store",
-      bestBefore: "Consume within 10–12 days of packing",
-      ingredients: "Besan (gram flour), ghee, sugar / jaggery (batch dependent)",
-      specifications: [
-        "Method: Slow-roasted besan",
-        "Fat: Bilona ghee aroma profile",
-        "Option: Jaggery-sweetened batches on request",
-      ],
-      packagingText: [
-        "Traditional sweet · Made fresh",
-        "No artificial colours / essence",
-        "Contains dairy & gluten (besan/wheat traces if shared kitchen)",
-      ],
-      storage: "Airtight container",
-      origin: "Made in Hyderabad",
-      sizes: [
-        { label: "250 g", price: 220, sku: "NB-SWT-BLD-250G" },
-        { label: "500 g", price: 420, sku: "NB-SWT-BLD-500G" },
-      ],
-      blurb: "Ghee-roasted · Jaggery option available",
-      description:
-        "Slow-roasted besan ladoos with bilona ghee aroma. Ask us for jaggery-sweetened batches when available.",
-      image: "assets/products/ladoo.jpg",
-      rating: 4.8,
-      reviews: 89,
-    },
-    {
-      id: "chakli",
-      name: "Traditional Chakli",
-      brand: "Nastro Blu",
-      category: "sweets",
-      tag: "Must Try",
-      price: 180,
-      mrp: 210,
-      netQuantity: "200 g",
-      unit: "200 g",
-      sku: "NB-SNK-CHK-200G",
-      barcode: "8906123405003",
-      packedOn: "Made fresh — ask batch date in store",
-      bestBefore: "Best within 15 days of packing",
-      ingredients: "Millet / rice flour blend, spices, cold-pressed oil (for frying), salt",
-      specifications: [
-        "Fry medium: Nastro Blu cold-pressed oil",
-        "Style: Traditional chakli / murukku family",
-        "Texture: Crisp",
-      ],
-      packagingText: [
-        "Fried in cold-pressed oil",
-        "Traditional snacks",
-        "Keep away from moisture",
-      ],
-      storage: "Airtight tin / jar",
-      origin: "Made in Hyderabad",
-      sizes: [
-        { label: "200 g", price: 180, sku: "NB-SNK-CHK-200G" },
-        { label: "400 g", price: 340, sku: "NB-SNK-CHK-400G" },
-      ],
-      blurb: "Fried in cold-pressed oil",
-      description:
-        "Crisp chakli made with millet flour and fried in our own cold-pressed oil — clean crunch without the usual aftertaste.",
-      image: "assets/products/snacks.jpg",
-      rating: 4.7,
-      reviews: 67,
-    },
-    {
-      id: "makhana",
-      name: "Roasted Makhana",
-      brand: "Nastro Blu",
-      category: "sweets",
-      tag: null,
-      price: 160,
-      mrp: 190,
-      netQuantity: "100 g",
-      unit: "100 g",
-      sku: "NB-SNK-MKH-100G",
-      barcode: "8906123405004",
-      packedOn: "July 2026",
-      bestBefore: "January 2027",
-      ingredients: "Fox nuts (Makhana), edible salt, seasoning (as applicable)",
-      specifications: [
-        "Process: Roasted",
-        "Seasoning: Lightly salted",
-        "Snack style: Light & crunchy",
-      ],
-      packagingText: [
-        "Roasted makhana",
-        "Guilt-free evening snack",
-        "Reseal after opening",
-      ],
-      storage: "Airtight after opening",
-      origin: "India",
-      sizes: [
-        { label: "100 g", price: 160, sku: "NB-SNK-MKH-100G" },
-        { label: "250 g", price: 360, sku: "NB-SNK-MKH-250G" },
-      ],
-      blurb: "Lightly salted · Guilt-free crunch",
-      description:
-        "Fox nuts roasted and lightly seasoned. A clean evening snack that travels well and stays crisp.",
-      image: "assets/products/snacks.jpg",
-      rating: 4.6,
-      reviews: 40,
-    },
-    {
-      id: "a2-ghee-500",
-      name: "Bilona A2 Desi Cow Ghee",
-      brand: "Nastro Blu",
-      category: "ghee",
-      tag: "Best Seller",
-      price: 950,
-      mrp: 1100,
-      netQuantity: "500 ml",
-      unit: "500 ml",
-      sku: "NB-DRY-A2G-500ML",
-      barcode: "8906123406001",
-      packedOn: "July 2026",
-      bestBefore: "July 2027",
-      ingredients: "100% Bilona-method Ghee from A2 Desi Cow Milk",
-      specifications: [
-        "Method: Traditional bilona (cultured / hand-churned style)",
-        "Milk: A2 desi cow",
-        "Character: Golden, aromatic",
-      ],
-      packagingText: [
-        "Bilona A2 Desi Cow Ghee",
-        "Dairy & Ghee — Eat Better",
-        "No additives · No preservatives",
-        "Use a dry spoon",
-      ],
-      storage: "Room temperature; away from moisture",
-      origin: "Prepared for Nastro Blu, Hyderabad",
-      sizes: [
-        { label: "250 ml", price: 520, sku: "NB-DRY-A2G-250ML" },
-        { label: "500 ml", price: 950, sku: "NB-DRY-A2G-500ML" },
-        { label: "1 L", price: 1850, sku: "NB-DRY-A2G-1L" },
-      ],
-      blurb: "Bilona-churned · A2 desi cow · Golden",
-      description:
-        "Traditional bilona-method ghee from A2 desi cow milk — cultured, hand-churned, and slow-cooked over firewood heat for that grandmother's-kitchen aroma.",
-      image: "assets/products/ghee.jpg",
-      rating: 5.0,
-      reviews: 240,
-    },
-    {
-      id: "a2-milk",
-      name: "A2 Desi Cow Milk",
-      brand: "Nastro Blu",
-      category: "ghee",
-      tag: "Store Pickup",
-      price: 90,
-      mrp: 100,
-      netQuantity: "1 L",
-      unit: "1 L",
-      sku: "NB-DRY-A2M-1L",
-      barcode: "8906123406002",
-      packedOn: "Daily fresh — date on bottle / pouch",
-      bestBefore: "Consume within 24–48 hrs refrigerated",
-      ingredients: "100% A2 Desi Cow Milk",
-      specifications: [
-        "Type: Fresh milk",
-        "Channel: Store pickup / select Hyderabad routes",
-        "Availability: Confirm on WhatsApp same day",
-      ],
-      packagingText: [
-        "A2 Desi Cow Milk",
-        "Keep refrigerated",
-        "Farm-linked · Hyderabad",
-      ],
-      storage: "Refrigerate at 4°C or below",
-      origin: "Hyderabad farm-linked supply",
-      sizes: [{ label: "1 L", price: 90, sku: "NB-DRY-A2M-1L" }],
-      blurb: "Fresh · Farm-linked · Hyderabad only",
-      description:
-        "Fresh A2 desi cow milk available for store pickup and select Hyderabad delivery routes. Message us on WhatsApp for today's availability.",
-      image: "assets/products/ghee.jpg",
-      rating: 4.9,
-      reviews: 112,
-    },
-  ],
+ categories: [
+  {
+    "id": "all",
+    "name": "All Products",
+    "icon": "✦"
+  },
+  {
+    "id": "produce",
+    "name": "Naturally Grown Produce",
+    "icon": "🌿"
+  },
+  {
+    "id": "oils",
+    "name": "Cold Pressed Oils",
+    "icon": "🫒"
+  },
+  {
+    "id": "spices",
+    "name": "Kerala Spices & Teas",
+    "icon": "🌶"
+  },
+  {
+    "id": "honey",
+    "name": "Honey",
+    "icon": "🍯"
+  },
+  {
+    "id": "dryfruits",
+    "name": "Kashmiri Dry Fruits",
+    "icon": "🥜"
+  },
+  {
+    "id": "sweets",
+    "name": "Traditional Sweets & Snacks",
+    "icon": "🍬"
+  },
+  {
+    "id": "ghee",
+    "name": "Dairy & Ghee",
+    "icon": "🧈"
+  }
+],
+ products: [
+  {
+    "id": "ajmeri-kalakand-jaggery-250g",
+    "name": "Ajmeri Kalakand (jaggery)",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 240,
+    "mrp": 240,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-029",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi cow milk, jaggery, ghee…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-029"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 240,
+        "sku": "NB-029"
+      }
+    ],
+    "blurb": "Grainy Ajmeri-style kalakand sweetened with jaggery, not sugar.",
+    "description": "Grainy Ajmeri-style kalakand sweetened with jaggery, not sugar.",
+    "image": "assets/uploads/products/ajmeri-kalakand-jaggery-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 10
+  },
+  {
+    "id": "amla-pickle-250g",
+    "name": "Amla Pickle",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Pickles"
+    ],
+    "price": 150,
+    "mrp": 150,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-136",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made in peanut cold pressed oil…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-136"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 150,
+        "sku": "NB-136"
+      }
+    ],
+    "blurb": "Tangy amla (gooseberry) pickle in peanut cold-pressed oil.",
+    "description": "Tangy amla (gooseberry) pickle in peanut cold-pressed oil.",
+    "image": "assets/uploads/products/amla-pickle-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 20
+  },
+  {
+    "id": "anjeer-fig-250g",
+    "name": "Anjeer (Fig)",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 450,
+    "mrp": 450,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-119",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Naturally grown & directly from…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-119"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 450,
+        "sku": "NB-119"
+      }
+    ],
+    "blurb": "Sun-dried anjeer (figs) - soft, honeyed rounds, naturally grown.",
+    "description": "Sun-dried anjeer (figs) - soft, honeyed rounds, naturally grown.",
+    "image": "assets/uploads/products/anjeer-fig-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 30
+  },
+  {
+    "id": "anjeer-dry-fruit-roll-250g",
+    "name": "Anjeer Dry Fruit Roll",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 900,
+    "mrp": 900,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-014",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Poppy Seeds & Sugar",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-014"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 900,
+        "sku": "NB-014"
+      }
+    ],
+    "blurb": "No-frills fig-and-nut roll rolled in poppy seeds - dense, chewy and rich.",
+    "description": "No-frills fig-and-nut roll rolled in poppy seeds - dense, chewy and rich.",
+    "image": "assets/uploads/products/anjeer-dry-fruit-roll-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 40
+  },
+  {
+    "id": "anjeer-king-250g",
+    "name": "Anjeer King",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 900,
+    "mrp": 900,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-015",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Poppy Seeds & Sugar",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-015"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 900,
+        "sku": "NB-015"
+      }
+    ],
+    "blurb": "The signature anjeer sweet - packed fig discs crowned with dry fruits.",
+    "description": "The signature anjeer sweet - packed fig discs crowned with dry fruits.",
+    "image": "assets/uploads/products/anjeer-king-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 50
+  },
+  {
+    "id": "appadalu-250g",
+    "name": "Appadalu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 175,
+    "mrp": 175,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-062",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Kumkumpoovu single polish rice…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-062"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 175,
+        "sku": "NB-062"
+      }
+    ],
+    "blurb": "Sun-dried rice appadalu (papads) from single-polish Kumkumpoovu rice - fry till they bloom crisp.",
+    "description": "Sun-dried rice appadalu (papads) from single-polish Kumkumpoovu rice - fry till they bloom crisp.",
+    "image": "assets/uploads/products/appadalu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 60
+  },
+  {
+    "id": "apricot-250g",
+    "name": "Apricot",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 225,
+    "mrp": 225,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-121",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Naturally grown & directly from…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-121"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 225,
+        "sku": "NB-121"
+      }
+    ],
+    "blurb": "Dried apricots from Kashmir - chewy, tangy-sweet and preservative-free.",
+    "description": "Dried apricots from Kashmir - chewy, tangy-sweet and preservative-free.",
+    "image": "assets/uploads/products/apricot-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 70
+  },
+  {
+    "id": "badam-sunflower-250g",
+    "name": "Badam Sunflower",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 700,
+    "mrp": 700,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-005",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Kaju, Badam, Pista, Anjeer, Kesar…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-005"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 700,
+        "sku": "NB-005"
+      }
+    ],
+    "blurb": "Sunflower-shaped dry-fruit sweet layered with kaju, badam, pista and anjeer.",
+    "description": "Sunflower-shaped dry-fruit sweet layered with kaju, badam, pista and anjeer.",
+    "image": "assets/uploads/products/badam-sunflower-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 80
+  },
+  {
+    "id": "badusha-250g",
+    "name": "Badusha",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-049",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Maida, Sugar, Ghee & Dry Fruits",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-049"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-049"
+      }
+    ],
+    "blurb": "Flaky, syrup-glazed badusha topped with dry fruits.",
+    "description": "Flaky, syrup-glazed badusha topped with dry fruits.",
+    "image": "assets/uploads/products/badusha-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 90
+  },
+  {
+    "id": "bajra-aata-1kg",
+    "name": "Bajra Aata",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 150,
+    "mrp": 150,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-069",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-069"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 150,
+        "sku": "NB-069"
+      }
+    ],
+    "blurb": "Pearl millet (bajra) flour for winter rotlas and theplas.",
+    "description": "Pearl millet (bajra) flour for winter rotlas and theplas.",
+    "image": "assets/uploads/products/bajra-aata-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 100
+  },
+  {
+    "id": "balaghat-chinnor-rice-1kg",
+    "name": "Balaghat Chinnor Rice",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-073",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-073"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 200,
+        "sku": "NB-073"
+      }
+    ],
+    "blurb": "Heritage Chinnor rice from Balaghat - small aromatic grains that cook soft and fragrant.",
+    "description": "Heritage Chinnor rice from Balaghat - small aromatic grains that cook soft and fragrant.",
+    "image": "assets/uploads/products/balaghat-chinnor-rice-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 110
+  },
+  {
+    "id": "banana-chips-200g",
+    "name": "Banana Chips",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 168,
+    "mrp": 168,
+    "cost": 0,
+    "netQuantity": "200 gms",
+    "unit": "200 gms",
+    "sku": "NB-061",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Fresh Raw Banana, salt, red chilli…",
+    "specifications": [
+      "Net quantity: 200 gms",
+      "SKU: NB-061"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "200 gms",
+        "price": 168,
+        "sku": "NB-061"
+      }
+    ],
+    "blurb": "Thin-sliced raw banana chips, lightly salted with a red-chilli kick.",
+    "description": "Thin-sliced raw banana chips, lightly salted with a red-chilli kick.",
+    "image": "assets/uploads/products/banana-chips-200g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 120
+  },
+  {
+    "id": "bansi-wheat-flour-1kg",
+    "name": "Bansi Wheat Flour",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 125,
+    "mrp": 125,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-064",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-064"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 125,
+        "sku": "NB-064"
+      }
+    ],
+    "blurb": "Stone-milled atta from Bansi wheat - a traditional variety known for taste and soft rotis.",
+    "description": "Stone-milled atta from Bansi wheat - a traditional variety known for taste and soft rotis.",
+    "image": "assets/uploads/products/bansi-wheat-flour-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 130
+  },
+  {
+    "id": "bay-leaves-50g",
+    "name": "Bay Leaves",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 140,
+    "mrp": 140,
+    "cost": 0,
+    "netQuantity": "50 gms",
+    "unit": "50 gms",
+    "sku": "NB-110",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 50 gms",
+      "SKU: NB-110"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "50 gms",
+        "price": 140,
+        "sku": "NB-110"
+      }
+    ],
+    "blurb": "Whole dried bay leaves (tej patta) from Kerala.",
+    "description": "Whole dried bay leaves (tej patta) from Kerala.",
+    "image": "assets/uploads/products/bay-leaves-50g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 140
+  },
+  {
+    "id": "bellam-gavvalu-250g",
+    "name": "Bellam Gavvalu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 250,
+    "mrp": 250,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-059",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Wheat flour, Jaggery, Ghee…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-059"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 250,
+        "sku": "NB-059"
+      }
+    ],
+    "blurb": "Andhra shell-shaped gavvalu glazed in bellam (jaggery) - a sweet-crunchy snack.",
+    "description": "Andhra shell-shaped gavvalu glazed in bellam (jaggery) - a sweet-crunchy snack.",
+    "image": "assets/uploads/products/bellam-gavvalu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 150
+  },
+  {
+    "id": "besan-1kg",
+    "name": "Besan",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 195,
+    "mrp": 195,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-071",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-071"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 195,
+        "sku": "NB-071"
+      }
+    ],
+    "blurb": "Pure chana dal besan for pakoras, kadhi, cheela and laddus.",
+    "description": "Pure chana dal besan for pakoras, kadhi, cheela and laddus.",
+    "image": "assets/uploads/products/besan-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 160
+  },
+  {
+    "id": "besan-laddu-250g",
+    "name": "Besan Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 150,
+    "mrp": 150,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-040",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Chana Dal, Sugar & Ghee",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-040"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 150,
+        "sku": "NB-040"
+      }
+    ],
+    "blurb": "Home-style besan laddus - slow-roasted chana dal flour, ghee and sugar.",
+    "description": "Home-style besan laddus - slow-roasted chana dal flour, ghee and sugar.",
+    "image": "assets/uploads/products/besan-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 170
+  },
+  {
+    "id": "bhel-mixture-200g",
+    "name": "Bhel Mixture",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 120,
+    "mrp": 120,
+    "cost": 0,
+    "netQuantity": "200 gms",
+    "unit": "200 gms",
+    "sku": "NB-055",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Murmura, Peanut, Futana Dal…",
+    "specifications": [
+      "Net quantity: 200 gms",
+      "SKU: NB-055"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "200 gms",
+        "price": 120,
+        "sku": "NB-055"
+      }
+    ],
+    "blurb": "Ready bhel mix of murmura, peanuts and roasted dal - just add onion, tomato and chutney.",
+    "description": "Ready bhel mix of murmura, peanuts and roasted dal - just add onion, tomato and chutney.",
+    "image": "assets/uploads/products/bhel-mixture-200g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 180
+  },
+  {
+    "id": "black-sesame-500g",
+    "name": "Black Sesame",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 350,
+    "mrp": 350,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-093",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-093"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 350,
+        "sku": "NB-093"
+      }
+    ],
+    "blurb": "Black sesame - deeper, nuttier til for chutney podi and baking.",
+    "description": "Black sesame - deeper, nuttier til for chutney podi and baking.",
+    "image": "assets/uploads/products/black-sesame-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 190
+  },
+  {
+    "id": "black-whole-urad-500g",
+    "name": "Black whole Urad",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 115,
+    "mrp": 115,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-079",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-079"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 115,
+        "sku": "NB-079"
+      }
+    ],
+    "blurb": "Whole black urad - the base of true dal makhani.",
+    "description": "Whole black urad - the base of true dal makhani.",
+    "image": "assets/uploads/products/black-whole-urad-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 200
+  },
+  {
+    "id": "cham-cham-250g",
+    "name": "Cham Cham",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 240,
+    "mrp": 240,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-035",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi cow milk & Sugar",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-035"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 240,
+        "sku": "NB-035"
+      }
+    ],
+    "blurb": "Soft Bengali cham cham made from fresh desi cow milk chenna.",
+    "description": "Soft Bengali cham cham made from fresh desi cow milk chenna.",
+    "image": "assets/uploads/products/cham-cham-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 210
+  },
+  {
+    "id": "chana-dal-1kg",
+    "name": "Chana Dal",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 170,
+    "mrp": 170,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-081",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-081"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 170,
+        "sku": "NB-081"
+      }
+    ],
+    "blurb": "Bold, even-sized chana dal from naturally grown chana.",
+    "description": "Bold, even-sized chana dal from naturally grown chana.",
+    "image": "assets/uploads/products/chana-dal-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 220
+  },
+  {
+    "id": "chanoli-500g",
+    "name": "Chanoli",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products",
+      "Review notes"
+    ],
+    "price": 100,
+    "mrp": 100,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-087",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-087",
+      "Note: Could not identify this item precisely from the screenshot - please review the description."
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 100,
+        "sku": "NB-087"
+      }
+    ],
+    "blurb": "Chanoli from the naturally grown farm range.",
+    "description": "Chanoli from the naturally grown farm range.",
+    "image": "assets/uploads/products/chanoli-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 230
+  },
+  {
+    "id": "chekodi-250g",
+    "name": "Chekodi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 175,
+    "mrp": 175,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-057",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Kumkumpoovu Rice Flour, White sesame…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-057"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 175,
+        "sku": "NB-057"
+      }
+    ],
+    "blurb": "Crunchy ring chekodi made with heritage Kumkumpoovu rice flour.",
+    "description": "Crunchy ring chekodi made with heritage Kumkumpoovu rice flour.",
+    "image": "assets/uploads/products/chekodi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 240
+  },
+  {
+    "id": "chena-toast-1pc",
+    "name": "Chena Toast",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 60,
+    "mrp": 60,
+    "cost": 0,
+    "netQuantity": "1 pc",
+    "unit": "1 pc",
+    "sku": "NB-036",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Sugar, Kesar, Pista…",
+    "specifications": [
+      "Net quantity: 1 pc",
+      "SKU: NB-036"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 pc",
+        "price": 60,
+        "sku": "NB-036"
+      }
+    ],
+    "blurb": "Golden-toasted chenna sweet on desi cow milk, topped with kesar and pista. Sold per piece.",
+    "description": "Golden-toasted chenna sweet on desi cow milk, topped with kesar and pista. Sold per piece.",
+    "image": "assets/uploads/products/chena-toast-1pc.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 250
+  },
+  {
+    "id": "chia-seeds-200g",
+    "name": "Chia Seeds",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 160,
+    "mrp": 160,
+    "cost": 0,
+    "netQuantity": "200 gms",
+    "unit": "200 gms",
+    "sku": "NB-089",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 200 gms",
+      "SKU: NB-089"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "200 gms",
+        "price": 160,
+        "sku": "NB-089"
+      }
+    ],
+    "blurb": "Chia seeds for soaking, smoothies and puddings.",
+    "description": "Chia seeds for soaking, smoothies and puddings.",
+    "image": "assets/uploads/products/chia-seeds-200g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 260
+  },
+  {
+    "id": "coconut-cold-pressed-oil-1l",
+    "name": "Coconut Cold Pressed Oil",
+    "brand": "Nastro Blu",
+    "category": "oils",
+    "tag": null,
+    "tags": [
+      "Cold Pressed Oil"
+    ],
+    "price": 820,
+    "mrp": 820,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-131",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-131"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 820,
+        "sku": "NB-131"
+      }
+    ],
+    "blurb": "Cold-pressed coconut oil from fresh copra - for cooking, hair and skin.",
+    "description": "Cold-pressed coconut oil from fresh copra - for cooking, hair and skin.",
+    "image": "assets/uploads/products/coconut-cold-pressed-oil-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 270
+  },
+  {
+    "id": "coconut-laddu-250g",
+    "name": "Coconut Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-041",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Fresh Coconut, Almond, Jaggery…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-041"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-041"
+      }
+    ],
+    "blurb": "Fresh-coconut laddus with almond, sweetened with jaggery.",
+    "description": "Fresh-coconut laddus with almond, sweetened with jaggery.",
+    "image": "assets/uploads/products/coconut-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 280
+  },
+  {
+    "id": "desi-cow-ghee-250g",
+    "name": "Desi Cow Ghee",
+    "brand": "Nastro Blu",
+    "category": "ghee",
+    "tag": null,
+    "tags": [
+      "Dairy Products"
+    ],
+    "price": 950,
+    "mrp": 950,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-127",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-127"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 950,
+        "sku": "NB-127"
+      }
+    ],
+    "blurb": "Golden desi cow ghee, slow-made from desi cow milk.",
+    "description": "Golden desi cow ghee, slow-made from desi cow milk.",
+    "image": "assets/uploads/products/desi-cow-ghee-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 290
+  },
+  {
+    "id": "desi-khand-500g",
+    "name": "Desi Khand",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 125,
+    "mrp": 125,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-097",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made from natural sugar cane juice…",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-097"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 125,
+        "sku": "NB-097"
+      }
+    ],
+    "blurb": "Unrefined desi khand from natural sugarcane juice - a cleaner alternative to white sugar.",
+    "description": "Unrefined desi khand from natural sugarcane juice - a cleaner alternative to white sugar.",
+    "image": "assets/uploads/products/desi-khand-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 300
+  },
+  {
+    "id": "desi-mamra-badam-250g",
+    "name": "Desi Mamra Badam",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 550,
+    "mrp": 550,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-118",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Naturally grown directly from Kashmir…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-118"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 550,
+        "sku": "NB-118"
+      }
+    ],
+    "blurb": "True Kashmiri mamra almonds - small, curved, oil-rich kernels, naturally grown.",
+    "description": "True Kashmiri mamra almonds - small, curved, oil-rich kernels, naturally grown.",
+    "image": "assets/uploads/products/desi-mamra-badam-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 310
+  },
+  {
+    "id": "desi-mamra-badam-cold-pressed-oil-100ml",
+    "name": "Desi Mamra Badam Cold Pressed Oil",
+    "brand": "Nastro Blu",
+    "category": "oils",
+    "tag": null,
+    "tags": [
+      "Cold Pressed Oil"
+    ],
+    "price": 600,
+    "mrp": 600,
+    "cost": 0,
+    "netQuantity": "100 ml",
+    "unit": "100 ml",
+    "sku": "NB-133",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 100 ml",
+      "SKU: NB-133"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "100 ml",
+        "price": 600,
+        "sku": "NB-133"
+      }
+    ],
+    "blurb": "Cold-pressed almond oil from Kashmiri mamra badam - a little goes a long way.",
+    "description": "Cold-pressed almond oil from Kashmiri mamra badam - a little goes a long way.",
+    "image": "assets/uploads/products/desi-mamra-badam-cold-pressed-oil-100ml.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 320
+  },
+  {
+    "id": "desi-mamra-badam-halwa-250g",
+    "name": "Desi Mamra Badam Halwa",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 550,
+    "mrp": 550,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-003",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Mamra Badam, Kesar, Ghee…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-003"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 550,
+        "sku": "NB-003"
+      }
+    ],
+    "blurb": "Slow-roasted almond halwa of desi mamra badam finished with kesar and ghee.",
+    "description": "Slow-roasted almond halwa of desi mamra badam finished with kesar and ghee.",
+    "image": "assets/uploads/products/desi-mamra-badam-halwa-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 330
+  },
+  {
+    "id": "desi-mamra-badam-katli-250g",
+    "name": "Desi Mamra Badam Katli",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 625,
+    "mrp": 625,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-002",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Mamra Badam & Khand",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-002"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 625,
+        "sku": "NB-002"
+      }
+    ],
+    "blurb": "Rich almond katli made from Kashmiri mamra badam and unrefined khand - no refined sugar.",
+    "description": "Rich almond katli made from Kashmiri mamra badam and unrefined khand - no refined sugar.",
+    "image": "assets/uploads/products/desi-mamra-badam-katli-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 340
+  },
+  {
+    "id": "dry-fruit-choco-delight-250g",
+    "name": "Dry Fruit Choco Delight",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 650,
+    "mrp": 650,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-018",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Cocoa Powder, Khand…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-018"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 650,
+        "sku": "NB-018"
+      }
+    ],
+    "blurb": "Chocolatey dry-fruit bites made with cocoa and khand instead of refined sugar.",
+    "description": "Chocolatey dry-fruit bites made with cocoa and khand instead of refined sugar.",
+    "image": "assets/uploads/products/dry-fruit-choco-delight-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 350
+  },
+  {
+    "id": "dry-fruit-laddu-250g",
+    "name": "Dry Fruit Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 395,
+    "mrp": 395,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-016",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Poppy Seeds, Ghee…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-016"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 395,
+        "sku": "NB-016"
+      }
+    ],
+    "blurb": "Round dry-fruit laddus bound with ghee and rolled in poppy seeds.",
+    "description": "Round dry-fruit laddus bound with ghee and rolled in poppy seeds.",
+    "image": "assets/uploads/products/dry-fruit-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 360
+  },
+  {
+    "id": "dry-fruit-mixture-250g",
+    "name": "Dry Fruit Mixture",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 225,
+    "mrp": 225,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-052",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-052"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 225,
+        "sku": "NB-052"
+      }
+    ],
+    "blurb": "Crunchy namkeen mixture upgraded with dry fruits.",
+    "description": "Crunchy namkeen mixture upgraded with dry fruits.",
+    "image": "assets/uploads/products/dry-fruit-mixture-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 370
+  },
+  {
+    "id": "essential-curry-masala-100gms",
+    "name": "Essential Curry Masala",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 260,
+    "mrp": 260,
+    "cost": 0,
+    "netQuantity": "100 gms",
+    "unit": "100 gms",
+    "sku": "NB-117",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 100 gms",
+      "SKU: NB-117"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "100 gms",
+        "price": 260,
+        "sku": "NB-117"
+      }
+    ],
+    "blurb": "The one everyday curry masala - a balanced Kerala-spice blend for vegetables, dals and gravies.",
+    "description": "The one everyday curry masala - a balanced Kerala-spice blend for vegetables, dals and gravies.",
+    "image": "assets/uploads/products/essential-curry-masala-100gms.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 380
+  },
+  {
+    "id": "flax-seeds-200g",
+    "name": "Flax Seeds",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 80,
+    "mrp": 80,
+    "cost": 0,
+    "netQuantity": "200 gms",
+    "unit": "200 gms",
+    "sku": "NB-090",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 200 gms",
+      "SKU: NB-090"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "200 gms",
+        "price": 80,
+        "sku": "NB-090"
+      }
+    ],
+    "blurb": "Whole flax seeds - roast and grind for omega-3-rich mukhwas and chutney.",
+    "description": "Whole flax seeds - roast and grind for omega-3-rich mukhwas and chutney.",
+    "image": "assets/uploads/products/flax-seeds-200g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 390
+  },
+  {
+    "id": "futana-dal-500g",
+    "name": "Futana Dal",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 100,
+    "mrp": 100,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-082",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-082"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 100,
+        "sku": "NB-082"
+      }
+    ],
+    "blurb": "Roasted gram (futana) - eat as is, or grind into chutney podi.",
+    "description": "Roasted gram (futana) - eat as is, or grind into chutney podi.",
+    "image": "assets/uploads/products/futana-dal-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 400
+  },
+  {
+    "id": "gajar-ka-halwa-250g",
+    "name": "Gajar Ka Halwa",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 275,
+    "mrp": 275,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-048",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Red Carrot, Sugar, Desi Cow Milk…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-048"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 275,
+        "sku": "NB-048"
+      }
+    ],
+    "blurb": "Red-carrot halwa slow-cooked in desi cow milk.",
+    "description": "Red-carrot halwa slow-cooked in desi cow milk.",
+    "image": "assets/uploads/products/gajar-ka-halwa-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 410
+  },
+  {
+    "id": "gift-hamper",
+    "name": "Gift Hamper",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": "On request",
+    "tags": [
+      "Gift Hampers",
+      "Review notes",
+      "Custom pricing"
+    ],
+    "price": 0,
+    "mrp": 0,
+    "cost": 0,
+    "netQuantity": "Customisable",
+    "unit": "Customisable",
+    "sku": "NB-142",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: Customisable",
+      "SKU: NB-142",
+      "Note: Price depends on customisation - shown in app without a fixed MRP."
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "Customisable",
+        "price": 0,
+        "sku": "NB-142"
+      }
+    ],
+    "blurb": "A customisable hamper of Nastro Blu sweets, dry fruits and pantry staples - built to your budget and occasion.",
+    "description": "A customisable hamper of Nastro Blu sweets, dry fruits and pantry staples - built to your budget and occasion.",
+    "image": "assets/uploads/products/gift-hamper.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 420
+  },
+  {
+    "id": "gond-dry-fruit-laddu-250g",
+    "name": "Gond Dry Fruit Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 245,
+    "mrp": 245,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-017",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Wheat Flour, Dry Fruits, Coconut…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-017"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 245,
+        "sku": "NB-017"
+      }
+    ],
+    "blurb": "Traditional gond laddu with wheat flour, dry fruits and coconut - a winter strength staple.",
+    "description": "Traditional gond laddu with wheat flour, dry fruits and coconut - a winter strength staple.",
+    "image": "assets/uploads/products/gond-dry-fruit-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 430
+  },
+  {
+    "id": "green-chilli-pickle-250g",
+    "name": "Green Chilli Pickle",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Pickles"
+    ],
+    "price": 150,
+    "mrp": 150,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-135",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made in peanut cold pressed oil…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-135"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 150,
+        "sku": "NB-135"
+      }
+    ],
+    "blurb": "Fiery green chilli pickle in peanut cold-pressed oil.",
+    "description": "Fiery green chilli pickle in peanut cold-pressed oil.",
+    "image": "assets/uploads/products/green-chilli-pickle-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 440
+  },
+  {
+    "id": "green-leaf-tea-50g",
+    "name": "Green Leaf Tea",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 250,
+    "mrp": 250,
+    "cost": 0,
+    "netQuantity": "50 gms",
+    "unit": "50 gms",
+    "sku": "NB-113",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 50 gms",
+      "SKU: NB-113"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "50 gms",
+        "price": 250,
+        "sku": "NB-113"
+      }
+    ],
+    "blurb": "Whole-leaf green tea from Kerala's high ranges - light, grassy and fresh.",
+    "description": "Whole-leaf green tea from Kerala's high ranges - light, grassy and fresh.",
+    "image": "assets/uploads/products/green-leaf-tea-50g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 450
+  },
+  {
+    "id": "gulab-jamun-250g",
+    "name": "Gulab Jamun",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 240,
+    "mrp": 240,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-032",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Sugar, a small portion of maida…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-032"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 240,
+        "sku": "NB-032"
+      }
+    ],
+    "blurb": "Soft khoya gulab jamuns made on desi cow milk with only a small portion of maida.",
+    "description": "Soft khoya gulab jamuns made on desi cow milk with only a small portion of maida.",
+    "image": "assets/uploads/products/gulab-jamun-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 460
+  },
+  {
+    "id": "gulkand-250g",
+    "name": "Gulkand",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 325,
+    "mrp": 325,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-100",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made with desi rose & raw honey…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-100"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 325,
+        "sku": "NB-100"
+      }
+    ],
+    "blurb": "Cooling rose-petal gulkand made with desi roses and raw honey.",
+    "description": "Cooling rose-petal gulkand made with desi roses and raw honey.",
+    "image": "assets/uploads/products/gulkand-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 470
+  },
+  {
+    "id": "idukki-grown-clove-50g",
+    "name": "Idukki grown Clove",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "50 gms",
+    "unit": "50 gms",
+    "sku": "NB-107",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 50 gms",
+      "SKU: NB-107"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "50 gms",
+        "price": 200,
+        "sku": "NB-107"
+      }
+    ],
+    "blurb": "Cloves grown in Idukki's spice hills - oil-rich and sharp.",
+    "description": "Cloves grown in Idukki's spice hills - oil-rich and sharp.",
+    "image": "assets/uploads/products/idukki-grown-clove-50g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 480
+  },
+  {
+    "id": "idukki-nutmeg-without-shell-20g",
+    "name": "Idukki Nutmeg without shell",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 65,
+    "mrp": 65,
+    "cost": 0,
+    "netQuantity": "20 gms",
+    "unit": "20 gms",
+    "sku": "NB-108",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 20 gms",
+      "SKU: NB-108"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "20 gms",
+        "price": 65,
+        "sku": "NB-108"
+      }
+    ],
+    "blurb": "Shelled whole nutmeg from Idukki - grate fresh over milk, sweets and bakes.",
+    "description": "Shelled whole nutmeg from Idukki - grate fresh over milk, sweets and bakes.",
+    "image": "assets/uploads/products/idukki-nutmeg-without-shell-20g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 490
+  },
+  {
+    "id": "jaggery-cubes-500g",
+    "name": "Jaggery Cubes",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 125,
+    "mrp": 125,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-095",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-095"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 125,
+        "sku": "NB-095"
+      }
+    ],
+    "blurb": "Bite-size jaggery cubes - easy portioning for tea and after meals.",
+    "description": "Bite-size jaggery cubes - easy portioning for tea and after meals.",
+    "image": "assets/uploads/products/jaggery-cubes-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 500
+  },
+  {
+    "id": "jaggery-jalebi-250g",
+    "name": "Jaggery Jalebi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 225,
+    "mrp": 225,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-031",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Wheat flour, curd, jaggery & ghee…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-031"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 225,
+        "sku": "NB-031"
+      }
+    ],
+    "blurb": "Whole-wheat jalebis fermented with curd, fried in ghee and soaked in jaggery syrup.",
+    "description": "Whole-wheat jalebis fermented with curd, fried in ghee and soaked in jaggery syrup.",
+    "image": "assets/uploads/products/jaggery-jalebi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 510
+  },
+  {
+    "id": "jaggery-piece-1kg",
+    "name": "Jaggery piece",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 140,
+    "mrp": 140,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-096",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-096"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 140,
+        "sku": "NB-096"
+      }
+    ],
+    "blurb": "Traditional jaggery block made from naturally grown sugarcane.",
+    "description": "Traditional jaggery block made from naturally grown sugarcane.",
+    "image": "assets/uploads/products/jaggery-piece-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 520
+  },
+  {
+    "id": "jaggery-powder-500g",
+    "name": "Jaggery Powder",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 85,
+    "mrp": 85,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-094",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-094"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 85,
+        "sku": "NB-094"
+      }
+    ],
+    "blurb": "Free-flowing jaggery powder - swap it 1:1 for sugar in tea and baking.",
+    "description": "Free-flowing jaggery powder - swap it 1:1 for sugar in tea and baking.",
+    "image": "assets/uploads/products/jaggery-powder-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 530
+  },
+  {
+    "id": "jaggery-sandesh-250g",
+    "name": "Jaggery Sandesh",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 300,
+    "mrp": 300,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-030",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi cow milk, jaggery & cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-030"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 300,
+        "sku": "NB-030"
+      }
+    ],
+    "blurb": "Bengali-style sandesh made on desi cow milk and jaggery.",
+    "description": "Bengali-style sandesh made on desi cow milk and jaggery.",
+    "image": "assets/uploads/products/jaggery-sandesh-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 540
+  },
+  {
+    "id": "janthikalu-250g",
+    "name": "Janthikalu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 175,
+    "mrp": 175,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-056",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Rice Flour, Chana dal flour, Cold pressed oil…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-056"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 175,
+        "sku": "NB-056"
+      }
+    ],
+    "blurb": "Andhra-style janthikalu (murukku) pressed from rice and chana dal flours.",
+    "description": "Andhra-style janthikalu (murukku) pressed from rice and chana dal flours.",
+    "image": "assets/uploads/products/janthikalu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 550
+  },
+  {
+    "id": "jeera-250g",
+    "name": "Jeera",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-105",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Naturally grown",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-105"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-105"
+      }
+    ],
+    "blurb": "Naturally grown cumin - plump seeds with strong aroma.",
+    "description": "Naturally grown cumin - plump seeds with strong aroma.",
+    "image": "assets/uploads/products/jeera-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 560
+  },
+  {
+    "id": "jonna-laddu-jaggery-250g",
+    "name": "Jonna Laddu (jaggery)",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-043",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "White Jowar, Almond, Jaggery…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-043"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-043"
+      }
+    ],
+    "blurb": "Jowar (sorghum) laddus with almond and jaggery - a millet-first sweet.",
+    "description": "Jowar (sorghum) laddus with almond and jaggery - a millet-first sweet.",
+    "image": "assets/uploads/products/jonna-laddu-jaggery-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 570
+  },
+  {
+    "id": "kabuli-chola-500g",
+    "name": "Kabuli Chola",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 85,
+    "mrp": 85,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-084",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-084"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 85,
+        "sku": "NB-084"
+      }
+    ],
+    "blurb": "Kabuli chana (chola) for chole, salads and hummus.",
+    "description": "Kabuli chana (chola) for chole, salads and hummus.",
+    "image": "assets/uploads/products/kabuli-chola-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 580
+  },
+  {
+    "id": "kaju-anjeer-roll-250g",
+    "name": "Kaju Anjeer Roll",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 413,
+    "mrp": 413,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-011",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Kaju, Anjeer, Sugar, Kesar & Cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-011"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 413,
+        "sku": "NB-011"
+      }
+    ],
+    "blurb": "Cashew rolls wrapped around a soft anjeer (fig) centre.",
+    "description": "Cashew rolls wrapped around a soft anjeer (fig) centre.",
+    "image": "assets/uploads/products/kaju-anjeer-roll-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 590
+  },
+  {
+    "id": "kaju-delight-assorted-250g",
+    "name": "Kaju Delight (Assorted)",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 600,
+    "mrp": 600,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-012",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Sugar, Honey, Saffron…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-012"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 600,
+        "sku": "NB-012"
+      }
+    ],
+    "blurb": "An assorted box of the house kaju sweets - a mix of shapes and fillings in one pack.",
+    "description": "An assorted box of the house kaju sweets - a mix of shapes and fillings in one pack.",
+    "image": "assets/uploads/products/kaju-delight-assorted-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 600
+  },
+  {
+    "id": "kaju-dry-fruit-barfi-250g",
+    "name": "Kaju Dry Fruit Barfi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 550,
+    "mrp": 550,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-006",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Sugar & Honey",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-006"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 550,
+        "sku": "NB-006"
+      }
+    ],
+    "blurb": "Cashew barfi loaded with mixed dry fruits, sweetened with sugar and honey.",
+    "description": "Cashew barfi loaded with mixed dry fruits, sweetened with sugar and honey.",
+    "image": "assets/uploads/products/kaju-dry-fruit-barfi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 610
+  },
+  {
+    "id": "kaju-dry-fruit-gillori-250g",
+    "name": "Kaju Dry Fruit Gillori",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 650,
+    "mrp": 650,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-007",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Honey, Sugar, Saffron…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-007"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 650,
+        "sku": "NB-007"
+      }
+    ],
+    "blurb": "Paan-shaped kaju gillori stuffed with dry fruits, honey and saffron.",
+    "description": "Paan-shaped kaju gillori stuffed with dry fruits, honey and saffron.",
+    "image": "assets/uploads/products/kaju-dry-fruit-gillori-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 620
+  },
+  {
+    "id": "kaju-kali-250g",
+    "name": "Kaju Kali",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 650,
+    "mrp": 650,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-013",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Honey, Sugar, Saffron…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-013"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 650,
+        "sku": "NB-013"
+      }
+    ],
+    "blurb": "Bud-shaped kaju sweets ('kali') with dry fruits, honey and saffron.",
+    "description": "Bud-shaped kaju sweets ('kali') with dry fruits, honey and saffron.",
+    "image": "assets/uploads/products/kaju-kali-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 630
+  },
+  {
+    "id": "kaju-katli-250g",
+    "name": "Kaju Katli",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 385,
+    "mrp": 385,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-001",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Kaju, sugar & cardamom",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-001"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 385,
+        "sku": "NB-001"
+      }
+    ],
+    "blurb": "Classic thin-cut cashew fudge made with just kaju, sugar and a touch of cardamom - soft, smooth and melt-in-the-mouth.",
+    "description": "Classic thin-cut cashew fudge made with just kaju, sugar and a touch of cardamom - soft, smooth and melt-in-the-mouth.",
+    "image": "assets/uploads/products/kaju-katli-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 640
+  },
+  {
+    "id": "kaju-new-dry-fruit-gillori-250g",
+    "name": "Kaju New Dry Fruit Gillori",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 600,
+    "mrp": 600,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-008",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Honey, Sugar, Kesar…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-008"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 600,
+        "sku": "NB-008"
+      }
+    ],
+    "blurb": "The new-style kaju gillori - a dry-fruit filling folded into a delicate cashew wrap.",
+    "description": "The new-style kaju gillori - a dry-fruit filling folded into a delicate cashew wrap.",
+    "image": "assets/uploads/products/kaju-new-dry-fruit-gillori-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 650
+  },
+  {
+    "id": "kaju-pista-rangeela-250g",
+    "name": "Kaju Pista Rangeela",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 550,
+    "mrp": 550,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-009",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Dry Fruits, Honey, Sugar & Cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-009"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 550,
+        "sku": "NB-009"
+      }
+    ],
+    "blurb": "Colourful layered kaju-pista rolls with honey and cardamom.",
+    "description": "Colourful layered kaju-pista rolls with honey and cardamom.",
+    "image": "assets/uploads/products/kaju-pista-rangeela-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 660
+  },
+  {
+    "id": "kaju-pista-surai-250g",
+    "name": "Kaju Pista Surai",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 550,
+    "mrp": 550,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-010",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Kaju, Pista, Sugar, saffron & Cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-010"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 550,
+        "sku": "NB-010"
+      }
+    ],
+    "blurb": "Surai-shaped kaju sweets with a pista heart and a whisper of saffron.",
+    "description": "Surai-shaped kaju sweets with a pista heart and a whisper of saffron.",
+    "image": "assets/uploads/products/kaju-pista-surai-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 670
+  },
+  {
+    "id": "kashmiri-lal-mirchi-250g",
+    "name": "Kashmiri Lal Mirchi",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 215,
+    "mrp": 215,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-124",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-124"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 215,
+        "sku": "NB-124"
+      }
+    ],
+    "blurb": "Kashmiri lal mirchi - famous for vivid red colour and gentle heat.",
+    "description": "Kashmiri lal mirchi - famous for vivid red colour and gentle heat.",
+    "image": "assets/uploads/products/kashmiri-lal-mirchi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 680
+  },
+  {
+    "id": "kashmiri-single-clove-garlic-50g",
+    "name": "Kashmiri Single Clove Garlic",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 80,
+    "mrp": 80,
+    "cost": 0,
+    "netQuantity": "50 gms",
+    "unit": "50 gms",
+    "sku": "NB-123",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Naturally grown & directly from…",
+    "specifications": [
+      "Net quantity: 50 gms",
+      "SKU: NB-123"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "50 gms",
+        "price": 80,
+        "sku": "NB-123"
+      }
+    ],
+    "blurb": "Single-clove (snow mountain) garlic from Kashmir - prized in traditional wellness routines.",
+    "description": "Single-clove (snow mountain) garlic from Kashmir - prized in traditional wellness routines.",
+    "image": "assets/uploads/products/kashmiri-single-clove-garlic-50g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 690
+  },
+  {
+    "id": "khapli-aata-swali-250g",
+    "name": "Khapli Aata Swali",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 240,
+    "mrp": 240,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-063",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Khapli wheat flour, Cold Pressed oil…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-063"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 240,
+        "sku": "NB-063"
+      }
+    ],
+    "blurb": "Baked-crisp swali made from ancient khapli (emmer) wheat and cold-pressed oil.",
+    "description": "Baked-crisp swali made from ancient khapli (emmer) wheat and cold-pressed oil.",
+    "image": "assets/uploads/products/khapli-aata-swali-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 700
+  },
+  {
+    "id": "khapli-wheat-flour-1kg",
+    "name": "Khapli Wheat Flour",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 145,
+    "mrp": 145,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-065",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Is an Ancient heirloom grain…",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-065"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 145,
+        "sku": "NB-065"
+      }
+    ],
+    "blurb": "Atta from khapli (emmer), an ancient heirloom wheat - lower gluten, easier to digest.",
+    "description": "Atta from khapli (emmer), an ancient heirloom wheat - lower gluten, easier to digest.",
+    "image": "assets/uploads/products/khapli-wheat-flour-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 710
+  },
+  {
+    "id": "konkan-cashew-250g",
+    "name": "Konkan Cashew",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 425,
+    "mrp": 425,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-125",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-125"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 425,
+        "sku": "NB-125"
+      }
+    ],
+    "blurb": "Plump whole cashews from the Konkan coast.",
+    "description": "Plump whole cashews from the Konkan coast.",
+    "image": "assets/uploads/products/konkan-cashew-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 720
+  },
+  {
+    "id": "lavender-tea-50g",
+    "name": "Lavender Tea",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 150,
+    "mrp": 150,
+    "cost": 0,
+    "netQuantity": "50 gms",
+    "unit": "50 gms",
+    "sku": "NB-115",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 50 gms",
+      "SKU: NB-115"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "50 gms",
+        "price": 150,
+        "sku": "NB-115"
+      }
+    ],
+    "blurb": "Fragrant lavender tisane for calm, caffeine-light evenings.",
+    "description": "Fragrant lavender tisane for calm, caffeine-light evenings.",
+    "image": "assets/uploads/products/lavender-tea-50g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 730
+  },
+  {
+    "id": "lemon-ginger-squash-1l",
+    "name": "Lemon & Ginger Squash",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Summer Special Squashes"
+    ],
+    "price": 630,
+    "mrp": 630,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-139",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "No colour, preservatives, essence…",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-139"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 630,
+        "sku": "NB-139"
+      }
+    ],
+    "blurb": "Zingy lemon-ginger squash - a sharp, cooling summer mix with nothing artificial.",
+    "description": "Zingy lemon-ginger squash - a sharp, cooling summer mix with nothing artificial.",
+    "image": "assets/uploads/products/lemon-ginger-squash-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 740
+  },
+  {
+    "id": "lemon-squash-1l",
+    "name": "Lemon Squash",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Summer Special Squashes"
+    ],
+    "price": 580,
+    "mrp": 580,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-138",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "No colour, preservatives, essence…",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-138"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 580,
+        "sku": "NB-138"
+      }
+    ],
+    "blurb": "Fresh lemon squash - just dilute and serve. No colour, preservatives or essence.",
+    "description": "Fresh lemon squash - just dilute and serve. No colour, preservatives or essence.",
+    "image": "assets/uploads/products/lemon-squash-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 750
+  },
+  {
+    "id": "mamra-badam-anjeer-barfi-250g",
+    "name": "Mamra Badam Anjeer Barfi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 700,
+    "mrp": 700,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-004",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi mamra badam, Anjeer, Saffron…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-004"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 700,
+        "sku": "NB-004"
+      }
+    ],
+    "blurb": "Dense, fruit-and-nut barfi of mamra almonds and anjeer (figs) with a hint of saffron.",
+    "description": "Dense, fruit-and-nut barfi of mamra almonds and anjeer (figs) with a hint of saffron.",
+    "image": "assets/uploads/products/mamra-badam-anjeer-barfi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 760
+  },
+  {
+    "id": "mango-kalakand-250g",
+    "name": "Mango Kalakand",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 300,
+    "mrp": 300,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-028",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made with Desi Cow Milk, Mango…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-028"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 300,
+        "sku": "NB-028"
+      }
+    ],
+    "blurb": "Seasonal kalakand folding real mango into fresh desi cow milk chenna.",
+    "description": "Seasonal kalakand folding real mango into fresh desi cow milk chenna.",
+    "image": "assets/uploads/products/mango-kalakand-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 770
+  },
+  {
+    "id": "mango-pickle-250g",
+    "name": "Mango Pickle",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Pickles"
+    ],
+    "price": 150,
+    "mrp": 150,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-134",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made in peanut cold pressed oil…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-134"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 150,
+        "sku": "NB-134"
+      }
+    ],
+    "blurb": "Traditional mango pickle matured in peanut cold-pressed oil.",
+    "description": "Traditional mango pickle matured in peanut cold-pressed oil.",
+    "image": "assets/uploads/products/mango-pickle-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 780
+  },
+  {
+    "id": "mango-squash-1l",
+    "name": "Mango Squash",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Summer Special Squashes"
+    ],
+    "price": 650,
+    "mrp": 650,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-137",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "No preservatives, essence & colour. Made with Khand.",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-137"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 650,
+        "sku": "NB-137"
+      }
+    ],
+    "blurb": "Real mango squash sweetened with khand - no colour, preservatives or essence.",
+    "description": "Real mango squash sweetened with khand - no colour, preservatives or essence.",
+    "image": "assets/uploads/products/mango-squash-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 790
+  },
+  {
+    "id": "masala-boondi-150g",
+    "name": "Masala Boondi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 114,
+    "mrp": 114,
+    "cost": 0,
+    "netQuantity": "150 gms",
+    "unit": "150 gms",
+    "sku": "NB-054",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Besan, Peanut, Kaju, Karo Patta…",
+    "specifications": [
+      "Net quantity: 150 gms",
+      "SKU: NB-054"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "150 gms",
+        "price": 114,
+        "sku": "NB-054"
+      }
+    ],
+    "blurb": "Spiced boondi with peanuts, kaju and curry leaves.",
+    "description": "Spiced boondi with peanuts, kaju and curry leaves.",
+    "image": "assets/uploads/products/masala-boondi-150g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 800
+  },
+  {
+    "id": "masala-tea-100gms",
+    "name": "Masala Tea",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "100 gms",
+    "unit": "100 gms",
+    "sku": "NB-116",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 100 gms",
+      "SKU: NB-116"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "100 gms",
+        "price": 200,
+        "sku": "NB-116"
+      }
+    ],
+    "blurb": "Black tea pre-blended with whole spices - a ready masala chai base.",
+    "description": "Black tea pre-blended with whole spices - a ready masala chai base.",
+    "image": "assets/uploads/products/masala-tea-100gms.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 810
+  },
+  {
+    "id": "masoor-dal-1kg",
+    "name": "Masoor Dal",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 230,
+    "mrp": 230,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-076",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-076"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 230,
+        "sku": "NB-076"
+      }
+    ],
+    "blurb": "Whole masoor dal, directly from farmers.",
+    "description": "Whole masoor dal, directly from farmers.",
+    "image": "assets/uploads/products/masoor-dal-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 820
+  },
+  {
+    "id": "matar-500g",
+    "name": "Matar",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 80,
+    "mrp": 80,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-086",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-086"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 80,
+        "sku": "NB-086"
+      }
+    ],
+    "blurb": "Dried matar (peas) for ragda, ghugni and curries.",
+    "description": "Dried matar (peas) for ragda, ghugni and curries.",
+    "image": "assets/uploads/products/matar-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 830
+  },
+  {
+    "id": "mava-choco-barfi-250g",
+    "name": "Mava Choco Barfi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)",
+      "Review notes"
+    ],
+    "price": 400,
+    "mrp": 400,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-022",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Cocoa Powder…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-022",
+      "Note: Possibly a duplicate of 'Mava Chocolate Barfi' - verify before publishing."
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 400,
+        "sku": "NB-022"
+      }
+    ],
+    "blurb": "Cocoa-flavoured mava barfi on a desi cow milk base.",
+    "description": "Cocoa-flavoured mava barfi on a desi cow milk base.",
+    "image": "assets/uploads/products/mava-choco-barfi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 840
+  },
+  {
+    "id": "mava-chocolate-barfi-250g",
+    "name": "Mava Chocolate Barfi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)",
+      "Review notes"
+    ],
+    "price": 400,
+    "mrp": 400,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-021",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Sugar, Almond…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-021",
+      "Note: App also lists 'Mava Choco Barfi' - possibly the same SKU; verify."
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 400,
+        "sku": "NB-021"
+      }
+    ],
+    "blurb": "Two-layer mava barfi with a chocolate top, made on desi cow milk with almonds.",
+    "description": "Two-layer mava barfi with a chocolate top, made on desi cow milk with almonds.",
+    "image": "assets/uploads/products/mava-chocolate-barfi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 850
+  },
+  {
+    "id": "mava-delight-assorted",
+    "name": "Mava Delight (Assorted)",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 1600,
+    "mrp": 1600,
+    "cost": 0,
+    "netQuantity": "Assorted box",
+    "unit": "Assorted box",
+    "sku": "NB-020",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Sugar, Saffron…",
+    "specifications": [
+      "Net quantity: Assorted box",
+      "SKU: NB-020"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "Assorted box",
+        "price": 1600,
+        "sku": "NB-020"
+      }
+    ],
+    "blurb": "A premium assorted box of the house mava sweets made on desi cow milk.",
+    "description": "A premium assorted box of the house mava sweets made on desi cow milk.",
+    "image": "assets/uploads/products/mava-delight-assorted.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 860
+  },
+  {
+    "id": "mava-flower-250g",
+    "name": "Mava Flower",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 400,
+    "mrp": 400,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-023",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Sugar, Kesar, Dry Fruits…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-023"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 400,
+        "sku": "NB-023"
+      }
+    ],
+    "blurb": "Flower-moulded mava peda with kesar and dry fruits.",
+    "description": "Flower-moulded mava peda with kesar and dry fruits.",
+    "image": "assets/uploads/products/mava-flower-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 870
+  },
+  {
+    "id": "mava-gillori-250g",
+    "name": "Mava Gillori",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 400,
+    "mrp": 400,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-024",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi cow milk, sugar, Kesar, Cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-024"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 400,
+        "sku": "NB-024"
+      }
+    ],
+    "blurb": "Soft mava gilloris on desi cow milk, perfumed with kesar and cardamom.",
+    "description": "Soft mava gilloris on desi cow milk, perfumed with kesar and cardamom.",
+    "image": "assets/uploads/products/mava-gillori-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 880
+  },
+  {
+    "id": "mava-shimla-roll-250g",
+    "name": "Mava Shimla Roll",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 400,
+    "mrp": 400,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-025",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Sugar, Kesar, Dry Fruits…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-025"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 400,
+        "sku": "NB-025"
+      }
+    ],
+    "blurb": "Mava rolls with a dry-fruit filling - the house take on the Shimla-style roll.",
+    "description": "Mava rolls with a dry-fruit filling - the house take on the Shimla-style roll.",
+    "image": "assets/uploads/products/mava-shimla-roll-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 890
+  },
+  {
+    "id": "motichoor-laddu-250g",
+    "name": "Motichoor Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 245,
+    "mrp": 245,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-039",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Chana Dal Flour, Sugar, Ghee…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-039"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 245,
+        "sku": "NB-039"
+      }
+    ],
+    "blurb": "Fine-pearl motichoor laddus fried in ghee.",
+    "description": "Fine-pearl motichoor laddus fried in ghee.",
+    "image": "assets/uploads/products/motichoor-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 900
+  },
+  {
+    "id": "mustard-cold-pressed-oil-1l",
+    "name": "Mustard Cold Pressed Oil",
+    "brand": "Nastro Blu",
+    "category": "oils",
+    "tag": null,
+    "tags": [
+      "Cold Pressed Oil"
+    ],
+    "price": 360,
+    "mrp": 360,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-132",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-132"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 360,
+        "sku": "NB-132"
+      }
+    ],
+    "blurb": "Pungent cold-pressed mustard oil - kachi ghani strength for pickles and tadka.",
+    "description": "Pungent cold-pressed mustard oil - kachi ghani strength for pickles and tadka.",
+    "image": "assets/uploads/products/mustard-cold-pressed-oil-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 910
+  },
+  {
+    "id": "nastro-blu-rabri-40ml-1-pc",
+    "name": "Nastro Blu Rabri (40ml - 1 pc)",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 32,
+    "mrp": 32,
+    "cost": 0,
+    "netQuantity": "40 ml (1 pc)",
+    "unit": "40 ml (1 pc)",
+    "sku": "NB-038",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Pista, Saffron…",
+    "specifications": [
+      "Net quantity: 40 ml (1 pc)",
+      "SKU: NB-038"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "40 ml (1 pc)",
+        "price": 32,
+        "sku": "NB-038"
+      }
+    ],
+    "blurb": "The signature slow-cooked rabri in a single-serve 40 ml cup - desi cow milk, pista and saffron.",
+    "description": "The signature slow-cooked rabri in a single-serve 40 ml cup - desi cow milk, pista and saffron.",
+    "image": "assets/uploads/products/nastro-blu-rabri-40ml-1-pc.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 920
+  },
+  {
+    "id": "neelamundi-black-pepper-50g",
+    "name": "Neelamundi Black Pepper",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 125,
+    "mrp": 125,
+    "cost": 0,
+    "netQuantity": "50 gms",
+    "unit": "50 gms",
+    "sku": "NB-109",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 50 gms",
+      "SKU: NB-109"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "50 gms",
+        "price": 125,
+        "sku": "NB-109"
+      }
+    ],
+    "blurb": "High-range Neelamundi black pepper - bold berries with real bite.",
+    "description": "High-range Neelamundi black pepper - bold berries with real bite.",
+    "image": "assets/uploads/products/neelamundi-black-pepper-50g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 930
+  },
+  {
+    "id": "orthodox-black-tea-100gms",
+    "name": "Orthodox Black Tea",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 120,
+    "mrp": 120,
+    "cost": 0,
+    "netQuantity": "100 gms",
+    "unit": "100 gms",
+    "sku": "NB-114",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 100 gms",
+      "SKU: NB-114"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "100 gms",
+        "price": 120,
+        "sku": "NB-114"
+      }
+    ],
+    "blurb": "Orthodox whole-leaf black tea - brisk and bright, best without milk.",
+    "description": "Orthodox whole-leaf black tea - brisk and bright, best without milk.",
+    "image": "assets/uploads/products/orthodox-black-tea-100gms.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 940
+  },
+  {
+    "id": "paigambari-wheat-flour-1kg",
+    "name": "Paigambari Wheat Flour",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 165,
+    "mrp": 165,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-066",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Is an Ancient heirloom grain…",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-066"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 165,
+        "sku": "NB-066"
+      }
+    ],
+    "blurb": "Atta from Paigambari wheat, an ancient heirloom grain prized for flavour.",
+    "description": "Atta from Paigambari wheat, an ancient heirloom grain prized for flavour.",
+    "image": "assets/uploads/products/paigambari-wheat-flour-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 950
+  },
+  {
+    "id": "palakudi-cardamom-25g",
+    "name": "Palakudi Cardamom",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 250,
+    "mrp": 250,
+    "cost": 0,
+    "netQuantity": "25 gms",
+    "unit": "25 gms",
+    "sku": "NB-106",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 25 gms",
+      "SKU: NB-106"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "25 gms",
+        "price": 250,
+        "sku": "NB-106"
+      }
+    ],
+    "blurb": "Bold green cardamom from Palakudi, Kerala - intensely aromatic pods.",
+    "description": "Bold green cardamom from Palakudi, Kerala - intensely aromatic pods.",
+    "image": "assets/uploads/products/palakudi-cardamom-25g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 960
+  },
+  {
+    "id": "paneer-200g",
+    "name": "Paneer",
+    "brand": "Nastro Blu",
+    "category": "ghee",
+    "tag": null,
+    "tags": [
+      "Dairy Products"
+    ],
+    "price": 240,
+    "mrp": 240,
+    "cost": 0,
+    "netQuantity": "200 gms",
+    "unit": "200 gms",
+    "sku": "NB-126",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made with Desi Cow Milk. Available on order…",
+    "specifications": [
+      "Net quantity: 200 gms",
+      "SKU: NB-126"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "200 gms",
+        "price": 240,
+        "sku": "NB-126"
+      }
+    ],
+    "blurb": "Fresh paneer made from desi cow milk. Made to order.",
+    "description": "Fresh paneer made from desi cow milk. Made to order.",
+    "image": "assets/uploads/products/paneer-200g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 970
+  },
+  {
+    "id": "peanut-1kg",
+    "name": "Peanut",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 250,
+    "mrp": 250,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-088",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-088"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 250,
+        "sku": "NB-088"
+      }
+    ],
+    "blurb": "Raw shelled peanuts - roast, boil or press at home.",
+    "description": "Raw shelled peanuts - roast, boil or press at home.",
+    "image": "assets/uploads/products/peanut-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 980
+  },
+  {
+    "id": "peanut-chakki-250g",
+    "name": "Peanut Chakki",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-047",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Peanut & Jaggery",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-047"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-047"
+      }
+    ],
+    "blurb": "Crunchy peanut chikki set in jaggery - two ingredients only.",
+    "description": "Crunchy peanut chikki set in jaggery - two ingredients only.",
+    "image": "assets/uploads/products/peanut-chakki-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 990
+  },
+  {
+    "id": "peanut-cold-pressed-oil-1l",
+    "name": "Peanut Cold Pressed Oil",
+    "brand": "Nastro Blu",
+    "category": "oils",
+    "tag": null,
+    "tags": [
+      "Cold Pressed Oil"
+    ],
+    "price": 430,
+    "mrp": 430,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-128",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-128"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 430,
+        "sku": "NB-128"
+      }
+    ],
+    "blurb": "Cold-pressed (kachi ghani) peanut oil - unrefined, nutty and great for everyday cooking.",
+    "description": "Cold-pressed (kachi ghani) peanut oil - unrefined, nutty and great for everyday cooking.",
+    "image": "assets/uploads/products/peanut-cold-pressed-oil-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1000
+  },
+  {
+    "id": "peda-desi-cow-milk-250g",
+    "name": "Peda (Desi Cow Milk)",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 220,
+    "mrp": 220,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-027",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Sugar & Cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-027"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 220,
+        "sku": "NB-027"
+      }
+    ],
+    "blurb": "Hand-pressed pedas made on pure desi cow milk with cardamom.",
+    "description": "Hand-pressed pedas made on pure desi cow milk with cardamom.",
+    "image": "assets/uploads/products/peda-desi-cow-milk-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1010
+  },
+  {
+    "id": "phalli-pakoda-250g",
+    "name": "Phalli Pakoda",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 190,
+    "mrp": 190,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-060",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Peanut, Chana Dal flour, Salt, Red chilli…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-060"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 190,
+        "sku": "NB-060"
+      }
+    ],
+    "blurb": "Crisp peanut pakoda - whole peanuts in a spiced chana dal crust.",
+    "description": "Crisp peanut pakoda - whole peanuts in a spiced chana dal crust.",
+    "image": "assets/uploads/products/phalli-pakoda-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1020
+  },
+  {
+    "id": "pineapple-squash-1l",
+    "name": "Pineapple Squash",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Summer Special Squashes"
+    ],
+    "price": 630,
+    "mrp": 630,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-140",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "No colour, preservatives, essence…",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-140"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 630,
+        "sku": "NB-140"
+      }
+    ],
+    "blurb": "Tropical pineapple squash with no colour, preservatives or essence.",
+    "description": "Tropical pineapple squash with no colour, preservatives or essence.",
+    "image": "assets/uploads/products/pineapple-squash-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1030
+  },
+  {
+    "id": "pista-barfi-250g",
+    "name": "Pista Barfi",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 1000,
+    "mrp": 1000,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-050",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Pista, Sugar, Cardamom, White…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-050"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 1000,
+        "sku": "NB-050"
+      }
+    ],
+    "blurb": "Pure pistachio barfi - dense, vividly green and intensely nutty.",
+    "description": "Pure pistachio barfi - dense, vividly green and intensely nutty.",
+    "image": "assets/uploads/products/pista-barfi-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1040
+  },
+  {
+    "id": "pista-bhujia-250g",
+    "name": "Pista Bhujia",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 1000,
+    "mrp": 1000,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-051",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Pista, Elaichi & Sugar",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-051"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 1000,
+        "sku": "NB-051"
+      }
+    ],
+    "blurb": "Delicate pistachio 'bhujia' strands with elaichi - a rich, festive treat.",
+    "description": "Delicate pistachio 'bhujia' strands with elaichi - a rich, festive treat.",
+    "image": "assets/uploads/products/pista-bhujia-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1050
+  },
+  {
+    "id": "plain-mota-bhujia-250g",
+    "name": "Plain Mota Bhujia",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 175,
+    "mrp": 175,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-053",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-053"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 175,
+        "sku": "NB-053"
+      }
+    ],
+    "blurb": "Thick-cut classic bhujia - plain, crisp and moreish.",
+    "description": "Thick-cut classic bhujia - plain, crisp and moreish.",
+    "image": "assets/uploads/products/plain-mota-bhujia-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1060
+  },
+  {
+    "id": "ragi-aata-1kg",
+    "name": "Ragi Aata",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 120,
+    "mrp": 120,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-070",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-070"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 120,
+        "sku": "NB-070"
+      }
+    ],
+    "blurb": "Finger millet (ragi) flour - calcium-rich, for dosa, mudde and rotis.",
+    "description": "Finger millet (ragi) flour - calcium-rich, for dosa, mudde and rotis.",
+    "image": "assets/uploads/products/ragi-aata-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1070
+  },
+  {
+    "id": "ragi-laddu-250g",
+    "name": "Ragi Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-044",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Ragi, Jaggery & Ghee",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-044"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-044"
+      }
+    ],
+    "blurb": "Ragi (finger millet) laddus with jaggery and ghee.",
+    "description": "Ragi (finger millet) laddus with jaggery and ghee.",
+    "image": "assets/uploads/products/ragi-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1080
+  },
+  {
+    "id": "ragi-murkul-250g",
+    "name": "Ragi Murkul",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Snacks (delivery 12-24 Hrs)"
+    ],
+    "price": 190,
+    "mrp": 190,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-058",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Ragi flour, Chana Dal flour, Salt…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-058"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 190,
+        "sku": "NB-058"
+      }
+    ],
+    "blurb": "Ragi murukku - the classic crunch, made darker and earthier with finger millet.",
+    "description": "Ragi murukku - the classic crunch, made darker and earthier with finger millet.",
+    "image": "assets/uploads/products/ragi-murkul-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1090
+  },
+  {
+    "id": "rajma-500g",
+    "name": "Rajma",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 85,
+    "mrp": 85,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-085",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Directly from farmers",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-085"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 85,
+        "sku": "NB-085"
+      }
+    ],
+    "blurb": "Rajma sourced directly from farmers - creamy when slow-cooked.",
+    "description": "Rajma sourced directly from farmers - creamy when slow-cooked.",
+    "image": "assets/uploads/products/rajma-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1100
+  },
+  {
+    "id": "rasgulla-1pc",
+    "name": "Rasgulla",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 40,
+    "mrp": 40,
+    "cost": 0,
+    "netQuantity": "1 pc",
+    "unit": "1 pc",
+    "sku": "NB-033",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi cow milk & sugar",
+    "specifications": [
+      "Net quantity: 1 pc",
+      "SKU: NB-033"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 pc",
+        "price": 40,
+        "sku": "NB-033"
+      }
+    ],
+    "blurb": "Spongy rasgulla made fresh from desi cow milk chenna. Sold per piece.",
+    "description": "Spongy rasgulla made fresh from desi cow milk chenna. Sold per piece.",
+    "image": "assets/uploads/products/rasgulla-1pc.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1110
+  },
+  {
+    "id": "rasmalai-1pc",
+    "name": "Rasmalai",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 45,
+    "mrp": 45,
+    "cost": 0,
+    "netQuantity": "1 pc",
+    "unit": "1 pc",
+    "sku": "NB-034",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Kesar, Pista, Badam…",
+    "specifications": [
+      "Net quantity: 1 pc",
+      "SKU: NB-034"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 pc",
+        "price": 45,
+        "sku": "NB-034"
+      }
+    ],
+    "blurb": "Chenna discs soaked in kesar-pista thickened milk. Sold per piece.",
+    "description": "Chenna discs soaked in kesar-pista thickened milk. Sold per piece.",
+    "image": "assets/uploads/products/rasmalai-1pc.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1120
+  },
+  {
+    "id": "raw-honey-250g",
+    "name": "Raw Honey",
+    "brand": "Nastro Blu",
+    "category": "honey",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-098",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-098"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-098"
+      }
+    ],
+    "blurb": "Raw, unprocessed honey - unheated and unfiltered.",
+    "description": "Raw, unprocessed honey - unheated and unfiltered.",
+    "image": "assets/uploads/products/raw-honey-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1130
+  },
+  {
+    "id": "raw-wild-honey-forest-500g",
+    "name": "Raw Wild Honey (forest)",
+    "brand": "Nastro Blu",
+    "category": "honey",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 800,
+    "mrp": 800,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-099",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-099"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 800,
+        "sku": "NB-099"
+      }
+    ],
+    "blurb": "Wild forest honey collected from natural hives - raw, unheated and intense.",
+    "description": "Wild forest honey collected from natural hives - raw, unheated and intense.",
+    "image": "assets/uploads/products/raw-wild-honey-forest-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1140
+  },
+  {
+    "id": "red-chilli-powder-250g",
+    "name": "Red Chilli Powder",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 150,
+    "mrp": 150,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-103",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-103"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 150,
+        "sku": "NB-103"
+      }
+    ],
+    "blurb": "Sun-dried red chillies, ground fresh.",
+    "description": "Sun-dried red chillies, ground fresh.",
+    "image": "assets/uploads/products/red-chilli-powder-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1150
+  },
+  {
+    "id": "rice-1kg",
+    "name": "Rice",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 120,
+    "mrp": 120,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-072",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-072"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 120,
+        "sku": "NB-072"
+      }
+    ],
+    "blurb": "Everyday rice from the naturally grown farm range.",
+    "description": "Everyday rice from the naturally grown farm range.",
+    "image": "assets/uploads/products/rice-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1160
+  },
+  {
+    "id": "rose-squash-1l",
+    "name": "Rose Squash",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Summer Special Squashes"
+    ],
+    "price": 580,
+    "mrp": 580,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-141",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "No colour, preservatives, essence…",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-141"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 580,
+        "sku": "NB-141"
+      }
+    ],
+    "blurb": "Classic rose squash for milk sherbets and coolers - nothing artificial.",
+    "description": "Classic rose squash for milk sherbets and coolers - nothing artificial.",
+    "image": "assets/uploads/products/rose-squash-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1170
+  },
+  {
+    "id": "sabja-seeds-200g",
+    "name": "Sabja Seeds",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 160,
+    "mrp": 160,
+    "cost": 0,
+    "netQuantity": "200 gms",
+    "unit": "200 gms",
+    "sku": "NB-091",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 200 gms",
+      "SKU: NB-091"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "200 gms",
+        "price": 160,
+        "sku": "NB-091"
+      }
+    ],
+    "blurb": "Sabja (basil) seeds - soak for falooda, sherbets and summer coolers.",
+    "description": "Sabja (basil) seeds - soak for falooda, sherbets and summer coolers.",
+    "image": "assets/uploads/products/sabja-seeds-200g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1180
+  },
+  {
+    "id": "sabut-dhaniya-250g",
+    "name": "Sabut Dhaniya",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 90,
+    "mrp": 90,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-104",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-104"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 90,
+        "sku": "NB-104"
+      }
+    ],
+    "blurb": "Whole coriander seeds - roast and grind for the freshest dhaniya powder.",
+    "description": "Whole coriander seeds - roast and grind for the freshest dhaniya powder.",
+    "image": "assets/uploads/products/sabut-dhaniya-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1190
+  },
+  {
+    "id": "safflower-kardi-cold-pressed-oil-1l",
+    "name": "Safflower (Kardi) Cold Pressed Oil",
+    "brand": "Nastro Blu",
+    "category": "oils",
+    "tag": null,
+    "tags": [
+      "Cold Pressed Oil"
+    ],
+    "price": 580,
+    "mrp": 580,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-130",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-130"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 580,
+        "sku": "NB-130"
+      }
+    ],
+    "blurb": "Cold-pressed safflower (kardi) oil - light and neutral, suited to heart-conscious kitchens.",
+    "description": "Cold-pressed safflower (kardi) oil - light and neutral, suited to heart-conscious kitchens.",
+    "image": "assets/uploads/products/safflower-kardi-cold-pressed-oil-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1200
+  },
+  {
+    "id": "saffron-1g",
+    "name": "Saffron",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 450,
+    "mrp": 450,
+    "cost": 0,
+    "netQuantity": "1 gm",
+    "unit": "1 gm",
+    "sku": "NB-122",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Naturally soil grown & directly from…",
+    "specifications": [
+      "Net quantity: 1 gm",
+      "SKU: NB-122"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 gm",
+        "price": 450,
+        "sku": "NB-122"
+      }
+    ],
+    "blurb": "Kashmiri saffron, naturally soil-grown - deep-red threads with powerful aroma.",
+    "description": "Kashmiri saffron, naturally soil-grown - deep-red threads with powerful aroma.",
+    "image": "assets/uploads/products/saffron-1g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1210
+  },
+  {
+    "id": "seeds-delight-no-sugar-no-jaggery-250g",
+    "name": "Seeds Delight (no sugar no jaggery)",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 300,
+    "mrp": 300,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-019",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Multi Seeds, Peanut & Khajoor",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-019"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 300,
+        "sku": "NB-019"
+      }
+    ],
+    "blurb": "Sugar-free and jaggery-free seed bars - multi seeds and peanuts bound only with khajoor (dates).",
+    "description": "Sugar-free and jaggery-free seed bars - multi seeds and peanuts bound only with khajoor (dates).",
+    "image": "assets/uploads/products/seeds-delight-no-sugar-no-jaggery-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1220
+  },
+  {
+    "id": "special-chena-mango-sweets-1pc",
+    "name": "Special Chena Mango Sweets",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)",
+      "Review notes"
+    ],
+    "price": 80,
+    "mrp": 80,
+    "cost": 0,
+    "netQuantity": "1 pc",
+    "unit": "1 pc",
+    "sku": "NB-037",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Made with fresh chenna & mango",
+    "specifications": [
+      "Net quantity: 1 pc",
+      "SKU: NB-037",
+      "Note: Available on order (as listed in app)."
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 pc",
+        "price": 80,
+        "sku": "NB-037"
+      }
+    ],
+    "blurb": "Mango-season special chenna sweet.",
+    "description": "Mango-season special chenna sweet.",
+    "image": "assets/uploads/products/special-chena-mango-sweets-1pc.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1230
+  },
+  {
+    "id": "special-khoa-250g",
+    "name": "Special Khoa",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-026",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Desi Cow Milk, Jaggery & Cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-026"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-026"
+      }
+    ],
+    "blurb": "Fresh khoa slow-thickened from desi cow milk, lightly sweetened with jaggery.",
+    "description": "Fresh khoa slow-thickened from desi cow milk, lightly sweetened with jaggery.",
+    "image": "assets/uploads/products/special-khoa-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1240
+  },
+  {
+    "id": "star-anise-25g",
+    "name": "Star Anise",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 75,
+    "mrp": 75,
+    "cost": 0,
+    "netQuantity": "25 gms",
+    "unit": "25 gms",
+    "sku": "NB-111",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 25 gms",
+      "SKU: NB-111"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "25 gms",
+        "price": 75,
+        "sku": "NB-111"
+      }
+    ],
+    "blurb": "Whole star anise for biryani, garam masala and slow braises.",
+    "description": "Whole star anise for biryani, garam masala and slow braises.",
+    "image": "assets/uploads/products/star-anise-25g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1250
+  },
+  {
+    "id": "sunni-laddu-250g",
+    "name": "Sunni Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-042",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Urad Dal, Jaggery, Cardamom…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-042"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-042"
+      }
+    ],
+    "blurb": "Andhra sunnundalu - roasted urad dal laddus with jaggery and cardamom.",
+    "description": "Andhra sunnundalu - roasted urad dal laddus with jaggery and cardamom.",
+    "image": "assets/uploads/products/sunni-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1260
+  },
+  {
+    "id": "tamarind-500g",
+    "name": "Tamarind",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 175,
+    "mrp": 175,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-101",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "It is Tamarind Variety grown in…",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-101"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 175,
+        "sku": "NB-101"
+      }
+    ],
+    "blurb": "Naturally grown tamarind - deseeded pulp blocks for rasam, sambar and chutneys.",
+    "description": "Naturally grown tamarind - deseeded pulp blocks for rasam, sambar and chutneys.",
+    "image": "assets/uploads/products/tamarind-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1270
+  },
+  {
+    "id": "till-laddu-250g",
+    "name": "Till Laddu",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 190,
+    "mrp": 190,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-045",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "White Sesame & Jaggery",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-045"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 190,
+        "sku": "NB-045"
+      }
+    ],
+    "blurb": "Winter classic til laddus - white sesame and jaggery, nothing else.",
+    "description": "Winter classic til laddus - white sesame and jaggery, nothing else.",
+    "image": "assets/uploads/products/till-laddu-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1280
+  },
+  {
+    "id": "tilli-chakki-250g",
+    "name": "Tilli Chakki",
+    "brand": "Nastro Blu",
+    "category": "sweets",
+    "tag": null,
+    "tags": [
+      "Sweets (delivery 12-24 Hrs)"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-046",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "White Tilli & Jaggery",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-046"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 200,
+        "sku": "NB-046"
+      }
+    ],
+    "blurb": "Crisp sesame chikki (tilli chakki) set in jaggery.",
+    "description": "Crisp sesame chikki (tilli chakki) set in jaggery.",
+    "image": "assets/uploads/products/tilli-chakki-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1290
+  },
+  {
+    "id": "toor-dal-500g",
+    "name": "Toor Dal",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 140,
+    "mrp": 140,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-080",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-080"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 140,
+        "sku": "NB-080"
+      }
+    ],
+    "blurb": "Farm-sourced toor (arhar) dal for everyday dal and sambar.",
+    "description": "Farm-sourced toor (arhar) dal for everyday dal and sambar.",
+    "image": "assets/uploads/products/toor-dal-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1300
+  },
+  {
+    "id": "true-cinnamon-ceylon-25g",
+    "name": "True Cinnamon (ceylon)",
+    "brand": "Nastro Blu",
+    "category": "spices",
+    "tag": null,
+    "tags": [
+      "Kerala Naturally Grown Product"
+    ],
+    "price": 200,
+    "mrp": 200,
+    "cost": 0,
+    "netQuantity": "25 gms",
+    "unit": "25 gms",
+    "sku": "NB-112",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 25 gms",
+      "SKU: NB-112"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "25 gms",
+        "price": 200,
+        "sku": "NB-112"
+      }
+    ],
+    "blurb": "True Ceylon cinnamon - thin, papery quills, sweeter and gentler than cassia.",
+    "description": "True Ceylon cinnamon - thin, papery quills, sweeter and gentler than cassia.",
+    "image": "assets/uploads/products/true-cinnamon-ceylon-25g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1310
+  },
+  {
+    "id": "turmeric-powder-500g",
+    "name": "Turmeric Powder",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 225,
+    "mrp": 225,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-102",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-102"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 225,
+        "sku": "NB-102"
+      }
+    ],
+    "blurb": "Ground turmeric from naturally grown rhizomes - deep colour and aroma.",
+    "description": "Ground turmeric from naturally grown rhizomes - deep colour and aroma.",
+    "image": "assets/uploads/products/turmeric-powder-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1320
+  },
+  {
+    "id": "tuti-hari-moong-500g",
+    "name": "Tuti Hari Moong",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 120,
+    "mrp": 120,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-083",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-083"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 120,
+        "sku": "NB-083"
+      }
+    ],
+    "blurb": "Whole green moong for sprouting, khichdi and dal.",
+    "description": "Whole green moong for sprouting, khichdi and dal.",
+    "image": "assets/uploads/products/tuti-hari-moong-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1330
+  },
+  {
+    "id": "urad-dal-1kg",
+    "name": "Urad Dal",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 230,
+    "mrp": 230,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-077",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-077"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 230,
+        "sku": "NB-077"
+      }
+    ],
+    "blurb": "White urad dal for idli-dosa batters, dahi vada and dal makhani.",
+    "description": "White urad dal for idli-dosa batters, dahi vada and dal makhani.",
+    "image": "assets/uploads/products/urad-dal-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1340
+  },
+  {
+    "id": "urad-dal-split-black-urad-1kg",
+    "name": "Urad Dal (Split Black Urad)",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 230,
+    "mrp": 230,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-078",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-078"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 230,
+        "sku": "NB-078"
+      }
+    ],
+    "blurb": "Split black urad with skin - for chilka dal and authentic dal makhani.",
+    "description": "Split black urad with skin - for chilka dal and authentic dal makhani.",
+    "image": "assets/uploads/products/urad-dal-split-black-urad-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1350
+  },
+  {
+    "id": "walnuts-250g",
+    "name": "Walnuts",
+    "brand": "Nastro Blu",
+    "category": "dryfruits",
+    "tag": null,
+    "tags": [
+      "Kashmiri Dry Fruits & More"
+    ],
+    "price": 500,
+    "mrp": 500,
+    "cost": 0,
+    "netQuantity": "250 gms",
+    "unit": "250 gms",
+    "sku": "NB-120",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "Naturally grown & directly from…",
+    "specifications": [
+      "Net quantity: 250 gms",
+      "SKU: NB-120"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "250 gms",
+        "price": 500,
+        "sku": "NB-120"
+      }
+    ],
+    "blurb": "Kashmiri walnut kernels - fresh, pale halves without bitterness.",
+    "description": "Kashmiri walnut kernels - fresh, pale halves without bitterness.",
+    "image": "assets/uploads/products/walnuts-250g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1360
+  },
+  {
+    "id": "white-jowar-aata-1kg",
+    "name": "White Jowar Aata",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 110,
+    "mrp": 110,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-067",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-067"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 110,
+        "sku": "NB-067"
+      }
+    ],
+    "blurb": "Fresh-milled white jowar (sorghum) flour for bhakri and rotla.",
+    "description": "Fresh-milled white jowar (sorghum) flour for bhakri and rotla.",
+    "image": "assets/uploads/products/white-jowar-aata-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1370
+  },
+  {
+    "id": "white-sesame-500g",
+    "name": "White Sesame",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 140,
+    "mrp": 140,
+    "cost": 0,
+    "netQuantity": "500 gms",
+    "unit": "500 gms",
+    "sku": "NB-092",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 500 gms",
+      "SKU: NB-092"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "500 gms",
+        "price": 140,
+        "sku": "NB-092"
+      }
+    ],
+    "blurb": "Clean white sesame (til) for laddus, chikki and tadka.",
+    "description": "Clean white sesame (til) for laddus, chikki and tadka.",
+    "image": "assets/uploads/products/white-sesame-500g.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1380
+  },
+  {
+    "id": "white-sesame-cold-pressed-oil-1l",
+    "name": "White Sesame Cold Pressed Oil",
+    "brand": "Nastro Blu",
+    "category": "oils",
+    "tag": null,
+    "tags": [
+      "Cold Pressed Oil"
+    ],
+    "price": 700,
+    "mrp": 700,
+    "cost": 0,
+    "netQuantity": "1 litre",
+    "unit": "1 litre",
+    "sku": "NB-129",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 litre",
+      "SKU: NB-129"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 litre",
+        "price": 700,
+        "sku": "NB-129"
+      }
+    ],
+    "blurb": "Cold-pressed white sesame (til) oil - traditional flavour for cooking and self-care.",
+    "description": "Cold-pressed white sesame (til) oil - traditional flavour for cooking and self-care.",
+    "image": "assets/uploads/products/white-sesame-cold-pressed-oil-1l.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1390
+  },
+  {
+    "id": "yellow-jowar-1kg",
+    "name": "Yellow Jowar",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 120,
+    "mrp": 120,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-074",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-074"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 120,
+        "sku": "NB-074"
+      }
+    ],
+    "blurb": "Whole yellow jowar grain - for bhakri flour, popping or slow-cooked porridge.",
+    "description": "Whole yellow jowar grain - for bhakri flour, popping or slow-cooked porridge.",
+    "image": "assets/uploads/products/yellow-jowar-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1400
+  },
+  {
+    "id": "yellow-jowar-aata-1kg",
+    "name": "Yellow Jowar Aata",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 145,
+    "mrp": 145,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-068",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-068"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 145,
+        "sku": "NB-068"
+      }
+    ],
+    "blurb": "Yellow jowar flour - slightly sweeter and richer than white jowar.",
+    "description": "Yellow jowar flour - slightly sweeter and richer than white jowar.",
+    "image": "assets/uploads/products/yellow-jowar-aata-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1410
+  },
+  {
+    "id": "yellow-moong-dal-1kg",
+    "name": "Yellow Moong Dal",
+    "brand": "Nastro Blu",
+    "category": "produce",
+    "tag": null,
+    "tags": [
+      "Naturally Grown Farm Products"
+    ],
+    "price": 230,
+    "mrp": 230,
+    "cost": 0,
+    "netQuantity": "1 kg",
+    "unit": "1 kg",
+    "sku": "NB-075",
+    "barcode": "",
+    "packedOn": "",
+    "bestBefore": "",
+    "ingredients": "",
+    "specifications": [
+      "Net quantity: 1 kg",
+      "SKU: NB-075"
+    ],
+    "packagingText": [],
+    "storage": "Store in a cool, dry place",
+    "origin": "India",
+    "sizes": [
+      {
+        "label": "1 kg",
+        "price": 230,
+        "sku": "NB-075"
+      }
+    ],
+    "blurb": "Split yellow moong dal - light, quick-cooking and easy on the stomach.",
+    "description": "Split yellow moong dal - light, quick-cooking and easy on the stomach.",
+    "image": "assets/uploads/products/yellow-moong-dal-1kg.jpg",
+    "rating": 4.8,
+    "reviews": 0,
+    "status": "available",
+    "active": true,
+    "sortOrder": 1420
+  }
+],
 };

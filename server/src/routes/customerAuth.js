@@ -76,10 +76,11 @@ router.post("/register", async (req, res) => {
   try {
     if (!checkRate(req, res)) return;
 
+    const { cleanName, cleanText } = require("../sanitize");
     const email = String(req.body.email || "").trim().toLowerCase();
     const password = String(req.body.password || "");
-    const name = String(req.body.name || "").trim();
-    const phone = String(req.body.phone || "").trim();
+    const name = cleanName(req.body.name || "");
+    const phone = cleanText(req.body.phone || "", 20).replace(/[^\d+\s()-]/g, "");
 
     if (!name || name.length < 2) {
       return res.status(400).json({ error: "Please enter your full name" });
@@ -175,24 +176,25 @@ router.put("/me", requireCustomer, async (req, res) => {
       return res.status(401).json({ error: "Account not found" });
     }
 
+    const { cleanName, cleanText } = require("../sanitize");
     if (req.body.name != null) {
-      const name = String(req.body.name || "").trim();
+      const name = cleanName(req.body.name || "");
       if (name.length < 2) {
         return res.status(400).json({ error: "Please enter your full name" });
       }
       customer.name = name;
     }
     if (req.body.phone != null) {
-      customer.phone = String(req.body.phone || "").trim();
+      customer.phone = cleanText(req.body.phone || "", 20).replace(/[^\d+\s()-]/g, "");
     }
     if (req.body.address && typeof req.body.address === "object") {
       const a = req.body.address;
       customer.address = {
-        line1: String(a.line1 || "").trim(),
-        line2: String(a.line2 || "").trim(),
-        city: String(a.city || "").trim(),
-        state: String(a.state || "").trim(),
-        pincode: String(a.pincode || "").trim(),
+        line1: cleanText(a.line1 || "", 120),
+        line2: cleanText(a.line2 || "", 120),
+        city: cleanText(a.city || "", 80),
+        state: cleanText(a.state || "", 80),
+        pincode: cleanText(a.pincode || "", 12).replace(/[^\d]/g, ""),
       };
     }
 

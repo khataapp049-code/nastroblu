@@ -1,0 +1,72 @@
+[
+  {
+    "id": "P5/8.3",
+    "result": "Pass",
+    "evidence": "headers present: ['x-content-type-options', 'x-frame-options', 'content-security-policy', 'referrer-policy', 'strict-transport-security']"
+  },
+  {
+    "id": "8.4-compose-prod",
+    "result": "Pass",
+    "evidence": "compose status 404"
+  },
+  {
+    "id": "8.5-robots-prod",
+    "result": "Pass",
+    "evidence": "robots 200"
+  },
+  {
+    "id": "local-login",
+    "result": "Pass",
+    "evidence": "login 200"
+  },
+  {
+    "id": "6.9-api",
+    "result": "Fail",
+    "evidence": "400 name=''"
+  },
+  {
+    "id": "6.6",
+    "result": "Pass",
+    "evidence": "neg price 400 {'error': 'Price and MRP must be valid non-negative numbers'}"
+  },
+  {
+    "id": "6.5",
+    "result": "Pass",
+    "evidence": "price>mrp 400 {'error': 'Selling price cannot be greater than MRP'}"
+  },
+  {
+    "id": "6.7",
+    "result": "Pass",
+    "evidence": "bad category 400 {'error': 'Invalid category'}"
+  },
+  {
+    "id": "6.10-image",
+    "result": "Pass",
+    "evidence": "js image 400 {'error': 'Invalid image path'}"
+  },
+  {
+    "id": "6.18",
+    "result": "Pass",
+    "evidence": "reviews=0 rating=0"
+  },
+  {
+    "id": "customer-xss-name",
+    "result": "Fail",
+    "evidence": "no customer token 400 {'error': 'Please enter your full name'}"
+  },
+  {
+    "id": "6.9-dom",
+    "result": "Pass",
+    "evidence": "product html contains onerror=False"
+  },
+  {
+    "id": "10.seo",
+    "result": "Pass",
+    "evidence": "title area ok status=200"
+  },
+  {
+    "id": "4.whatsapp-app",
+    "result": "Pass",
+    "evidence": "wa url encoded: https://wa.me/919063048255?text=Hi%20Nastro%20Blu%21%20Order%20test%20%26%20sweets"
+  }
+]
