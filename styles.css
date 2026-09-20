@@ -200,18 +200,19 @@ h2.display {
   flex: none;
   width: 58px;
   height: 58px;
-  border-radius: 10px;
-  background: #fff;
   display: grid;
   place-items: center;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
-  overflow: hidden;
+  /* no white circle, ring or crop behind the logo - just the logo itself */
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
 }
 .brand__logo {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 0;
   display: block;
 }
 .brand__text {
@@ -3155,5 +3156,175 @@ body.nb-special-open {
   }
   #about-us .story__body p.first::first-letter {
     font-size: 2.6rem;
+  }
+}
+
+/* =========================================================
+   HERO — wheat/leaf line-art decoration, right side
+   The hero emblem (logo box) has been removed from the hero,
+   so the hero copy now spans the full width and the leaf motif
+   sits as a large decorative graphic on the right, behind the
+   copy, clipped to the hero's bounds.
+
+   FIX: .hero is display:flex, so without an explicit width the
+   .wrap.hero__grid child shrink-wrapped to its content and
+   centered itself (because of margin: 0 auto). That pushed the
+   text to the middle and made the leaf (positioned relative to
+   this box) land on top of the text. width: 100% makes the box
+   fill the hero, up to its max-width.
+   ========================================================= */
+.hero .wrap.hero__grid {
+  width: 100%;
+  margin-inline: auto;
+  grid-template-columns: 1fr;
+  /* not positioned, so the leaf below is placed relative to the whole hero */
+  position: static;
+}
+
+.hero {
+  overflow: hidden;
+}
+
+.hero__leaf-deco {
+  position: absolute;
+  top: 124px; /* starts just below the (taller) menu bar so the top bud is fully visible */
+  /* keeps a fixed gap from the right edge, so it sits on the right side
+     and never crowds the text */
+  left: calc(100% - clamp(170px, 19vw, 360px));
+  width: clamp(230px, 18vw, 320px);
+  height: auto;
+  max-width: none;
+  transform: translateX(-50%);
+  opacity: 0.4;
+  z-index: 1; /* behind the text */
+  pointer-events: none;
+}
+
+/* Hero text: a little bigger */
+.hero__copy {
+  max-width: 780px;
+  position: relative;
+  z-index: 2; /* keeps the text above the leaf */
+}
+.hero h1.display {
+  font-size: clamp(2.6rem, 6.8vw, 5.4rem);
+}
+.hero .lede {
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  max-width: 48ch;
+}
+.hero .btn {
+  font-size: 1.02rem;
+  padding: 0.9em 1.6em;
+}
+.hero .trust {
+  font-size: 0.9rem;
+}
+
+/* Tablets / phones (menu is the hamburger): leaf sits behind the right end
+   of the text and the bud shows at the top */
+@media (max-width: 1150px) {
+  .hero__leaf-deco {
+    top: -8px;
+    left: 68%;
+    width: auto;
+    height: 108svh; /* fills the hero so the stem runs off the bottom */
+    opacity: 0.36;
+  }
+}
+
+/* =========================================================
+   LOGO — larger, and identical everywhere it appears
+   (menu bar on every page, footer, and the Google reviews block).
+   Every page that uses the .brand markup picks these sizes up
+   automatically because they all share this stylesheet.
+   ========================================================= */
+.brand__mark {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+.brand__logo {
+  border-radius: 0;
+}
+.brand__name {
+  font-size: 1.6rem;
+}
+.brand__sub {
+  font-size: 0.66rem;
+}
+
+/* Locked size: the logo is exactly the same in the menu bar (on every page,
+   scrolled or not) and in the footer. !important stops any other rule or
+   script from resizing it. */
+.nav .brand__mark,
+.nav .brand > span:first-child,
+.foot .brand__mark,
+.foot .brand > span:first-child {
+  width: 92px !important;
+  height: 92px !important;
+  min-width: 92px !important;
+  min-height: 92px !important;
+  max-width: 92px !important;
+  max-height: 92px !important;
+  padding: 0 !important;
+  transform: none !important;
+  zoom: 1 !important;
+}
+.nav .brand img,
+.foot .brand img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transform: none !important;
+  object-fit: contain !important;
+}
+
+/* the sticky filter chips sit right under the solid menu bar
+   (logo 92px + the bar's 0.65rem top and bottom padding) */
+.collections {
+  top: 113px;
+}
+
+/* Google reviews block: same logo, bigger */
+.greviews__brand img {
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .brand__mark {
+    width: 72px;
+    height: 72px;
+  }
+  .nav .brand__mark,
+  .nav .brand > span:first-child,
+  .foot .brand__mark,
+  .foot .brand > span:first-child {
+    width: 72px !important;
+    height: 72px !important;
+    min-width: 72px !important;
+    min-height: 72px !important;
+    max-width: 72px !important;
+    max-height: 72px !important;
+  }
+  .brand__name {
+    font-size: 1.35rem;
+  }
+  .collections {
+    top: 93px;
+  }
+  .greviews__brand img {
+    width: 84px;
+    height: 84px;
   }
 }
