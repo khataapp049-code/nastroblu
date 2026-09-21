@@ -2137,6 +2137,9 @@
 
       var nav = $("nav");
 
+      var nav = $("nav");
+      var scrollCue = document.querySelector(".scrollcue");
+
       var onScroll =
         function () {
           if (nav) {
@@ -2145,8 +2148,14 @@
               window.scrollY > 40
             );
           }
-        };
 
+          if (scrollCue) {
+            scrollCue.classList.toggle(
+              "is-hidden",
+              window.scrollY > 40
+            );
+          }
+        };
       window.addEventListener(
         "scroll",
         onScroll,

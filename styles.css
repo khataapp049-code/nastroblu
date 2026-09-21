@@ -1513,7 +1513,9 @@ button.btn--muted {
   position: fixed;
   left: 50%;
   bottom: 1.5rem;
-  transform: translateX(-50%) translateY(120%);
+  transform: translateX(-50%) translateY(200%);
+  opacity: 0;
+  visibility: hidden;
   background: var(--olive);
   color: var(--cream);
   padding: 0.75rem 1.2rem;
@@ -1521,11 +1523,13 @@ button.btn--muted {
   z-index: 120;
   font-size: 0.9rem;
   font-weight: 600;
-  transition: transform 0.35s ease;
+  transition: transform 0.35s ease, opacity 0.35s ease, visibility 0.35s ease;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 .toast.show {
   transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 .reveal {
   opacity: 0;
@@ -3327,4 +3331,25 @@ body.nb-special-open {
     width: 84px;
     height: 84px;
   }
+}
+/* Scroll cue: fades out once the user starts scrolling */
+.scrollcue {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.scrollcue.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+/* Green pill on the hero's bottom edge - fades out with the scroll cue */
+.scrollcue::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1.6rem; /* lines up with the bottom edge of the hero */
+  transform: translateX(-50%);
+  width: 48px;
+  height: 24px;
+  border-radius: 999px 999px 0 0;
+  background: var(--olive);
 }
