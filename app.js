@@ -2136,9 +2136,8 @@
       }
 
       var nav = $("nav");
-
-      var nav = $("nav");
       var scrollCue = document.querySelector(".scrollcue");
+      var toTop = $("toTop");
 
       var onScroll =
         function () {
@@ -2149,13 +2148,39 @@
             );
           }
 
+          // Hero "SCROLL" cue fades out once the user scrolls
           if (scrollCue) {
             scrollCue.classList.toggle(
               "is-hidden",
               window.scrollY > 40
             );
           }
+
+          // Back-to-top button appears near the bottom of the page
+          if (toTop) {
+            var nearBottom =
+              window.innerHeight + window.scrollY >=
+              document.documentElement.scrollHeight - 400;
+
+            toTop.classList.toggle(
+              "is-visible",
+              nearBottom
+            );
+          }
         };
+
+      if (toTop) {
+        toTop.addEventListener(
+          "click",
+          function () {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+        );
+      }
+
       window.addEventListener(
         "scroll",
         onScroll,
