@@ -4,8 +4,8 @@
     products: []
   };
 
-  // Show 4 products at a time
-  var PRODUCTS_PER_PAGE = 8;
+  // Show 10 products at a time
+  var PRODUCTS_PER_PAGE = 10;
 
   // Single cap used everywhere
   var MAX_QTY = 99;
@@ -13,6 +13,7 @@
   var state = {
     filter: "all",
     query: "",
+    sort: "default",
     cart: loadCart(),
     activeProduct: null,
     sizeIndex: 0,
@@ -381,10 +382,7 @@
 
     strip.innerHTML = shopFilters()
       .filter(function (c) {
-        return (
-          c.id !== "all" &&
-          c.id !== "under999"
-        );
+        return c.id !== "under999";
       })
       .map(function (c) {
         return (
@@ -399,6 +397,53 @@
           '</div><div class="nm">' +
           escapeHtml(c.name) +
           "</div></button>"
+        );
+      })
+      .join("");
+  }
+
+  function categoryProductCount(id) {
+    if (id === "all") {
+      return (catalog.products || []).length;
+    }
+
+    return (catalog.products || []).filter(
+      function (p) {
+        return matchesFilter(p, id);
+      }
+    ).length;
+  }
+
+  function renderShopCategories() {
+    var grid = $("shopCategoryGrid");
+
+    if (!grid) {
+      return;
+    }
+
+    var cats = shopFilters().filter(
+      function (c) {
+        return c.id !== "under999";
+      }
+    );
+
+    grid.innerHTML = cats
+      .map(function (c) {
+        var count = categoryProductCount(c.id);
+
+        return (
+          '<a class="cat-card" href="category.html?cat=' +
+          safeAttr(c.id) +
+          '" data-filter="' +
+          safeAttr(c.id) +
+          '"><div class="ic">' +
+          escapeHtml(c.icon || "✦") +
+          '</div><div class="nm">' +
+          escapeHtml(c.name) +
+          '</div><div class="ct" style="font-size:.8rem;opacity:.75;margin-top:.2rem">' +
+          count +
+          (count === 1 ? " product" : " products") +
+          "</div></a>"
         );
       })
       .join("");
@@ -455,12 +500,230 @@
     return false;
   }
 
+  function categoryName(catId) {
+    var found = shopFilters().find(
+      function (c) {
+        return c.id === catId;
+      }
+    );
+
+    return (
+      (found && found.name) ||
+      catId
+    );
+  }
+
+  // "Naturally Grown Farm Products" is used on rice, dals,
+  // flours, jaggery, whole spices, seeds and more all at once.
+  // Split it by item type so rice sits with rice, dal with
+  // dal, etc., instead of one big alphabetical blob.
+  function farmProductSubgroup(p) {
+    var n = (p.name || "").toLowerCase();
+
+    if (/\brice\b/.test(n)) {
+      return "Rice";
+    }
+
+    if (
+      /\bdal\b|chola|kabuli|rajma|moong|urad|\bmatar\b/.test(
+        n
+      )
+    ) {
+      return "Dals & Pulses";
+    }
+
+    if (/aata|\bflour\b|besan/.test(n)) {
+      return "Flours (Aata)";
+    }
+
+    if (/jaggery|khand|gulkand/.test(n)) {
+      return "Jaggery & Natural Sweeteners";
+    }
+
+    if (
+      /turmeric|chilli powder|\bjeera\b|dhaniya|tamarind/.test(
+        n
+      )
+    ) {
+      return "Spices & Masala";
+    }
+
+    if (/seed|sesame|chia|flax|sabja/.test(n)) {
+      return "Seeds";
+    }
+
+    if (/peanut/.test(n)) {
+      return "Peanuts";
+    }
+
+    return "Other Naturally Grown Products";
+  }
+
+  // "Kerala Naturally Grown Product" covers both whole
+  // spices and teas - keep teas on their own shelf.
+  function keralaSpiceSubgroup(p) {
+    var n = (p.name || "").toLowerCase();
+
+    if (/\btea\b/.test(n)) {
+      return "Kerala Teas";
+    }
+
+    return "Kerala Spices";
+  }
+
+  // "Kashmiri Dry Fruits & More" also covers garlic,
+  // chillies and saffron - split those out from the nuts.
+  function kashmiriDryFruitSubgroup(p) {
+    var n = (p.name || "").toLowerCase();
+
+    if (/garlic|mirchi|chilli/.test(n)) {
+      return "Kashmiri Specialities";
+    }
+
+    if (/saffron/.test(n)) {
+      return "Saffron";
+    }
+
+    return "Dry Fruits";
+  }
+
+  function productGroupLabel(p) {
+    var tag =
+      Array.isArray(p.tags) &&
+      p.tags.length
+        ? p.tags[0]
+        : null;
+
+    // Trim internal notes like
+    // "Sweets (delivery 12-24 Hrs)"
+    // down to just "Sweets"
+    var trimmedTag = tag
+      ? tag
+          .replace(
+            /\s*\(delivery[^)]*\)\s*$/i,
+            ""
+          )
+          .trim()
+      : null;
+
+    if (
+      trimmedTag ===
+      "Naturally Grown Farm Products"
+    ) {
+      return farmProductSubgroup(p);
+    }
+
+    if (
+      trimmedTag ===
+      "Kerala Naturally Grown Product"
+    ) {
+      return keralaSpiceSubgroup(p);
+    }
+
+    if (
+      trimmedTag ===
+      "Kashmiri Dry Fruits & More"
+    ) {
+      return kashmiriDryFruitSubgroup(
+        p
+      );
+    }
+
+    if (!tag) {
+      return categoryName(
+        p.category
+      );
+    }
+
+    return trimmedTag;
+  }
+
+  function sortOptions() {
+    return [
+      { id: "default", name: "Recommended" },
+      { id: "price-asc", name: "Price: Low to High" },
+      { id: "price-desc", name: "Price: High to Low" },
+      { id: "name-asc", name: "Name: A to Z" }
+    ];
+  }
+
+  function renderSort() {
+    var sel = $("sortSelect");
+
+    if (!sel) {
+      return;
+    }
+
+    if (!sel.options.length) {
+      sel.innerHTML = sortOptions()
+        .map(function (o) {
+          return (
+            '<option value="' +
+            safeAttr(o.id) +
+            '">' +
+            escapeHtml(o.name) +
+            "</option>"
+          );
+        })
+        .join("");
+    }
+
+    sel.value = state.sort;
+  }
+
+  function applySort(list) {
+    var sorted = list.slice();
+
+    if (state.sort === "price-asc") {
+      sorted.sort(function (a, b) {
+        return (Number(a.price) || 0) - (Number(b.price) || 0);
+      });
+    } else if (state.sort === "price-desc") {
+      sorted.sort(function (a, b) {
+        return (Number(b.price) || 0) - (Number(a.price) || 0);
+      });
+    } else if (state.sort === "name-asc") {
+      sorted.sort(function (a, b) {
+        var an = (a.name || "").toLowerCase();
+        var bn = (b.name || "").toLowerCase();
+
+        return an < bn ? -1 : an > bn ? 1 : 0;
+      });
+    }
+
+    return sorted;
+  }
+
+  function setSort(id) {
+    state.sort = id;
+
+    // A new sort starts pagination fresh, same as a
+    // category or search change.
+    state.visibleCount = PRODUCTS_PER_PAGE;
+
+    renderProducts();
+  }
+
+  function categoryOrderIndex(catId) {
+    var cats = catalog.categories || [];
+
+    var idx = cats.findIndex(
+      function (c) {
+        return c.id === catId;
+      }
+    );
+
+    return idx === -1
+      ? cats.length
+      : idx;
+  }
+
   function filteredProducts() {
     var q = (state.query || "")
       .trim()
       .toLowerCase();
 
-    return (
+    var list = (
       catalog.products || []
     ).filter(function (p) {
       return (
@@ -471,6 +734,82 @@
         matchesQuery(p, q)
       );
     });
+
+    // Group products by their shelf - Pickles with pickles,
+    // Rice/Dals/Flours together, Sweets together, etc. -
+    // rather than pure A-Z, which mixes everything together.
+    // Only the broad "All products" / "Under ₹999" views need
+    // this: a single category page (e.g.
+    // category.html?cat=produce) already shows just one
+    // category, so it stays a plain list.
+    if (
+      state.sort === "default" &&
+      (state.filter === "all" ||
+        state.filter === "under999")
+    ) {
+      list = list
+        .map(function (p, i) {
+          return {
+            p: p,
+            i: i
+          };
+        })
+        .sort(function (a, b) {
+          var ca = categoryOrderIndex(
+            a.p.category
+          );
+
+          var cb = categoryOrderIndex(
+            b.p.category
+          );
+
+          if (ca !== cb) {
+            return ca - cb;
+          }
+
+          // Within the same category, cluster by
+          // the more specific group (Pickles,
+          // Summer Special Squashes, Sweets, ...)
+          // instead of falling back to plain A-Z.
+          var la = productGroupLabel(
+            a.p
+          );
+
+          var lb = productGroupLabel(
+            b.p
+          );
+
+          if (la !== lb) {
+            return la < lb ? -1 : 1;
+          }
+
+          // Stable: keep original relative
+          // order within the same sub-group
+          return a.i - b.i;
+        })
+        .map(function (entry) {
+          return entry.p;
+        });
+    }
+
+    // An explicit sort (price/name) wins over the
+    // default shelf-by-shelf grouping above.
+    if (state.sort !== "default") {
+      list = applySort(list);
+    }
+
+    return list;
+  }
+
+  // Same key renderProducts() uses to detect a new
+  // group heading - kept in one place so pagination
+  // and heading logic never disagree with each other.
+  function groupKeyFor(p) {
+    return (
+      p.category +
+      "::" +
+      productGroupLabel(p)
+    );
   }
 
   function filterLabel(id) {
@@ -649,6 +988,12 @@
         filterLabel(
           state.filter
         );
+
+      if (onCategoryPage()) {
+        document.title =
+          title.textContent +
+          " | Nastro Blu";
+      }
     }
 
     if (!grid) {
@@ -665,13 +1010,88 @@
         wrap.innerHTML = "";
       }
     } else {
+      // Group headings (and the group-safe "Show more"
+      // pagination below) only apply on the broad
+      // "All products" / "Under ₹999" views. A single
+      // category page shows a plain list.
+      var grouped =
+        state.sort === "default" &&
+        (state.filter === "all" ||
+          state.filter === "under999");
+
+      // A plain slice at state.visibleCount can land in the
+      // middle of a shelf group (e.g. "Cold Pressed Oil"
+      // starts right at item #50), so "Show more" would only
+      // reveal one item of that group and need a second click
+      // to show the rest. Extend the cut point forward to the
+      // end of that group so a shelf is never split across
+      // pages.
+      var visibleCount =
+        state.visibleCount;
+
+      if (grouped) {
+        while (
+          visibleCount <
+            list.length &&
+          groupKeyFor(
+            list[visibleCount]
+          ) ===
+            groupKeyFor(
+              list[
+                visibleCount - 1
+              ]
+            )
+        ) {
+          visibleCount++;
+        }
+      }
+
       var visible = list.slice(
         0,
-        state.visibleCount
+        visibleCount
       );
 
+      var lastGroupKey = null;
+
       grid.innerHTML = visible
-        .map(productCardHtml)
+        .map(function (p, idx) {
+          var heading = "";
+
+          var groupKey = groupKeyFor(
+            p
+          );
+
+          if (
+            grouped &&
+            groupKey !== lastGroupKey
+          ) {
+            lastGroupKey = groupKey;
+
+            heading =
+              '<h3 class="shop-group-heading" style="grid-column:1/-1;font-family:\'Fraunces\',serif;font-weight:600;font-size:1.35rem;color:var(--wine);margin:' +
+              (idx === 0
+                ? "0"
+                : "2rem") +
+              ' 0 .6rem;padding-top:' +
+              (idx === 0
+                ? "0"
+                : "1.5rem") +
+              ";border-top:" +
+              (idx === 0
+                ? "none"
+                : "1px solid rgba(45,67,31,.12)") +
+              '">' +
+              escapeHtml(
+                productGroupLabel(p)
+              ) +
+              "</h3>";
+          }
+
+          return (
+            heading +
+            productCardHtml(p)
+          );
+        })
         .join("");
 
       // Create Show More / Show Less container
@@ -699,13 +1119,23 @@
       // Show More
       if (
         list.length >
-        state.visibleCount
+        visibleCount
       ) {
         wrap.innerHTML =
+          '<div class="show-more-progress" style="margin-bottom:.6rem;font-size:.85rem;opacity:.75">' +
+          "Showing " +
+          Math.min(
+            visibleCount,
+            list.length
+          ) +
+          " of " +
+          list.length +
+          " products" +
+          "</div>" +
           '<button type="button" class="btn btn--ghost" id="showMoreBtn" data-show-more>' +
           "Show more (" +
           (list.length -
-            state.visibleCount) +
+            visibleCount) +
           " remaining)" +
           "</button>";
 
@@ -1847,7 +2277,23 @@
 
   /* ---------- filter / search ---------- */
 
+  function onCategoryPage() {
+    return /category\.html/i.test(
+      window.location.pathname
+    );
+  }
+
   function setFilter(id) {
+    if (!onCategoryPage()) {
+      // From the homepage, clicking a category
+      // takes the shopper to its own listing page.
+      window.location.href =
+        "category.html?cat=" +
+        encodeURIComponent(id);
+
+      return;
+    }
+
     state.filter = id;
 
     // A category click starts fresh
@@ -1863,6 +2309,23 @@
 
     state.visibleCount =
       PRODUCTS_PER_PAGE;
+
+    try {
+      var url = new URL(
+        window.location.href
+      );
+
+      url.searchParams.set(
+        "cat",
+        id
+      );
+
+      history.replaceState(
+        null,
+        "",
+        url.toString()
+      );
+    } catch (e) {}
 
     renderFilters();
     renderCategories();
@@ -1881,7 +2344,7 @@
   function setSearch(q) {
     state.query = q || "";
 
-    // Search starts from first 4 products
+    // Search starts from the first page of products
     state.visibleCount =
       PRODUCTS_PER_PAGE;
 
@@ -1927,6 +2390,18 @@
     }
 
     if (t.dataset.filter) {
+      // Category cards on the shop grid are real
+      // <a> links (so ctrl/cmd-click still works);
+      // don't double-navigate on top of that.
+      if (
+        t.tagName === "A" &&
+        t.getAttribute("href")
+      ) {
+        return;
+      }
+
+      e.preventDefault();
+
       setFilter(
         t.dataset.filter
       );
@@ -2058,11 +2533,23 @@
 
       // SEO / SearchAction:
       // ?q=term opens shop filtered
+      // ?cat=id opens a specific category (category.html)
       try {
-        var qParam =
+        var urlParams =
           new URLSearchParams(
             window.location.search
-          ).get("q");
+          );
+
+        var qParam =
+          urlParams.get("q");
+
+        var catParam =
+          urlParams.get("cat");
+
+        if (catParam) {
+          state.filter =
+            catParam;
+        }
 
         if (qParam) {
           state.query =
@@ -2080,12 +2567,22 @@
 
       renderFilters();
       renderCategories();
+      renderShopCategories();
+      renderSort();
       renderProducts();
       renderFeatured();
       initBanner();
       updateCartCount();
       renderCart();
       refreshAccountNav();
+
+      on(
+        "sortSelect",
+        "change",
+        function () {
+          setSort(this.value);
+        }
+      );
 
       document.body.addEventListener(
         "click",
@@ -2135,6 +2632,50 @@
         );
       }
 
+      // Homepage-only search box: it has no product
+      // grid to filter, so it redirects into the
+      // category listing page instead.
+      var shopSearch =
+        $("shopSearch");
+
+      if (shopSearch) {
+        var goShopSearch =
+          function () {
+            var value =
+              shopSearch.value.trim();
+
+            if (!value) {
+              return;
+            }
+
+            window.location.href =
+              "category.html?cat=all&q=" +
+              encodeURIComponent(
+                value
+              );
+          };
+
+        shopSearch.addEventListener(
+          "keydown",
+          function (e) {
+            if (
+              e.key === "Enter"
+            ) {
+              e.preventDefault();
+              goShopSearch();
+            }
+          }
+        );
+
+        // Navigate once the shopper is done typing
+        // (leaves the field), not mid-word on every
+        // keystroke pause.
+        shopSearch.addEventListener(
+          "blur",
+          goShopSearch
+        );
+      }
+
       var nav = $("nav");
       var scrollCue = document.querySelector(".scrollcue");
       var toTop = $("toTop");
@@ -2156,15 +2697,13 @@
             );
           }
 
-          // Back-to-top button appears near the bottom of the page
+          // Back-to-top button appears once the shopper has
+          // scrolled a meaningful distance, not just near the
+          // very bottom of a long (150+ product) page.
           if (toTop) {
-            var nearBottom =
-              window.innerHeight + window.scrollY >=
-              document.documentElement.scrollHeight - 400;
-
             toTop.classList.toggle(
               "is-visible",
-              nearBottom
+              window.scrollY > 600
             );
           }
         };

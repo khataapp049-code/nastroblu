@@ -84,7 +84,7 @@
  "publisher": { "@id": "https://nastroblu.in/#business" },
  "potentialAction": {
  "@type": "SearchAction",
- "target": "https://nastroblu.in/?q={search_term_string}#shop",
+ "target": "https://nastroblu.in/category.html?cat=all&q={search_term_string}",
  "query-input": "required name=search_term_string"
  }
  }
@@ -111,7 +111,7 @@
  <nav class="nav__links" id="navLinks">
  <a href="#story">Our Story</a>
  <a href="#believe">Beliefs</a>
- <a href="#shop">Shop</a>
+ <a href="#categories">Shop</a>
  <a href="about.html#about-us">About</a>
  <a href="#visit">Visit</a>
  <a href="account.html#wishlist">Wishlist</a>
@@ -154,7 +154,7 @@
  <h1 class="display">Know your farmer.<br />Know your <span class="gold-i">food.</span></h1>
  <p class="lede">Naturally grown, sourced straight from the soil, and prepared the honest way. This is real food - the way nature intended it to be.</p>
  <div class="btns">
- <a href="#shop" class="btn btn--gold">Shop the pantry</a>
+ <a href="#categories" class="btn btn--gold">Shop the pantry</a>
  <a href="https://wa.me/919063048255?text=Hi%20Nastro%20Blu!" class="btn btn--ghost">Order on WhatsApp</a>
  </div>
  <div class="trust">
@@ -309,12 +309,6 @@
  </div>
  </section>
 
- <section class="collections">
- <div class="wrap">
- <div class="collection-row" id="collectionRow" aria-label="Product filters"></div>
- </div>
- </section>
-
  <section class="band band--parch" id="featured" style="padding-top:2.5rem;padding-bottom:2rem">
  <div class="wrap">
  <div class="shop-head">
@@ -322,7 +316,7 @@
  <span class="eyebrow">Most loved</span>
  <h2 class="display">Best sellers</h2>
  </div>
- <a href="#shop" class="btn btn--ghost" style="border-color:var(--wine);color:var(--wine)">Shop all</a>
+ <a href="#categories" class="btn btn--ghost" style="border-color:var(--wine);color:var(--wine)">Shop all</a>
  </div>
  <div class="product-grid" id="featuredGrid"></div>
  </div>
@@ -336,24 +330,6 @@
  <p class="lede" style="margin-top:0.8rem">Six shelves. One promise - know your farmer, know your food.</p>
  </div>
  <div class="cat-strip reveal" id="catStrip"></div>
- </div>
- </section>
-
- <section class="band band--parch" id="shop">
- <div class="wrap">
- <div class="shop-head reveal">
- <div>
- <span class="eyebrow">Shop</span>
- <h2 class="display" id="shopTitle">All products</h2>
- </div>
- <p id="productCount" style="color:var(--ink-soft);font-weight:600"></p>
- </div>
- <label class="shop-search reveal" for="productSearch">
- <span class="shop-search__icon" aria-hidden="true">⌕</span>
- <input type="search" id="productSearch" placeholder="Search products by name, SKU, or category…" autocomplete="off" />
- </label>
- <div class="filter-row reveal" id="filterRow"></div>
- <div class="product-grid" id="productGrid"></div>
  </div>
  </section>
 
@@ -421,7 +397,7 @@
  </span>
  </a>
  <nav class="foot__links">
- <a href="#shop">Shop</a>
+ <a href="#categories">Shop</a>
  <a href="about.html#about-us">About</a>
  <a href="#believe">Difference</a>
  <a href="#visit">Visit store</a>

@@ -18,7 +18,7 @@
   --white: #fffdf8;
   --serif: "Fraunces", Georgia, "Times New Roman", serif;
   --sans: "Hanken Grotesk", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --wrap: 1180px;
+  --wrap: 1440px;
   --gutter: clamp(20px, 5vw, 40px);
   --radius: 14px;
 }
@@ -871,7 +871,7 @@ h2.display {
 }
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
   gap: 1.35rem;
 }
 .shop-empty {
