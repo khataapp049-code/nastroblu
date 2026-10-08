@@ -18,7 +18,7 @@
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
- <link rel="stylesheet" href="styles.css?v=20260921" />
+ <link rel="stylesheet" href="styles.css?v=20261007" />
 </head>
 <body>
  <div class="platform-bar">
@@ -40,7 +40,9 @@
  </span>
  </a>
  <nav class="nav__links" id="navLinks">
- <a href="index.html#story">Our Story</a>
+ <a href="index.html">Home</a>
+
+        <a href="index.html#story">Our Story</a>
  <a href="index.html#believe">Beliefs</a>
  <a href="index.html#shop">Shop</a>
  <a href="about.html#about-us">About</a>
@@ -60,7 +62,7 @@
  </div>
  </header>
 
- <main class="wrap" style="padding-top:2.5rem">
+ <main class="wrap" style="padding-top:6rem">
  <section id="shop">
  <div class="shop-head reveal">
  <div>
@@ -73,8 +75,17 @@
  <span class="shop-search__icon" aria-hidden="true">⌕</span>
  <input type="search" id="productSearch" placeholder="Search products by name, SKU, or category…" autocomplete="off" />
  </label>
- <div class="filter-row reveal" id="filterRow"></div>
+
+ <div class="filter-row reveal" id="filterRow" role="toolbar" aria-label="Product categories"></div>
+
+ <div class="shop-layout">
+ <!-- Left sidebar (built by app.js): sub-categories - Atta / Rice / Pulses & Grains / Others / Natural Sweetener, and Milk & Khoa / Dry Fruit / Traditional Indian / Bengali & Chhena Sweets -->
+ <aside class="shop-sidebar" id="shopSidebar" aria-label="Filter products"></aside>
+
+ <div class="shop-main">
  <div class="product-grid" id="productGrid"></div>
+ </div>
+ </div>
  </section>
  </main>
 
@@ -125,7 +136,7 @@
 
  <script src="products.js"></script>
  <script src="wishlist.js?v=20260718a"></script>
- <script src="app.js"></script>
+ <script src="app.js?v=20261005"></script>
  <script src="delivery-info.js?v=20260804b"></script>
 </body>
 </html>

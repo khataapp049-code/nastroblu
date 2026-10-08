@@ -8,6 +8,70 @@
   <meta name="robots" content="noindex,nofollow" />
   <link rel="icon" href="/assets/logo.png" />
   <link rel="stylesheet" href="/admin/admin.css?v=20260718a" />
+  <style>
+    /* Weights & prices editor (kept here so admin.css stays untouched) */
+    .sizes-editor {
+      margin: 1.4rem 0;
+      padding: 1rem 1.1rem 1.1rem;
+      border: 1px solid rgba(128, 128, 128, 0.35);
+      border-radius: 12px;
+    }
+    .sizes-editor h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1.05rem;
+    }
+    .sizes-editor .hint {
+      margin: 0 0 0.9rem;
+    }
+    .sizes-tools {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.9rem;
+    }
+    .sizes-tools .round-pick {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+    }
+    .sizes-tools select {
+      width: auto;
+    }
+    .sizes-table-wrap {
+      overflow-x: auto;
+    }
+    .sizes-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+    .sizes-table th {
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0 0.4rem 0.4rem;
+      white-space: nowrap;
+    }
+    .sizes-table td {
+      padding: 0.2rem 0.4rem;
+      vertical-align: middle;
+    }
+    .sizes-table input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.45rem 0.55rem;
+    }
+    .sizes-table .size-per {
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0.75;
+    }
+    .sizes-table button.danger {
+      padding: 0.35rem 0.6rem;
+    }
+  </style>
 </head>
 <body>
   <div id="loginView" class="auth">
@@ -83,8 +147,8 @@
             <label>Primary badge / tag<input id="tag" placeholder="Best Seller / New" /></label>
             <label>Extra tags (comma separated)<input id="tags" placeholder="organic, gift, festive" /></label>
             <label>Sort order (lower = first)<input id="sortOrder" type="number" step="1" value="100" /></label>
-            <label>Selling price (₹) *<input id="price" type="number" min="0" step="1" required /></label>
-            <label>MRP (₹) *<input id="mrp" type="number" min="0" step="1" required /></label>
+            <label>Selling price (₹) - main size *<input id="price" type="number" min="0" step="1" required /></label>
+            <label>MRP (₹) - main size *<input id="mrp" type="number" min="0" step="1" required /></label>
             <label>Cost / costing (₹)<input id="cost" type="number" min="0" step="0.01" value="0" /></label>
             <label>Availability
               <select id="status">
@@ -93,14 +157,49 @@
                 <option value="archived">Archived (hidden)</option>
               </select>
             </label>
-            <label>Net quantity / weight<input id="netQuantity" placeholder="500 g / 1 L" /></label>
-            <label>Unit label<input id="unit" placeholder="500 g" /></label>
-            <label>SKU<input id="sku" /></label>
+            <label>Net quantity / weight - main size<input id="netQuantity" placeholder="1 kg / 500 g / 1 L" /></label>
+            <label>Unit label<input id="unit" placeholder="1 kg" /></label>
+            <label>SKU - main size<input id="sku" /></label>
             <label>Barcode<input id="barcode" /></label>
             <label>Packed on<input id="packedOn" /></label>
-            <label>Best before / expiry<input id="bestBefore" /></label>
+            <label>Shelf life<input id="bestBefore" /></label>
             <label>Slug / URL id<input id="slug" placeholder="auto from name if empty" /></label>
           </div>
+
+          <div class="sizes-editor" id="sizesEditor">
+            <h3>More weights and prices</h3>
+            <p class="hint">The price, MRP, weight and SKU above are the main size (shown first on the store). Add the other sizes here, each with its own price. Use labels like 250 g, 500 g, 750 g, 1 kg.</p>
+            <div class="sizes-tools">
+              <button type="button" id="btnAddSize">+ Add weight</button>
+              <button type="button" id="btnStdSizes">Add standard sizes</button>
+              <span class="round-pick">Round prices to
+                <select id="sizeRounding">
+                  <option value="1" selected>nearest ₹1</option>
+                  <option value="5">nearest ₹5</option>
+                  <option value="10">nearest ₹10</option>
+                  <option value="0">no rounding</option>
+                </select>
+              </span>
+              <button type="button" id="btnAutoPrice" class="primary">Auto-price from main size</button>
+            </div>
+            <div class="sizes-table-wrap">
+              <table class="sizes-table">
+                <thead>
+                  <tr>
+                    <th>Weight label</th>
+                    <th>Price (₹)</th>
+                    <th>MRP (₹)</th>
+                    <th>SKU</th>
+                    <th>Per kg / litre</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="sizeRows"></tbody>
+              </table>
+            </div>
+            <p id="sizeMsg" class="msg is-hidden"></p>
+          </div>
+
           <div class="image-upload">
             <label>Product image
               <input id="image" placeholder="assets/products/.... or upload below" />
@@ -264,6 +363,6 @@
     </main>
   </div>
 
-  <script src="/admin/admin.js?v=20260718a"></script>
+  <script src="/admin/admin.js?v=20261008a"></script>
 </body>
 </html>

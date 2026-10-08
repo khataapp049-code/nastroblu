@@ -14,6 +14,7 @@
     filter: "all",
     query: "",
     sort: "default",
+    sub: "all",
     cart: loadCart(),
     activeProduct: null,
     sizeIndex: 0,
@@ -77,7 +78,7 @@
         data.products.length
       ) {
         setCatalog({
-          categories: data.categories || catalog.categories,
+          categories: catalog.categories,
           products: data.products
         });
 
@@ -326,19 +327,6 @@
       ];
     }
 
-    var hasUnder = cats.some(
-      function (c) {
-        return c.id === "under999";
-      }
-    );
-
-    if (!hasUnder) {
-      cats.push({
-        id: "under999",
-        name: "Under ₹999"
-      });
-    }
-
     return cats;
   }
 
@@ -372,6 +360,34 @@
       sticky.innerHTML = html;
     }
   }
+  function catIconHtml(icon) {
+    var s = String(icon || "✦");
+
+    if (
+      window.NASTRO_ICONS &&
+      typeof window.NASTRO_ICONS[s] === "string" &&
+      window.NASTRO_ICONS[s].trim()
+    ) {
+      return (
+        '<span class="category-svg-icon" aria-hidden="true">' +
+        window.NASTRO_ICONS[s] +
+        "</span>"
+      );
+    }
+
+    if (
+      /^(assets\/|https?:\/\/|\/).+\.(png|svg|jpe?g|webp)$/i.test(s)
+    ) {
+      return (
+        '<img src="' +
+        safeAttr(s) +
+        '" alt="" width="42" height="42" ' +
+        'style="width:42px;height:42px;object-fit:contain" />'
+      );
+    }
+
+    return escapeHtml(s);
+  }
 
   function renderCategories() {
     var strip = $("catStrip");
@@ -381,9 +397,6 @@
     }
 
     strip.innerHTML = shopFilters()
-      .filter(function (c) {
-        return c.id !== "under999";
-      })
       .map(function (c) {
         return (
           '<button type="button" class="cat-card' +
@@ -393,7 +406,7 @@
           '" data-filter="' +
           safeAttr(c.id) +
           '"><div class="ic">' +
-          escapeHtml(c.icon || "✦") +
+          catIconHtml(c.icon) +
           '</div><div class="nm">' +
           escapeHtml(c.name) +
           "</div></button>"
@@ -421,11 +434,7 @@
       return;
     }
 
-    var cats = shopFilters().filter(
-      function (c) {
-        return c.id !== "under999";
-      }
-    );
+    var cats = shopFilters();
 
     grid.innerHTML = cats
       .map(function (c) {
@@ -437,7 +446,7 @@
           '" data-filter="' +
           safeAttr(c.id) +
           '"><div class="ic">' +
-          escapeHtml(c.icon || "✦") +
+          catIconHtml(c.icon) +
           '</div><div class="nm">' +
           escapeHtml(c.name) +
           '</div><div class="ct" style="font-size:.8rem;opacity:.75;margin-top:.2rem">' +
@@ -447,6 +456,257 @@
         );
       })
       .join("");
+  }
+
+
+  /* ---------- squashes + sub-categories (left sidebar) ---------- */
+
+  // Squashes are filed under "produce" in the data feed (the
+  // admin/API only know the older category list). Detect them
+  // by name/tag so "Nastro Blu Special Squashes" always works.
+  function isSquash(p) {
+    var tags = Array.isArray(p.tags)
+      ? p.tags.join(" ")
+      : "";
+
+    return (
+      /squash/i.test(
+        (p.name || "") +
+          " " +
+          tags +
+          " " +
+          (p.tag || "")
+      )
+    );
+  }
+
+  // The category a product is *shown* under.
+  function catOf(p) {
+    return isSquash(p)
+      ? "squashes"
+      : p.category;
+  }
+
+  // Second-level filters shown in the sidebar once a
+  // category is picked. Order = order shown on screen.
+  var SUBCATEGORIES = {
+    produce: [
+      { id: "atta", name: "Atta" },
+      { id: "rice", name: "Rice" },
+      { id: "pulses", name: "Pulses & Grains" },
+      { id: "others", name: "Others" },
+      { id: "sweetener", name: "Natural Sweetener" }
+    ],
+    sweets: [
+      { id: "milk-khoa", name: "Milk & Khoa Sweets" },
+      { id: "dry-fruit", name: "Dry Fruit Sweets" },
+      { id: "traditional", name: "Traditional Indian Sweets" },
+      { id: "bengali-chhena", name: "Bengali & Chhena Sweets" },
+      { id: "snacks", name: "Snacks & Savouries" }
+    ]
+  };
+
+  function subList(cat) {
+    return SUBCATEGORIES[cat] || [];
+  }
+
+  function subName(cat, subId) {
+    var found = subList(cat).find(
+      function (x) {
+        return x.id === subId;
+      }
+    );
+
+    return found ? found.name : "";
+  }
+
+  // Naturally Grown Produce -> Atta / Rice / Pulses & Grains /
+  // Others / Natural Sweetener
+  function produceSubId(p) {
+    var n = (p.name || "").toLowerCase();
+
+    if (/aata|\bflour\b|besan/.test(n)) {
+      return "atta";
+    }
+
+    if (/\brice\b/.test(n)) {
+      return "rice";
+    }
+
+    if (/jaggery|\bkhand\b/.test(n)) {
+      return "sweetener";
+    }
+
+    if (
+      /\bdal\b|chola|chana|kabuli|rajma|moong|urad|\bmatar\b|jowar|futana/.test(
+        n
+      )
+    ) {
+      return "pulses";
+    }
+
+    return "others";
+  }
+
+  // Traditional Sweets & Snacks -> Milk & Khoa / Dry Fruit /
+  // Traditional Indian / Bengali & Chhena / Snacks
+  function sweetSubId(p) {
+    var n = (p.name || "").toLowerCase();
+
+    var tags = (
+      Array.isArray(p.tags)
+        ? p.tags.join(" ")
+        : ""
+    ).toLowerCase();
+
+    if (/snack/.test(tags)) {
+      return "snacks";
+    }
+
+    if (
+      /rasgulla|rasmalai|cham ?cham|chh?ena|sandesh/.test(
+        n
+      )
+    ) {
+      return "bengali-chhena";
+    }
+
+    if (
+      /\bmava\b|\bkhoa\b|kalakand|\bpeda\b|rabri|gulab jamun/.test(
+        n
+      )
+    ) {
+      return "milk-khoa";
+    }
+
+    if (
+      /kaju|pista|badam|mamra|anjeer|dry fruit|\bgond\b/.test(
+        n
+      )
+    ) {
+      return "dry-fruit";
+    }
+
+    return "traditional";
+  }
+
+  function subIdOf(p) {
+    var cat = catOf(p);
+
+    if (cat === "produce") {
+      return produceSubId(p);
+    }
+
+    if (cat === "sweets") {
+      return sweetSubId(p);
+    }
+
+    return "";
+  }
+
+  function matchesSub(p, filter, sub) {
+    if (
+      !sub ||
+      sub === "all" ||
+      !subList(filter).length
+    ) {
+      return true;
+    }
+
+    return subIdOf(p) === sub;
+  }
+
+  function sidebarLinkHtml(cat, sub, name, count, active) {
+    return (
+      '<li><button type="button" class="side-link' +
+      (active ? " active" : "") +
+      '" data-sub="' +
+      safeAttr(sub) +
+      '" data-sub-cat="' +
+      safeAttr(cat) +
+      '"' +
+      (active ? ' aria-current="true"' : "") +
+      ">" +
+      "<span>" +
+      escapeHtml(name) +
+      "</span><em>" +
+      count +
+      "</em></button></li>"
+    );
+  }
+
+  var lastSidebarHtml = null;
+
+  // Left sidebar = sub-categories of the category being viewed.
+  // Only "Naturally Grown Produce" and "Traditional Sweets & Snacks"
+  // have sub-categories, so the sidebar is shown for those two and
+  // hidden (with the product grid taking the full width) for
+  // every other category and for "All Products".
+  function renderSidebar() {
+    var box = $("shopSidebar");
+
+    if (!box) {
+      return;
+    }
+
+    var all = catalog.products || [];
+    var html = "";
+
+    var current = shopFilters().find(function (c) {
+      return c.id === state.filter;
+    });
+
+    var subs = current ? subList(current.id) : [];
+
+    if (current && subs.length) {
+      var inCat = all.filter(function (p) {
+        return matchesFilter(p, current.id);
+      });
+
+      html =
+        '<div class="side-block is-current">' +
+        '<h3 class="side-title">' +
+        escapeHtml(current.name) +
+        "</h3>" +
+        '<ul class="side-list">' +
+        sidebarLinkHtml(
+          current.id,
+          "all",
+          "All " + current.name,
+          inCat.length,
+          state.sub === "all"
+        ) +
+        subs
+          .map(function (x) {
+            var n = inCat.filter(function (p) {
+              return subIdOf(p) === x.id;
+            }).length;
+
+            return sidebarLinkHtml(
+              current.id,
+              x.id,
+              x.name,
+              n,
+              state.sub === x.id
+            );
+          })
+          .join("") +
+        "</ul></div>";
+    }
+
+    // Only touch the DOM when something changed so the
+    // sidebar keeps its scroll position.
+    if (html !== lastSidebarHtml) {
+      box.innerHTML = html;
+      lastSidebarHtml = html;
+    }
+
+    // No sidebar -> let the products use the full width.
+    var layout = box.parentNode;
+
+    if (layout && layout.classList) {
+      layout.classList.toggle("no-sidebar", !html);
+    }
   }
 
   function matchesQuery(p, q) {
@@ -477,16 +737,9 @@
       return true;
     }
 
-    if (filter === "under999") {
-      var price = Number(p.price);
-
-      return (
-        price > 0 &&
-        price < 999
-      );
-    }
-
-    if (p.category === filter) {
+    // catOf() lets squashes live in their own category even
+    // when the data still files them under "produce".
+    if (catOf(p) === filter) {
       return true;
     }
 
@@ -514,49 +767,18 @@
   }
 
   // "Naturally Grown Farm Products" is used on rice, dals,
-  // flours, jaggery, whole spices, seeds and more all at once.
-  // Split it by item type so rice sits with rice, dal with
-  // dal, etc., instead of one big alphabetical blob.
+  // flours, jaggery, seeds and more all at once. Split it
+  // with the same buckets as the sidebar (Atta, Rice,
+  // Pulses & Grains, Others, Natural Sweetener).
   function farmProductSubgroup(p) {
-    var n = (p.name || "").toLowerCase();
-
-    if (/\brice\b/.test(n)) {
-      return "Rice";
+    if (catOf(p) !== "produce") {
+      return categoryName(catOf(p));
     }
 
-    if (
-      /\bdal\b|chola|kabuli|rajma|moong|urad|\bmatar\b/.test(
-        n
-      )
-    ) {
-      return "Dals & Pulses";
-    }
-
-    if (/aata|\bflour\b|besan/.test(n)) {
-      return "Flours (Aata)";
-    }
-
-    if (/jaggery|khand|gulkand/.test(n)) {
-      return "Jaggery & Natural Sweeteners";
-    }
-
-    if (
-      /turmeric|chilli powder|\bjeera\b|dhaniya|tamarind/.test(
-        n
-      )
-    ) {
-      return "Spices & Masala";
-    }
-
-    if (/seed|sesame|chia|flax|sabja/.test(n)) {
-      return "Seeds";
-    }
-
-    if (/peanut/.test(n)) {
-      return "Peanuts";
-    }
-
-    return "Other Naturally Grown Products";
+    return (
+      subName("produce", produceSubId(p)) ||
+      "Others"
+    );
   }
 
   // "Kerala Naturally Grown Product" covers both whole
@@ -631,7 +853,7 @@
 
     if (!tag) {
       return categoryName(
-        p.category
+        catOf(p)
       );
     }
 
@@ -731,6 +953,11 @@
           p,
           state.filter
         ) &&
+        matchesSub(
+          p,
+          state.filter,
+          state.sub
+        ) &&
         matchesQuery(p, q)
       );
     });
@@ -738,14 +965,13 @@
     // Group products by their shelf - Pickles with pickles,
     // Rice/Dals/Flours together, Sweets together, etc. -
     // rather than pure A-Z, which mixes everything together.
-    // Only the broad "All products" / "Under ₹999" views need
+    // Only the broad "All products" view needs
     // this: a single category page (e.g.
     // category.html?cat=produce) already shows just one
     // category, so it stays a plain list.
     if (
       state.sort === "default" &&
-      (state.filter === "all" ||
-        state.filter === "under999")
+      state.filter === "all"
     ) {
       list = list
         .map(function (p, i) {
@@ -756,11 +982,11 @@
         })
         .sort(function (a, b) {
           var ca = categoryOrderIndex(
-            a.p.category
+            catOf(a.p)
           );
 
           var cb = categoryOrderIndex(
-            b.p.category
+            catOf(b.p)
           );
 
           if (ca !== cb) {
@@ -806,7 +1032,7 @@
   // and heading logic never disagree with each other.
   function groupKeyFor(p) {
     return (
-      p.category +
+      catOf(p) +
       "::" +
       productGroupLabel(p)
     );
@@ -828,6 +1054,18 @@
         state.query.trim() +
         '"'
       );
+    }
+
+    var subLabel =
+      state.sub !== "all"
+        ? subName(
+            state.filter,
+            state.sub
+          )
+        : "";
+
+    if (subLabel) {
+      return subLabel;
     }
 
     return (
@@ -1012,12 +1250,11 @@
     } else {
       // Group headings (and the group-safe "Show more"
       // pagination below) only apply on the broad
-      // "All products" / "Under ₹999" views. A single
+      // "All products" view. A single
       // category page shows a plain list.
       var grouped =
         state.sort === "default" &&
-        (state.filter === "all" ||
-          state.filter === "under999");
+        state.filter === "all";
 
       // A plain slice at state.visibleCount can land in the
       // middle of a shelf group (e.g. "Cold Pressed Oil"
@@ -1160,6 +1397,8 @@
         grid
       );
     }
+
+    renderSidebar();
 
     document
       .querySelectorAll(
@@ -2295,6 +2534,7 @@
     }
 
     state.filter = id;
+    state.sub = "all";
 
     // A category click starts fresh
     // and resets pagination.
@@ -2320,6 +2560,9 @@
         id
       );
 
+      url.searchParams.delete("sub");
+      url.searchParams.delete("q");
+
       history.replaceState(
         null,
         "",
@@ -2341,6 +2584,70 @@
     }
   }
 
+  function setSub(id, cat) {
+    // Picking a sub-category from another group (e.g. "Atta"
+    // while viewing All Products) switches to that category.
+    if (cat && cat !== state.filter) {
+      state.filter = cat;
+      state.query = "";
+
+      var searchEl =
+        $("productSearch");
+
+      if (searchEl) {
+        searchEl.value = "";
+      }
+
+      renderFilters();
+    }
+
+    state.sub = id || "all";
+    state.visibleCount =
+      PRODUCTS_PER_PAGE;
+
+    try {
+      var u = new URL(
+        window.location.href
+      );
+
+      u.searchParams.set(
+        "cat",
+        state.filter
+      );
+
+      u.searchParams.delete("q");
+
+      history.replaceState(
+        null,
+        "",
+        u.toString()
+      );
+    } catch (e) {}
+
+    try {
+      var url = new URL(
+        window.location.href
+      );
+
+      if (state.sub === "all") {
+        url.searchParams.delete("sub");
+      } else {
+        url.searchParams.set(
+          "sub",
+          state.sub
+        );
+      }
+
+      history.replaceState(
+        null,
+        "",
+        url.toString()
+      );
+    } catch (e) {}
+
+    renderProducts();
+  }
+
   function setSearch(q) {
     state.query = q || "";
 
@@ -2356,7 +2663,7 @@
   function onClick(e) {
     var t =
       e.target.closest(
-        "[data-filter],[data-add],[data-view],[data-size],[data-rm],[data-show-more],[data-show-less]"
+        "[data-filter],[data-sub],[data-add],[data-view],[data-size],[data-rm],[data-show-more],[data-show-less]"
       );
 
     if (!t) {
@@ -2385,6 +2692,17 @@
         PRODUCTS_PER_PAGE;
 
       renderProducts();
+
+      return;
+    }
+
+    if (t.dataset.sub) {
+      e.preventDefault();
+
+      setSub(
+        t.dataset.sub,
+        t.dataset.subCat
+      );
 
       return;
     }
@@ -2546,9 +2864,34 @@
         var catParam =
           urlParams.get("cat");
 
+        // Unknown ids (e.g. an old ?cat=under999 link)
+        // fall back to "All products".
         if (catParam) {
-          state.filter =
-            catParam;
+          var knownCat =
+            shopFilters().some(
+              function (c) {
+                return (
+                  c.id === catParam
+                );
+              }
+            );
+
+          state.filter = knownCat
+            ? catParam
+            : "all";
+        }
+
+        var subParam =
+          urlParams.get("sub");
+
+        if (
+          subParam &&
+          subName(
+            state.filter,
+            subParam
+          )
+        ) {
+          state.sub = subParam;
         }
 
         if (qParam) {

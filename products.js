@@ -13,48 +13,19 @@ window.NASTRO_BRAND = {
 };
 
 window.NASTRO_CATALOG = {
- categories: [
-  {
-    "id": "all",
-    "name": "All Products",
-    "icon": "✦"
-  },
-  {
-    "id": "produce",
-    "name": "Naturally Grown Produce",
-    "icon": "🌿"
-  },
-  {
-    "id": "oils",
-    "name": "Cold Pressed Oils",
-    "icon": "🫒"
-  },
-  {
-    "id": "spices",
-    "name": "Kerala Spices & Teas",
-    "icon": "🌶"
-  },
-  {
-    "id": "honey",
-    "name": "Honey",
-    "icon": "🍯"
-  },
-  {
-    "id": "dryfruits",
-    "name": "Kashmiri Dry Fruits",
-    "icon": "🥜"
-  },
-  {
-    "id": "sweets",
-    "name": "Traditional Sweets & Snacks",
-    "icon": "🍬"
-  },
-  {
-    "id": "ghee",
-    "name": "Dairy & Ghee",
-    "icon": "🧈"
-  }
-],
+  categories: [
+  { "id": "all", "name": "All Products", "icon": "all" },
+  { "id": "produce", "name": "Naturally Grown Produce", "icon": "produce" },
+  { "id": "squashes", "name": "Nastro Blu Special Squashes", "icon": "squash" },
+  { "id": "oils", "name": "Cold Pressed Oils", "icon": "oilPress" },
+  { "id": "spices", "name": "Kerala Spices & Teas", "icon": "chilli" },
+  { "id": "honey", "name": "Honey", "icon": "honey" },
+  { "id": "ghee", "name": "Dairy & Ghee", "icon": "milkBottle" },
+  { "id": "dryfruits", "name": "Kashmiri naturally grown Products", "icon": "walnut" },
+  { "id": "sweets", "name": "Traditional Sweets & Snacks", "icon": "kalakand" }
+  ],
+
+
  products: [
   {
     "id": "ajmeri-kalakand-jaggery-250g",
@@ -3131,7 +3102,7 @@ window.NASTRO_CATALOG = {
     "id": "lemon-ginger-squash-1l",
     "name": "Lemon & Ginger Squash",
     "brand": "Nastro Blu",
-    "category": "produce",
+    "category": "squashes",
     "tag": null,
     "tags": [
       "Summer Special Squashes"
@@ -3173,7 +3144,7 @@ window.NASTRO_CATALOG = {
     "id": "lemon-squash-1l",
     "name": "Lemon Squash",
     "brand": "Nastro Blu",
-    "category": "produce",
+    "category": "squashes",
     "tag": null,
     "tags": [
       "Summer Special Squashes"
@@ -3341,7 +3312,7 @@ window.NASTRO_CATALOG = {
     "id": "mango-squash-1l",
     "name": "Mango Squash",
     "brand": "Nastro Blu",
-    "category": "produce",
+    "category": "squashes",
     "tag": null,
     "tags": [
       "Summer Special Squashes"
@@ -4353,7 +4324,7 @@ window.NASTRO_CATALOG = {
     "id": "pineapple-squash-1l",
     "name": "Pineapple Squash",
     "brand": "Nastro Blu",
-    "category": "produce",
+    "category": "squashes",
     "tag": null,
     "tags": [
       "Summer Special Squashes"
@@ -4941,7 +4912,7 @@ window.NASTRO_CATALOG = {
     "id": "rose-squash-1l",
     "name": "Rose Squash",
     "brand": "Nastro Blu",
-    "category": "produce",
+    "category": "squashes",
     "tag": null,
     "tags": [
       "Summer Special Squashes"

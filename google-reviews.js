@@ -77,7 +77,7 @@
           '" target="_blank" rel="noopener">Verify on Google</a>' +
           "</div>" +
           '<div class="greviews__brand">' +
-          '<img src="assets/brand/Nastro Blu_Square Logo - JPEG.jpg" alt="" onerror="this.style.display=\'none\'" />' +
+          '<span class="brand__mark greviews__mark"><img class="brand__logo" src="assets/logo.png" alt="Nastro Blu logo" onerror="this.style.display=\'none\'" /></span>' +
           "<div><strong>" +
           escapeHtml(data.placeName || "NASTRO BLU") +
           "</strong>" +
