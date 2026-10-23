@@ -53,11 +53,20 @@
 
   /* ---------- catalog ---------- */
 
+  function alignProductPrice(p) {
+    if (!p) return p;
+    var price = Number(p.price);
+    if (!Number.isFinite(price) || price < 0) return p;
+    if (!Array.isArray(p.sizes) || !p.sizes.length) return p;
+    p.sizes[0] = Object.assign({}, p.sizes[0], { price: price });
+    return p;
+  }
+
   function setCatalog(data) {
     if (!data) {
       return;
     }
-
+    if (data.products) data.products.forEach(alignProductPrice);
     catalog = data;
     window.NASTRO_CATALOG = data;
   }
@@ -2122,6 +2131,15 @@
   }
 
   function renderCart() {
+    if (
+      window.NastroCheckout &&
+      typeof window.NastroCheckout.isDeliveryStep ===
+        "function" &&
+      window.NastroCheckout.isDeliveryStep()
+    ) {
+      return;
+    }
+
     syncCartPrices();
 
     var body =
@@ -2387,131 +2405,33 @@
       return;
     }
 
-    var customer =
-      await ensureCustomerSession();
-
-    if (!customer) {
-      toast(
-        "Please sign in to checkout"
-      );
-
-      window.location.href =
-        "account.html?next=checkout";
-
+    if (
+      window.NastroCheckout &&
+      typeof window.NastroCheckout.start ===
+        "function"
+    ) {
+      window.NastroCheckout.start({
+        source: "cart",
+        getItems: function () {
+          return state.cart;
+        },
+        renderItems: function () {
+          renderCart();
+        },
+        onSuccess: function () {
+          state.cart = [];
+          saveCart();
+        }
+      });
       return;
     }
 
-    var btn =
-      $("checkoutWa");
+    toast(
+      "Please sign in to checkout"
+    );
 
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent =
-        "Saving order…";
-    }
-
-    try {
-      var res = await fetch(
-        "/api/orders",
-        {
-          method: "POST",
-          credentials: "include",
-          headers:
-            customerAuthHeaders(),
-
-          body: JSON.stringify({
-            items:
-              state.cart.map(
-                function (i) {
-                  return {
-                    productId:
-                      i.id,
-                    size:
-                      i.size,
-                    qty:
-                      i.qty
-                  };
-                }
-              ),
-
-            shippingAddress:
-              customer.address ||
-              {},
-
-            notes: ""
-          })
-        }
-      );
-
-      var data = {};
-
-      try {
-        data =
-          await res.json();
-      } catch (e) {}
-
-      if (res.status === 401) {
-        toast(
-          "Please sign in to checkout"
-        );
-
-        window.location.href =
-          "account.html?next=checkout";
-
-        return;
-      }
-
-      if (!res.ok) {
-        throw new Error(
-          data.error ||
-            "Could not place order"
-        );
-      }
-
-      state.cart = [];
-
-      saveCart();
-      renderCart();
-
-      toast(
-        "Order " +
-          (data.order &&
-          data.order.orderNumber
-            ? data.order.orderNumber
-            : "") +
-          " saved"
-      );
-
-      closeCart();
-
-      if (data.whatsappUrl) {
-        var w =
-          window.open(
-            data.whatsappUrl,
-            "_blank"
-          );
-
-        if (w) {
-          try {
-            w.opener = null;
-          } catch (e) {}
-        } else {
-          window.location.href =
-            data.whatsappUrl;
-        }
-      }
-    } catch (err) {
-      toast(
-        err.message ||
-          "Checkout failed"
-      );
-    } finally {
-      if (btn) {
-        btn.disabled = false;
-        btn.textContent =
-          "Checkout";
-      }
-    }
+    window.location.href =
+      "account.html?next=checkout";
   }
 
   /* ---------- filter / search ---------- */
@@ -2847,9 +2767,8 @@
   document.addEventListener(
     "DOMContentLoaded",
     async function () {
-      await loadCatalogFromApi();
-
-      // SEO / SearchAction:
+      // Draw the local catalog immediately so the shop is not blank
+      // while MongoDB /api/products is loading.
       // ?q=term opens shop filtered
       // ?cat=id opens a specific category (category.html)
       try {
@@ -2918,6 +2837,23 @@
       updateCartCount();
       renderCart();
       refreshAccountNav();
+
+      function revealVisible() {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("in");
+        });
+      }
+      revealVisible();
+
+      loadCatalogFromApi().then(function () {
+        renderFilters();
+        renderShopCategories();
+        renderProducts();
+        renderFeatured();
+        updateCartCount();
+        renderCart();
+        revealVisible();
+      });
 
       on(
         "sortSelect",
@@ -3199,6 +3135,31 @@
         "click",
         function (e) {
           e.preventDefault();
+          if (
+            window.NastroCheckout &&
+            window.NastroCheckout.isDeliveryStep &&
+            window.NastroCheckout.isDeliveryStep()
+          ) {
+            return;
+          }
+          if (
+            window.NastroCheckout &&
+            typeof window.NastroCheckout.start ===
+              "function"
+          ) {
+            window.NastroCheckout.start({
+              source: "cart",
+              getItems: function () {
+                return state.cart;
+              },
+              renderItems: renderCart,
+              onSuccess: function () {
+                state.cart = [];
+                saveCart();
+              }
+            });
+            return;
+          }
           placeOrderAndCheckout();
         }
       );

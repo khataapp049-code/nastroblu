@@ -324,6 +324,12 @@ button.danger { background: #fff; color: #9b1c1c; border-color: #f0c0c0; }
   font-size: 0.88rem;
 }
 
+.sizes-table select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.45rem 0.4rem;
+}
+
 @media (max-width: 1000px) {
   .orders-layout { grid-template-columns: 1fr; }
 }

@@ -157,6 +157,10 @@
     var size = currentSize();
     var count = Array.isArray(p.sizes) ? p.sizes.length : 0;
     var price = size ? Number(size.price) || 0 : Number(p.price) || 0;
+    var main = Array.isArray(p.sizes) && p.sizes[0];
+    if (main && size && size.label === main.label) {
+      price = Number(p.price) || price;
+    }
     var mrp = size ? sizeMrp(p, size) : Number(p.mrp) || 0;
     var label = size ? size.label : p.netQuantity || "";
     var sku = size ? size.sku || p.sku || "" : p.sku || "";
@@ -195,6 +199,9 @@
   /* ---------- cart drawer ---------- */
 
   function renderCart() {
+    if (window.NastroCheckout && window.NastroCheckout.isDeliveryStep && window.NastroCheckout.isDeliveryStep()) {
+      return;
+    }
     var body = document.getElementById("cartBody");
     var total = document.getElementById("cartTotal");
     var cart = Nastro.loadCart();
@@ -294,7 +301,7 @@
     var root = document.getElementById("productPage");
     if (!p) {
       root.innerHTML = final
-        ? '<div class="product-missing"><h1 class="display">Product not found</h1><p class="lede">This SKU is not in the catalog.</p><a class="btn btn--wine" href="index.html#shop">Back to shop</a></div>'
+        ? '<div class="product-missing"><h1 class="display">Product not found</h1><p class="lede">This SKU is not in the catalog.</p><a class="btn btn--wine" href="index.html#categories">Back to shop</a></div>'
         : skeletonHtml();
       return;
     }
@@ -317,7 +324,7 @@
     var multi = Array.isArray(p.sizes) && p.sizes.length > 1;
 
     root.innerHTML =
-      '<nav class="breadcrumb"><a href="index.html">Home</a> / <a href="index.html#shop">Catalog</a> / <span>' +
+      '<nav class="breadcrumb"><a href="index.html">Home</a> / <a href="index.html#categories">Catalog</a> / <span>' +
       escapeHtml(p.name) +
       "</span></nav>" +
       '<div class="pdp' +
@@ -782,17 +789,16 @@
         }
       })
       .catch(function () {
-        // API down: keep showing the built-in catalog
         if (!state.product) render(true, true);
       });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     injectSkeletonStyles();
-    render(); // instant, from the built-in catalog
+    render();
     Nastro.updateCartBadges();
     renderCart();
-    refreshFromApi(); // quiet background refresh
+    refreshFromApi();
 
     document.getElementById("navToggle").addEventListener("click", function () {
       document.getElementById("navLinks").classList.toggle("open");
@@ -811,6 +817,32 @@
     });
     document.getElementById("checkoutWa").addEventListener("click", async function (e) {
       e.preventDefault();
+      if (
+        window.NastroCheckout &&
+        window.NastroCheckout.isDeliveryStep()
+      ) {
+        return;
+      }
+      if (
+        window.NastroCheckout &&
+        typeof window.NastroCheckout.start === "function"
+      ) {
+        window.NastroCheckout.start({
+          source: "cart",
+          getItems: function () {
+            return Nastro.loadCart();
+          },
+          renderItems: renderCart,
+          onSuccess: function () {
+            Nastro.saveCart([]);
+            renderCart();
+          },
+          onEmpty: function () {
+            toast("Cart is empty");
+          },
+        });
+        return;
+      }
       var btn = e.currentTarget;
       var cart = Nastro.loadCart();
       if (!cart.length) {

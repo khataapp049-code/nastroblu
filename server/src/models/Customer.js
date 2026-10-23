@@ -10,7 +10,7 @@ const customerSchema = new mongoose.Schema(
       trim: true,
       index: true,
     },
-    passwordHash: { type: String, required: true },
+    passwordHash: { type: String, default: "" }, // legacy: sign-in is by emailed code, no password
     name: { type: String, required: true, trim: true },
     phone: { type: String, default: "", trim: true },
     /** Optional shipping defaults */

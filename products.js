@@ -2981,8 +2981,8 @@ window.NASTRO_CATALOG = {
     "tags": [
       "Naturally Grown Farm Products"
     ],
-    "price": 145,
-    "mrp": 145,
+    "price": 185,
+    "mrp": 185,
     "cost": 0,
     "netQuantity": "1 kg",
     "unit": "1 kg",
@@ -3001,7 +3001,7 @@ window.NASTRO_CATALOG = {
     "sizes": [
       {
         "label": "1 kg",
-        "price": 145,
+        "price": 185,
         "sku": "NB-065"
       }
     ],

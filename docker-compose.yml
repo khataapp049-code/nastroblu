@@ -16,7 +16,8 @@ services:
       - .env
     environment:
       PORT: 4000
-      MONGODB_URI: mongodb://mongo:27017/nastroblu
+      # Live shop uses the same Atlas database as local (set MONGODB_URI in the server .env).
+      MONGODB_URI: ${MONGODB_URI:?Set MONGODB_URI in .env to the Atlas connection string}
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@nastroblu.in}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
@@ -49,6 +50,14 @@ services:
       - ./google-reviews.js:/app/google-reviews.js:ro
       - ./delivery-info.js:/app/delivery-info.js:ro
       - ./wishlist.js:/app/wishlist.js:ro
+      - ./order-confirmation.html:/app/order-confirmation.html:ro
+      - ./order-confirmation.js:/app/order-confirmation.js:ro
+      - ./review-order.html:/app/review-order.html:ro
+      - ./review-order.js:/app/review-order.js:ro
+      - ./checkout-flow.js:/app/checkout-flow.js:ro
+      - ./category.html:/app/category.html:ro
+      - ./hampers.html:/app/hampers.html:ro
+      - ./hampers.js:/app/hampers.js:ro
       - ./server/src:/app/server/src:ro
 
 volumes:

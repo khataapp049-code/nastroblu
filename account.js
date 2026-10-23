@@ -180,18 +180,6 @@
   var ADDRESS_RE =
     /^[\p{L}\p{N}\p{M}\s,.\/#\-()'&]+$/u;
 
-  var WEAK_PASSWORDS = [
-    "password",
-    "12345678",
-    "123456789",
-    "qwerty",
-    "admin123",
-    "welcome",
-    "letmein",
-    "iloveyou",
-    "abc12345"
-  ];
-
   var V = {
     name: function (raw) {
       var v = clean(raw);
@@ -296,146 +284,6 @@
       }
 
       return ok(digits);
-    },
-
-    newPassword: function (raw, ctx) {
-      ctx = ctx || {};
-
-      var v = String(
-        raw == null ? "" : raw
-      );
-
-      if (!v) {
-        return fail("Password is required");
-      }
-
-      if (v.length < 8) {
-        return fail(
-          "Password must be at least 8 characters"
-        );
-      }
-
-      if (v.length > 64) {
-        return fail(
-          "Password must be 64 characters or fewer"
-        );
-      }
-
-      if (/\s/.test(v)) {
-        return fail(
-          "Password cannot contain spaces"
-        );
-      }
-
-      var missing = [];
-
-      if (!/[a-z]/.test(v)) {
-        missing.push("a lowercase letter");
-      }
-
-      if (!/[A-Z]/.test(v)) {
-        missing.push("an uppercase letter");
-      }
-
-      if (!/\d/.test(v)) {
-        missing.push("a number");
-      }
-
-      if (!/[^A-Za-z0-9]/.test(v)) {
-        missing.push("a special character");
-      }
-
-      if (missing.length) {
-        return fail(
-          "Password must include " +
-          missing.join(", ")
-        );
-      }
-
-      var lower = v.toLowerCase();
-
-      var weak = WEAK_PASSWORDS.some(
-        function (w) {
-          return lower.indexOf(w) !== -1;
-        }
-      );
-
-      if (weak) {
-        return fail(
-          "This password is too common. Choose something harder to guess"
-        );
-      }
-
-      var local = String(
-        ctx.email || ""
-      )
-        .toLowerCase()
-        .split("@")[0];
-
-      if (
-        local.length >= 4 &&
-        lower.indexOf(local) !== -1
-      ) {
-        return fail(
-          "Password must not contain your email name"
-        );
-      }
-
-      return ok(v);
-    },
-
-    loginPassword: function (raw) {
-      var v = String(
-        raw == null ? "" : raw
-      );
-
-      if (!v) {
-        return fail("Password is required");
-      }
-
-      if (v.length > 128) {
-        return fail("Password is too long");
-      }
-
-      return ok(v);
-    },
-
-    currentPassword: function (raw) {
-      var v = String(
-        raw == null ? "" : raw
-      );
-
-      if (!v) {
-        return fail(
-          "Enter your current password"
-        );
-      }
-
-      return ok(v);
-    },
-
-    confirm: function (raw, other) {
-      var v = String(
-        raw == null ? "" : raw
-      );
-
-      if (!v) {
-        return fail(
-          "Please confirm your password"
-        );
-      }
-
-      if (
-        v !== String(
-          other == null ? "" : other
-        )
-      ) {
-        return fail(
-          "Passwords do not match"
-        );
-      }
-
-      return ok(v);
     },
 
     addrLine1: function (raw) {
@@ -554,6 +402,16 @@
       if (!/^[1-9]\d{5}$/.test(v)) {
         return fail(
           "Enter a valid 6-digit PIN code"
+        );
+      }
+
+      if (
+        ["500", "501", "502"].indexOf(
+          v.slice(0, 3)
+        ) === -1
+      ) {
+        return fail(
+          "We don’t deliver to this PIN code yet"
         );
       }
 
@@ -1111,11 +969,11 @@
 
             '<span class="order-status">' +
             escapeHtml(
-              o.status
-            ) +
-            " · " +
-            escapeHtml(
-              o.paymentStatus
+              o.status === "pending"
+                ? "Waiting"
+                : o.status === "confirmed"
+                  ? "Confirmed"
+                  : o.status || "Waiting"
             ) +
             "</span>" +
 
@@ -1128,6 +986,9 @@
             '<div class="order-card__total">Total ' +
             inr(o.total) +
             "</div>" +
+            '<p class="form-hint" style="margin:.6rem 0 0"><a href="order-confirmation.html?order=' +
+            encodeURIComponent(o.orderNumber || "") +
+            '">View status</a></p>' +
 
             "</article>"
           );
@@ -1273,7 +1134,7 @@
    * IMPORTANT:
    * login-otp is NOT one of these normal tabs.
    * It is controlled separately by showLoginOtpPanel()
-   * after the password has been verified.
+   * after a code has been emailed.
    */
   function switchTab(tab) {
     state.tab = tab;
@@ -1363,15 +1224,6 @@
         true
       );
 
-    var password =
-      V.newPassword(
-        val("regPassword"),
-        {
-          email:
-            email.value
-        }
-      );
-
     var pairs = [
       [
         $("regName"),
@@ -1384,26 +1236,8 @@
       [
         $("regPhone"),
         phone
-      ],
-      [
-        $("regPassword"),
-        password
       ]
     ];
-
-    if ($("regConfirmPassword")) {
-      pairs.push([
-        $("regConfirmPassword"),
-        V.confirm(
-          val(
-            "regConfirmPassword"
-          ),
-          val(
-            "regPassword"
-          )
-        )
-      ]);
-    }
 
     if ($("regTerms")) {
       pairs.push([
@@ -1443,34 +1277,40 @@
               email:
                 email.value,
               phone:
-                phone.value,
-              password:
-                password.value
+                phone.value
             }
           }
         );
 
-      if (data.token) {
-        setToken(
-          data.token
+      /*
+       * No token here. The account is signed in only
+       * after the emailed code is verified.
+       */
+      if (!data.otpRequired) {
+        throw new Error(
+          "Email verification is required to finish creating your account."
         );
       }
+
+      state.loginOtpEmail =
+        data.email ||
+        email.value;
 
       clearFormErrors(
         form
       );
 
-      setLoggedInUI(
-        data.customer
+      form.hidden = true;
+
+      showLoginOtpPanel(
+        state.loginOtpEmail
       );
 
-      showMsg(
-        $("dashMsg"),
-        "Welcome! Your account is ready.",
+      showLoginOtpMessage(
+        data.message ||
+          "A 6-digit verification code has been sent to your email.",
         false
       );
-
-      afterAuthRedirect();
 
     } catch (err) {
       if (err.status === 409) {
@@ -1517,7 +1357,7 @@
 
       if (next === "checkout") {
         window.location.href =
-          "index.html?checkout=1#shop";
+          "index.html?checkout=1#categories";
 
         return;
       }
@@ -1539,7 +1379,7 @@
   /* =========================================================
    * LOGIN - STEP 1
    *
-   * Email + password are checked first.
+   * Email is submitted; a code is emailed.
    * NO JWT is stored here.
    * OTP is sent by backend.
    * ======================================================= */
@@ -1571,20 +1411,11 @@
         val("loginEmail")
       );
 
-    var password =
-      V.loginPassword(
-        val("loginPassword")
-      );
-
     if (
       !applyResults([
         [
           $("loginEmail"),
           email
-        ],
-        [
-          $("loginPassword"),
-          password
         ]
       ])
     ) {
@@ -1605,7 +1436,7 @@
     try {
       /*
        * Step 1:
-       * Verify email + password.
+       * Request an emailed code (no password).
        *
        * Backend MUST NOT return a JWT here.
        */
@@ -1616,9 +1447,7 @@
             method: "POST",
             body: {
               email:
-                email.value,
-              password:
-                password.value
+                email.value
             }
           }
         );
@@ -1662,12 +1491,10 @@
 
     } catch (err) {
       var text =
-        err.status === 401
-          ? "Incorrect email or password."
-          : friendlyError(
-              err,
-              "Login failed"
-            );
+        friendlyError(
+          err,
+          "Could not send the code"
+        );
 
       showMsg(
         msg,
@@ -2130,159 +1957,6 @@
   }
 
   /* =========================================================
-   * CHANGE PASSWORD
-   * ======================================================= */
-
-  async function onChangePassword(e) {
-    e.preventDefault();
-
-    var form =
-      $("passwordForm");
-
-    if (isBusy(form)) {
-      return;
-    }
-
-    var msg =
-      $("passwordMsg");
-
-    showMsg(
-      msg,
-      ""
-    );
-
-    var current =
-      V.currentPassword(
-        val("currentPassword")
-      );
-
-    var email =
-      state.customer
-        ? state.customer.email
-        : "";
-
-    var next =
-      V.newPassword(
-        val("newPassword"),
-        {
-          email:
-            email
-        }
-      );
-
-    if (
-      !next.error &&
-      val("newPassword") ===
-        val("currentPassword")
-    ) {
-      next =
-        fail(
-          "New password must be different from your current password"
-        );
-    }
-
-    var confirm =
-      V.confirm(
-        val("confirmPassword"),
-        val("newPassword")
-      );
-
-    if (
-      !applyResults([
-        [
-          $("currentPassword"),
-          current
-        ],
-        [
-          $("newPassword"),
-          next
-        ],
-        [
-          $("confirmPassword"),
-          confirm
-        ]
-      ])
-    ) {
-      showMsg(
-        msg,
-        "Please fix the highlighted fields.",
-        true
-      );
-
-      return;
-    }
-
-    setBusy(
-      form,
-      true
-    );
-
-    try {
-      var data =
-        await api(
-          "/password",
-          {
-            method: "PUT",
-            body: {
-              currentPassword:
-                current.value,
-              newPassword:
-                next.value
-            }
-          }
-        );
-
-      if (data.token) {
-        setToken(
-          data.token
-        );
-      }
-
-      form.reset();
-
-      clearFormErrors(
-        form
-      );
-
-      showMsg(
-        msg,
-        "Password updated.",
-        false
-      );
-
-    } catch (err) {
-      if (
-        /current/i.test(
-          err.message || ""
-        )
-      ) {
-        setFieldError(
-          $("currentPassword"),
-          "Current password is incorrect"
-        );
-
-        $("currentPassword").focus();
-
-      } else {
-        showMsg(
-          msg,
-          friendlyError(
-            err,
-            "Could not update password"
-          ),
-          true
-        );
-      }
-
-    } finally {
-      setBusy(
-        form,
-        false
-      );
-    }
-  }
-
-  /* =========================================================
    * VALIDATION INIT
    * ======================================================= */
 
@@ -2292,8 +1966,7 @@
     [
       "loginForm",
       "registerForm",
-      "profileForm",
-      "passwordForm"
+      "profileForm"
     ].forEach(
       function (id) {
         var f = $(id);
@@ -2364,59 +2037,11 @@
     );
 
     setAttrs(
-      "regPassword",
-      {
-        maxlength: "64",
-        autocomplete: "new-password"
-      }
-    );
-
-    setAttrs(
-      "loginPassword",
-      {
-        maxlength: "128",
-        autocomplete: "current-password"
-      }
-    );
-
-    setAttrs(
       "loginOtp",
       {
         maxlength: "6",
         inputmode: "numeric",
         autocomplete: "one-time-code"
-      }
-    );
-
-    setAttrs(
-      "currentPassword",
-      {
-        maxlength: "128",
-        autocomplete: "current-password"
-      }
-    );
-
-    setAttrs(
-      "newPassword",
-      {
-        maxlength: "64",
-        autocomplete: "new-password"
-      }
-    );
-
-    setAttrs(
-      "confirmPassword",
-      {
-        maxlength: "64",
-        autocomplete: "new-password"
-      }
-    );
-
-    setAttrs(
-      "regConfirmPassword",
-      {
-        maxlength: "64",
-        autocomplete: "new-password"
       }
     );
 
@@ -2548,29 +2173,6 @@
     );
 
     bindLive(
-      "regPassword",
-      function (v) {
-        return V.newPassword(
-          v,
-          {
-            email:
-              val("regEmail")
-          }
-        );
-      }
-    );
-
-    bindLive(
-      "regConfirmPassword",
-      function (v) {
-        return V.confirm(
-          v,
-          val("regPassword")
-        );
-      }
-    );
-
-    bindLive(
       "loginEmail",
       V.email
     );
@@ -2597,32 +2199,6 @@
       )
     );
 
-    bindLive(
-      "newPassword",
-      function (v) {
-        return V.newPassword(
-          v,
-          {
-            email:
-              state.customer
-                ? state.customer.email
-                : ""
-          }
-        );
-      }
-    );
-
-    bindLive(
-      "confirmPassword",
-      function (v) {
-        return V.confirm(
-          v,
-          val(
-            "newPassword"
-          )
-        );
-      }
-    );
   }
 
   /* =========================================================
@@ -2729,17 +2305,6 @@
           .addEventListener(
             "submit",
             onSaveProfile
-          );
-      }
-
-      /*
-       * Password.
-       */
-      if ($("passwordForm")) {
-        $("passwordForm")
-          .addEventListener(
-            "submit",
-            onChangePassword
           );
       }
 

@@ -1,5 +1,4 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
@@ -16,6 +15,11 @@ const {
 const {
   sendLoginOtpEmail,
 } = require("../services/brevo");
+const {
+  validateName,
+  validatePhone,
+  validateShipping,
+} = require("../deliveryValidate");
 
 const router = express.Router();
 
@@ -150,53 +154,6 @@ function isValidEmail(
   return /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(
     email
   );
-}
-
-function validatePassword(
-  password
-) {
-  const value =
-    String(
-      password || ""
-    );
-
-  if (!value) {
-    return "Password is required";
-  }
-
-  if (value.length < 8) {
-    return "Password must be at least 8 characters";
-  }
-
-  if (value.length > 64) {
-    return "Password must be 64 characters or fewer";
-  }
-
-  if (/\s/.test(value)) {
-    return "Password cannot contain spaces";
-  }
-
-  if (!/[a-z]/.test(value)) {
-    return "Password must contain a lowercase letter";
-  }
-
-  if (!/[A-Z]/.test(value)) {
-    return "Password must contain an uppercase letter";
-  }
-
-  if (!/\d/.test(value)) {
-    return "Password must contain a number";
-  }
-
-  if (
-    !/[^A-Za-z0-9]/.test(
-      value
-    )
-  ) {
-    return "Password must contain a special character";
-  }
-
-  return null;
 }
 
 /* =========================================================
@@ -353,7 +310,75 @@ async function invalidateCustomerOtps(
 }
 
 /* =========================================================
- * REGISTER
+ * Issue a login code (shared by register and login)
+ * ======================================================= */
+
+async function issueLoginOtp(customer) {
+  const recent = await CustomerLoginOtp.findOne({
+    customerId: customer._id,
+    used: false,
+    expiresAt: { $gt: new Date() },
+  }).sort({ createdAt: -1 });
+
+  if (
+    recent &&
+    Date.now() - new Date(recent.lastSentAt).getTime() < 60 * 1000
+  ) {
+    return {
+      status: 200,
+      body: {
+        otpRequired: true,
+        email: customer.email,
+        message: "A verification code was already sent to your email.",
+      },
+    };
+  }
+
+  const otp = generateOtp();
+
+  await invalidateCustomerOtps(customer._id);
+
+  const doc = await CustomerLoginOtp.create({
+    customerId: customer._id,
+    email: customer.email,
+    otpHash: hashOtp(otp),
+    expiresAt: new Date(Date.now() + 5 * 60 * 1000),
+    attempts: 0,
+    lastSentAt: new Date(),
+    used: false,
+  });
+
+  try {
+    await sendLoginOtpEmail({
+      email: customer.email,
+      name: customer.name,
+      otp,
+    });
+  } catch (mailError) {
+    console.error("Login OTP email error:", mailError);
+
+    await CustomerLoginOtp.deleteOne({ _id: doc._id });
+
+    return {
+      status: 502,
+      body: {
+        error: "We could not send the verification email. Please try again.",
+      },
+    };
+  }
+
+  return {
+    status: 200,
+    body: {
+      otpRequired: true,
+      email: customer.email,
+      message: "A verification code has been sent to your email.",
+    },
+  };
+}
+
+/* =========================================================
+ * REGISTER (no password: account is created, a code is emailed)
  * ======================================================= */
 
 router.post(
@@ -361,146 +386,54 @@ router.post(
   checkRateLimit,
   async (req, res) => {
     try {
-      const name =
-        String(
-          req.body.name || ""
-        )
-          .trim()
-          .replace(
-            /\s+/g,
-            " "
-          );
-
-      const email =
-        String(
-          req.body.email || ""
-        )
-          .trim()
-          .toLowerCase();
-
-      const phone =
-        String(
-          req.body.phone || ""
-        ).trim();
-
-      const password =
-        String(
-          req.body.password || ""
-        );
+      const name = String(req.body.name || "").trim().replace(/\s+/g, " ");
+      const email = String(req.body.email || "").trim().toLowerCase();
+      const phone = String(req.body.phone || "").trim();
 
       if (!name) {
+        return res.status(400).json({ error: "Full name is required" });
+      }
+
+      if (name.length < 3 || name.length > 60) {
         return res.status(400).json({
-          error:
-            "Full name is required",
+          error: "Name must be between 3 and 60 characters",
         });
       }
 
-      if (
-        name.length < 3 ||
-        name.length > 60
-      ) {
-        return res.status(400).json({
-          error:
-            "Name must be between 3 and 60 characters",
-        });
+      if (!isValidEmail(email)) {
+        return res.status(400).json({ error: "Enter a valid email address" });
       }
 
-      if (
-        !isValidEmail(email)
-      ) {
-        return res.status(400).json({
-          error:
-            "Enter a valid email address",
-        });
-      }
-
-      const passwordError =
-        validatePassword(
-          password
-        );
-
-      if (passwordError) {
-        return res.status(400).json({
-          error:
-            passwordError,
-        });
-      }
-
-      const existing =
-        await Customer.findOne({
-          email,
-        });
+      const existing = await Customer.findOne({ email });
 
       if (existing) {
         return res.status(409).json({
-          error:
-            "An account with this email already exists",
+          error: "An account with this email already exists",
         });
       }
 
-      const passwordHash =
-        await bcrypt.hash(
-          password,
-          12
-        );
-
-      const customer =
-        await Customer.create({
-          name,
-
-          email,
-
-          phone,
-
-          passwordHash,
-
-          lastLoginAt:
-            new Date(),
-        });
-
-      const token =
-        signCustomerToken(
-          customer
-        );
-
-      setCustomerCookie(
-        res,
-        token
-      );
-
-      return res.status(201).json({
-        token,
-
-        customer:
-          publicCustomer(
-            customer
-          ),
+      const customer = await Customer.create({
+        name,
+        email,
+        phone,
+        passwordHash: "",
       });
 
+      const out = await issueLoginOtp(customer);
+
+      return res
+        .status(out.status === 200 ? 201 : out.status)
+        .json(out.body);
     } catch (err) {
+      console.error("Customer registration error:", err);
 
-      console.error(
-        "Customer registration error:",
-        err
-      );
-
-      return res.status(500).json({
-        error:
-          "Could not create account",
-      });
+      return res.status(500).json({ error: "Could not create account" });
     }
   }
 );
 
 /* =========================================================
- * LOGIN - STEP 1
- *
- * Email + password are checked.
- *
- * JWT is NOT returned here.
- *
- * If credentials are correct:
- * generate OTP -> store hash -> send email.
+ * LOGIN - STEP 1 (no password: email a code)
  * ======================================================= */
 
 router.post(
@@ -508,281 +441,34 @@ router.post(
   checkRateLimit,
   async (req, res) => {
     try {
+      const email = String(req.body.email || "").trim().toLowerCase();
 
-      const email =
-        String(
-          req.body.email || ""
-        )
-          .trim()
-          .toLowerCase();
-
-      const password =
-        String(
-          req.body.password || ""
-        );
-
-      if (
-        !isValidEmail(email)
-      ) {
-        return res.status(400).json({
-          error:
-            "Enter a valid email address",
-        });
+      if (!isValidEmail(email)) {
+        return res.status(400).json({ error: "Enter a valid email address" });
       }
 
-      if (!password) {
-        return res.status(400).json({
-          error:
-            "Password is required",
-        });
+      const customer = await Customer.findOne({ email });
+
+      if (customer && customer.isActive === false) {
+        return res.status(403).json({ error: "Your account is inactive." });
       }
 
-      const customer =
-        await Customer.findOne({
+      if (!customer) {
+        // Same response as success, so nobody can probe which emails exist.
+        return res.status(200).json({
+          otpRequired: true,
           email,
-        });
-
-      /*
-       * Always perform a bcrypt comparison,
-       * even when the email does not exist.
-       *
-       * This avoids making account existence
-       * easier to detect from timing.
-       */
-
-      const dummyHash =
-        "$2a$12$" +
-        "LQv3c1yqBW0u5G6H4Q7Y8." +
-        "K8V6j9pJ5q7w2mN4xY1Za";
-
-      const passwordHash =
-        customer
-          ? customer.passwordHash
-          : dummyHash;
-
-      let passwordMatches =
-        false;
-
-      try {
-
-        passwordMatches =
-          await bcrypt.compare(
-            password,
-            passwordHash
-          );
-
-      } catch (bcryptError) {
-
-        console.error(
-          "Password comparison error:",
-          bcryptError
-        );
-
-        passwordMatches =
-          false;
-      }
-
-      if (
-        !customer ||
-        !passwordMatches
-      ) {
-
-        return res.status(401).json({
-          error:
-            "Incorrect email or password.",
+          message: "If this email has an account, a code has been sent.",
         });
       }
 
-      if (
-        customer.isActive ===
-        false
-      ) {
+      const out = await issueLoginOtp(customer);
 
-        return res.status(403).json({
-          error:
-            "Your account is inactive.",
-        });
-      }
-
-      /*
-       * Check whether an active OTP was
-       * already sent recently.
-       */
-
-      const existingOtp =
-        await CustomerLoginOtp.findOne(
-          {
-            customerId:
-              customer._id,
-
-            used: false,
-
-            expiresAt: {
-              $gt: new Date(),
-            },
-          }
-        ).sort({
-          createdAt: -1,
-        });
-
-      if (existingOtp) {
-
-        const elapsed =
-          Date.now() -
-          new Date(
-            existingOtp.lastSentAt
-          ).getTime();
-
-        const cooldownMs =
-          60 * 1000;
-
-        if (
-          elapsed <
-          cooldownMs
-        ) {
-
-          const retryAfter =
-            Math.ceil(
-              (
-                cooldownMs -
-                elapsed
-              ) / 1000
-            );
-
-          return res.status(200).json({
-            otpRequired:
-              true,
-
-            email:
-              customer.email,
-
-            retryAfter,
-
-            message:
-              "A verification code was already sent to your email.",
-          });
-        }
-      }
-
-      /*
-       * Generate a cryptographically secure
-       * 6-digit OTP.
-       */
-
-      const otp =
-        generateOtp();
-
-      /*
-       * Never store the plaintext OTP.
-       */
-
-      const otpHashValue =
-        hashOtp(otp);
-
-      /*
-       * Invalidate any previous OTPs.
-       */
-
-      await invalidateCustomerOtps(
-        customer._id
-      );
-
-      /*
-       * OTP expires in 5 minutes.
-       */
-
-      const otpDocument =
-        await CustomerLoginOtp.create({
-          customerId:
-            customer._id,
-
-          email:
-            customer.email,
-
-          otpHash:
-            otpHashValue,
-
-          expiresAt:
-            new Date(
-              Date.now() +
-                5 * 60 * 1000
-            ),
-
-          attempts:
-            0,
-
-          lastSentAt:
-            new Date(),
-
-          used:
-            false,
-        });
-
-      /*
-       * Send OTP through Brevo.
-       */
-
-      try {
-
-        await sendLoginOtpEmail({
-          email:
-            customer.email,
-
-          name:
-            customer.name,
-
-          otp,
-        });
-
-      } catch (mailError) {
-
-        console.error(
-          "Login OTP email error:",
-          mailError
-        );
-
-        /*
-         * Do not leave an unusable OTP
-         * in the database if email failed.
-         */
-
-        await CustomerLoginOtp.deleteOne(
-          {
-            _id:
-              otpDocument._id,
-          }
-        );
-
-        return res.status(502).json({
-          error:
-            "We could not send the verification email. Please try again.",
-        });
-      }
-
-      return res.status(200).json({
-
-        otpRequired:
-          true,
-
-        email:
-          customer.email,
-
-        message:
-          "A verification code has been sent to your email.",
-
-      });
-
+      return res.status(out.status).json(out.body);
     } catch (err) {
+      console.error("Customer login error:", err);
 
-      console.error(
-        "Customer login error:",
-        err
-      );
-
-      return res.status(500).json({
-        error:
-          "Login failed",
-      });
+      return res.status(500).json({ error: "Login failed" });
     }
   }
 );
@@ -1271,48 +957,66 @@ router.put(
         });
       }
 
-      if (
-        name.length < 3 ||
-        name.length > 60
-      ) {
-        return res.status(400).json({
-          error:
-            "Name must be between 3 and 60 characters",
-        });
+      const nameCheck = validateName(name);
+      if (nameCheck.error) {
+        return res.status(400).json({ error: nameCheck.error });
       }
 
-      req.customer.name =
-        name;
+      let phoneValue = "";
+      if (phone) {
+        const phoneCheck = validatePhone(phone);
+        if (phoneCheck.error) {
+          return res.status(400).json({ error: phoneCheck.error });
+        }
+        phoneValue = phoneCheck.value;
+      }
 
-      req.customer.phone =
-        phone;
+      const line1 = String(address.line1 || "").trim();
+      const line2 = String(address.line2 || "").trim();
+      const city = String(address.city || "").trim();
+      const state = String(address.state || "").trim();
+      const pincode = String(address.pincode || "").trim();
+      const hasAddress = !!(line1 || line2 || city || state || pincode);
 
-      req.customer.address = {
-        line1:
-          String(
-            address.line1 || ""
-          ).trim(),
-
-        line2:
-          String(
-            address.line2 || ""
-          ).trim(),
-
-        city:
-          String(
-            address.city || ""
-          ).trim(),
-
-        state:
-          String(
-            address.state || ""
-          ).trim(),
-
-        pincode:
-          String(
-            address.pincode || ""
-          ).trim(),
+      let nextAddress = {
+        line1: "",
+        line2: "",
+        city: "",
+        state: "",
+        pincode: "",
       };
+
+      if (hasAddress) {
+        const shipCheck = validateShipping({
+          shippingAddress: {
+            name: nameCheck.value,
+            phone: phoneValue,
+            line1,
+            line2,
+            city,
+            state,
+            pincode,
+          },
+        });
+        if (shipCheck.error) {
+          return res.status(400).json({
+            error: shipCheck.error,
+            fields: shipCheck.fields || {},
+          });
+        }
+        nextAddress = {
+          line1: shipCheck.value.line1,
+          line2: shipCheck.value.line2,
+          city: shipCheck.value.city,
+          state: shipCheck.value.state,
+          pincode: shipCheck.value.pincode,
+        };
+        if (!phoneValue) phoneValue = shipCheck.value.phone;
+      }
+
+      req.customer.name = nameCheck.value;
+      req.customer.phone = phoneValue;
+      req.customer.address = nextAddress;
 
       await req.customer.save();
 
@@ -1333,124 +1037,6 @@ router.put(
       return res.status(500).json({
         error:
           "Could not save profile",
-      });
-    }
-  }
-);
-
-/* =========================================================
- * CHANGE PASSWORD
- * ======================================================= */
-
-router.put(
-  "/password",
-  requireCustomer,
-  async (req, res) => {
-    try {
-
-      const currentPassword =
-        String(
-          req.body.currentPassword ||
-            ""
-        );
-
-      const newPassword =
-        String(
-          req.body.newPassword ||
-            ""
-        );
-
-      if (!currentPassword) {
-        return res.status(400).json({
-          error:
-            "Current password is required",
-        });
-      }
-
-      const passwordError =
-        validatePassword(
-          newPassword
-        );
-
-      if (passwordError) {
-        return res.status(400).json({
-          error:
-            passwordError,
-        });
-      }
-
-      if (
-        currentPassword ===
-        newPassword
-      ) {
-        return res.status(400).json({
-          error:
-            "New password must be different from your current password",
-        });
-      }
-
-      const matches =
-        await bcrypt.compare(
-          currentPassword,
-          req.customer
-            .passwordHash
-        );
-
-      if (!matches) {
-        return res.status(401).json({
-          error:
-            "Current password is incorrect",
-        });
-      }
-
-      req.customer.passwordHash =
-        await bcrypt.hash(
-          newPassword,
-          12
-        );
-
-      await req.customer.save();
-
-      /*
-       * Any outstanding login OTP becomes
-       * invalid after a password change.
-       */
-
-      await invalidateCustomerOtps(
-        req.customer._id
-      );
-
-      const token =
-        signCustomerToken(
-          req.customer
-        );
-
-      setCustomerCookie(
-        res,
-        token
-      );
-
-      return res.status(200).json({
-
-        token,
-
-        customer:
-          publicCustomer(
-            req.customer
-          ),
-
-      });
-
-    } catch (err) {
-
-      console.error(
-        "Customer password update error:",
-        err
-      );
-
-      return res.status(500).json({
-        error:
-          "Could not update password",
       });
     }
   }

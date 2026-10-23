@@ -455,7 +455,7 @@ h2.display {
 }
 .banner--shop .banner__slide img {
   object-position: center;
-  filter: blur(14px);
+  filter: blur(5px);
   transform: scale(1.12);
   transform-origin: center;
 }
@@ -2078,6 +2078,83 @@ button.btn--muted {
   margin: 0 0 0.75rem;
   line-height: 1.4;
 }
+.delivery-fee-note {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.75rem;
+  line-height: 1.45;
+}
+.delivery-fee-note a {
+  color: var(--wine);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.co-form { display: grid; gap: 0.75rem; }
+.co-lead { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+.co-label { margin: 0 0 0.25rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
+.co-summary {
+  background: var(--parch-2);
+  border: 1px solid var(--line-gold);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+.co-summary p { margin: 0; font-size: 0.9rem; line-height: 1.45; }
+.co-edit { margin-top: 0.7rem; padding: 0.35rem 0.8rem; }
+.co-grid { display: grid; gap: 0.65rem; }
+.co-field { display: grid; gap: 0.3rem; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); }
+.co-field input,
+.co-field textarea {
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line-gold);
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 500;
+  color: var(--ink);
+  background: #fff;
+}
+.co-field input.is-invalid,
+.co-field textarea.is-invalid { border-color: #b3261e; }
+.co-err { min-height: 1em; color: #b3261e; font-size: 0.78rem; font-weight: 600; }
+.co-check { display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.88rem; font-weight: 600; }
+.co-check span { font-weight: 500; color: var(--ink-soft); }
+.co-back { justify-content: center; margin-top: 0.2rem; }
+.co-form .is-hidden,
+.is-hidden { display: none !important; }
+.confirm-page { padding: 7.5rem 0 4rem; }
+.confirm-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.6rem 1.4rem 1.8rem;
+  box-shadow: 0 10px 30px rgba(74, 20, 32, 0.08);
+  border: 1px solid rgba(200, 154, 75, 0.25);
+}
+.confirm-card h1 { color: var(--wine); font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0.3rem 0 0.6rem; }
+.confirm-badge {
+  display: inline-block;
+  background: #e8f3e4;
+  color: #2d431f;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+}
+.confirm-list { list-style: none; padding: 0; margin: 1rem 0; }
+.confirm-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--line-gold);
+  font-size: 0.92rem;
+}
+.confirm-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.15rem; color: var(--wine); margin: 0.4rem 0 0.5rem; }
+.confirm-addr { background: var(--parch-2); border-radius: 12px; padding: 0.9rem 1rem; margin: 1rem 0; }
+.confirm-actions { display: grid; gap: 0.6rem; margin-top: 1.2rem; }
 .orders-list {
   display: grid;
   gap: 0.9rem;
@@ -4202,4 +4279,66 @@ section[id] {
 }
 .greviews__brand .greviews__mark .brand__logo {
   transform: scale(1.13) !important;
+}
+.co-ok { min-height: 1em; color: #2d431f; font-size: 0.78rem; font-weight: 600; }
+.confirm-sub { display: flex; justify-content: space-between; font-size: 0.95rem; margin: 0.4rem 0; }
+.confirm-steps { list-style: none; padding: 0; margin: 1rem 0 0.6rem; }
+.confirm-steps li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--line-gold);
+  font-size: 0.92rem;
+}
+/* ---- Order page: honest status badge (append to styles.css) ---- */
+.confirm-badge--pending,
+.confirm-badge--done,
+.confirm-badge--cancelled {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+.confirm-badge--pending { background: #f3dfb0; color: #6b4a12; }
+.confirm-badge--done { background: #dfe8d2; color: #2d431f; }
+.confirm-badge--cancelled { background: #f6dcd9; color: #b3261e; }
+.confirm-intro { margin: 0.3rem 0 0; color: #5b5346; line-height: 1.5; }
+.confirm-actions--top { margin-top: 1rem; }
+.confirm-step--next { color: #8a5a10; font-weight: 600; }
+.confirm-step--wait { color: #8a8070; }
+.confirm-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+.confirm-wa svg { flex: 0 0 auto; }
+.confirm-card--confirmed {
+  border-color: rgba(45, 67, 31, 0.28);
+  background: #fbfdf6;
+}
+.confirm-card--confirmed h1 { color: #2d431f; }
+.confirm-card--cancelled h1 { color: #7a1f1a; }
+
+/* ---- Payment choice on review page (YouPI UPI) ---- */
+.co-pay { margin: 1rem 0 0.4rem; display: grid; gap: 0.55rem; }
+.co-pay__opt {
+  display: flex; gap: 0.7rem; align-items: flex-start; cursor: pointer;
+  padding: 0.8rem 0.9rem; border: 1px solid rgba(45, 67, 31, 0.25); border-radius: 12px;
+}
+.co-pay__opt input { margin-top: 0.3rem; accent-color: #2d431f; }
+.co-pay__opt span { display: grid; gap: 0.15rem; }
+.co-pay__opt small { opacity: 0.7; font-size: 0.82rem; }
+.co-pay__opt:has(input:checked) { border-color: #2d431f; background: rgba(45, 67, 31, 0.06); }
+/* Policy pages: start the content below the fixed menu bar */
+.legal {
+  padding-top: 8rem;          /* 128px, clears the ~113px bar on desktop */
+}
+
+@media (max-width: 900px) {
+  .legal {
+    padding-top: 6.5rem;      /* 104px, clears the ~93px bar on mobile */
+  }
 }

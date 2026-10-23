@@ -7,7 +7,9 @@
  <meta name="description" content="Browse Nastro Blu products by category — naturally grown produce, cold-pressed oils, Kerala spices, honey, Kashmiri dry fruits, traditional sweets and more." />
  <meta name="robots" content="index,follow,max-image-preview:large" />
  <link rel="canonical" href="https://nastroblu.in/category.html" />
- <link rel="icon" href="assets/logo.png" />
+ <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png" />
  <meta property="og:type" content="website" />
  <meta property="og:site_name" content="Nastro Blu" />
  <meta property="og:locale" content="en_IN" />
@@ -18,7 +20,7 @@
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
- <link rel="stylesheet" href="styles.css?v=20261007" />
+ <link rel="stylesheet" href="styles.css?v=20261023" />
 </head>
 <body>
  <div class="platform-bar">
@@ -44,7 +46,7 @@
 
         <a href="index.html#story">Our Story</a>
  <a href="index.html#believe">Beliefs</a>
- <a href="index.html#shop">Shop</a>
+ <a href="index.html#categories">Shop</a>
  <a href="about.html#about-us">About</a>
  <a href="index.html#visit">Visit</a>
  <a href="account.html#wishlist">Wishlist</a>
@@ -64,19 +66,19 @@
 
  <main class="wrap" style="padding-top:6rem">
  <section id="shop">
- <div class="shop-head reveal">
+ <div class="shop-head">
  <div>
  <span class="eyebrow">Shop</span>
  <h2 class="display" id="shopTitle">All products</h2>
  </div>
  <p id="productCount" style="color:var(--ink-soft);font-weight:600"></p>
  </div>
- <label class="shop-search reveal" for="productSearch">
+ <label class="shop-search" for="productSearch">
  <span class="shop-search__icon" aria-hidden="true">⌕</span>
  <input type="search" id="productSearch" placeholder="Search products by name, SKU, or category…" autocomplete="off" />
  </label>
 
- <div class="filter-row reveal" id="filterRow" role="toolbar" aria-label="Product categories"></div>
+ <div class="filter-row" id="filterRow" role="toolbar" aria-label="Product categories"></div>
 
  <div class="shop-layout">
  <!-- Left sidebar (built by app.js): sub-categories - Atta / Rice / Pulses & Grains / Others / Natural Sweetener, and Milk & Khoa / Dry Fruit / Traditional Indian / Bengali & Chhena Sweets -->
@@ -136,7 +138,8 @@
 
  <script src="products.js"></script>
  <script src="wishlist.js?v=20260718a"></script>
- <script src="app.js?v=20261005"></script>
+ <script src="app.js?v=20261017c"></script>
+ <script src="checkout-flow.js?v=20261014c"></script>
  <script src="delivery-info.js?v=20260804b"></script>
 </body>
 </html>

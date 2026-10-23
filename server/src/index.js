@@ -8,7 +8,9 @@ const authRoutes = require("./routes/auth");
 const customerAuthRoutes = require("./routes/customerAuth");
 const customersAdminRoutes = require("./routes/customersAdmin");
 const orderRoutes = require("./routes/orders");
+const youpiRoutes = require("./routes/youpiWebhook");
 const specialRoutes = require("./routes/special");
+const hamperRoutes = require("./routes/hampers");
 const reviewRoutes = require("./routes/reviews");
 const googleReviewRoutes = require("./routes/googleReviews");
 const wishlistRoutes = require("./routes/wishlist");
@@ -23,14 +25,32 @@ async function start() {
   const app = express();
   app.set("trust proxy", 1);
   app.use(morgan(config.nodeEnv === "production" ? "combined" : "dev"));
+  const corsAllow = (config.corsOrigin || "*")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const localOrigin = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/i;
   app.use(
     cors({
-      origin: config.corsOrigin === "*" ? true : config.corsOrigin.split(",").map((s) => s.trim()),
+      origin(origin, cb) {
+        if (!origin) return cb(null, true);
+        if (corsAllow.includes("*")) return cb(null, true);
+        if (corsAllow.includes(origin) || localOrigin.test(origin)) return cb(null, true);
+        cb(null, false);
+      },
       credentials: true,
     })
   );
+  // YouPI webhook needs the raw body for its HMAC, so it must come before express.json().
+  app.use("/api/payments/youpi", youpiRoutes);
   app.use(express.json({ limit: "2mb" }));
   app.disable("x-powered-by");
+
+  // Let the page load/frame the YouPI checkout host (empty when online payment is off)
+  let youpiOrigin = "";
+  try {
+    if (config.youpiHost) youpiOrigin = " " + new URL(config.youpiHost).origin;
+  } catch (e) {}
 
   // Security headers (also set in nginx when TLS terminates there)
   app.use((req, res, next) => {
@@ -53,8 +73,9 @@ async function start() {
         "img-src 'self' data: https: blob:",
         "font-src 'self' https://fonts.gstatic.com data:",
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-        "script-src 'self' 'unsafe-inline'",
-        "connect-src 'self'",
+        "script-src 'self' 'unsafe-inline'" + youpiOrigin,
+        "connect-src 'self'" + youpiOrigin,
+        "frame-src 'self'" + youpiOrigin,
         "form-action 'self' https://wa.me https://api.whatsapp.com",
       ].join("; ")
     );
@@ -71,6 +92,7 @@ async function start() {
   app.use("/api/customer", customersAdminRoutes);
   app.use("/api/orders", orderRoutes);
   app.use("/api/special", specialRoutes);
+  app.use("/api/hampers", hamperRoutes);
   app.use("/api/reviews", reviewRoutes);
   app.use("/api/google-reviews", googleReviewRoutes);
   app.use("/api/wishlist", wishlistRoutes);

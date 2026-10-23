@@ -4,6 +4,9 @@ const Product = require("../models/Product");
 const Customer = require("../models/Customer");
 const { requireCustomer } = require("../middleware/customerAuth");
 const { requireAdmin } = require("../middleware/auth");
+const { validateShipping } = require("../deliveryValidate");
+const { verifyAddress, publicLookup } = require("../pincodeLookup");
+const config = require("../config");
 
 const router = express.Router();
 
@@ -26,7 +29,7 @@ function formatInr(n) {
 
 function buildWhatsappMessage(order) {
   const lines = [
-    `Hi Nastro Blu! I'd like to place order ${order.orderNumber}:`,
+    `Hi Nastro Blu! I've placed order ${order.orderNumber}:`,
     "",
   ];
   order.items.forEach((i) => {
@@ -44,12 +47,109 @@ function buildWhatsappMessage(order) {
     lines.push(`Phone: ${order.customerSnapshot.phone}`);
   }
   const a = order.shippingAddress || {};
+  const who = a.name || (order.customerSnapshot && order.customerSnapshot.name) || "";
+  const phone = a.phone || (order.customerSnapshot && order.customerSnapshot.phone) || "";
+  if (who || phone) lines.push(`Deliver to: ${[who, phone].filter(Boolean).join(" · ")}`);
   const addr = [a.line1, a.line2, a.city, a.state, a.pincode].filter(Boolean).join(", ");
   if (addr) lines.push(`Address: ${addr}`);
+  lines.push("Delivery charges applicable — please confirm the amount.");
+  if (order.notes) {
+    lines.push("");
+    lines.push("Note: " + order.notes);
+  }
   lines.push("");
-  lines.push("Please confirm availability & delivery.");
+  lines.push("Please confirm availability and the delivery charges.");
   return lines.join("\n");
 }
+
+/** Re-price cart rows from the database. Returns { items } or { status, error }. */
+async function buildItems(rawItems) {
+  if (!rawItems.length) return { status: 400, error: "Cart is empty" };
+  if (rawItems.length > 50) return { status: 400, error: "Too many items in cart" };
+
+  const items = [];
+  for (const row of rawItems) {
+    const productId = String(row.productId || row.id || "").trim();
+    const qty = Math.max(1, Math.min(99, Number(row.qty) || 1));
+    const sizeLabel = String(row.size || "").trim();
+    if (!productId) continue;
+
+    const product =
+      (await Product.findOne({ slug: productId })) ||
+      (await Product.findById(productId).catch(() => null));
+    if (!product) return { status: 400, error: `Product not found: ${productId}` };
+    const status = product.status || (product.active === false ? "unavailable" : "available");
+    if (status !== "available") {
+      return { status: 400, error: `${product.name} is currently unavailable` };
+    }
+
+    let unitPrice = Number(product.price) || 0;
+    let size = sizeLabel || product.netQuantity || product.unit || "1 pack";
+    if (Array.isArray(product.sizes) && product.sizes.length) {
+      const match = product.sizes.find((s) => s.label === sizeLabel) || product.sizes[0];
+      if (match) {
+        unitPrice = Number(match.price != null ? match.price : product.price) || 0;
+        size = match.label || size;
+      }
+    }
+    if (unitPrice <= 0) return { status: 400, error: `${product.name} has no valid price` };
+
+    items.push({
+      productId: product.slug,
+      name: product.name,
+      sku: product.sku || "",
+      size,
+      qty,
+      unitPrice,
+      lineTotal: Math.round(unitPrice * qty),
+      image: product.image || "",
+    });
+  }
+  if (!items.length) return { status: 400, error: "No valid items to order" };
+  return { items };
+}
+
+/** Validate the delivery address. PIN/city/state lookup is optional so a slow
+ *  India Post request cannot hang checkout. */
+async function checkAddress(body, { lookup = true } = {}) {
+  const shipCheck = validateShipping(body);
+  if (shipCheck.error) return { error: shipCheck.error, fields: shipCheck.fields || {} };
+  const a = shipCheck.value;
+  if (!lookup) return { address: a, verified: false };
+  try {
+    const match = await Promise.race([
+      verifyAddress(a.pincode, a.city, a.state),
+      new Promise((resolve) => setTimeout(() => resolve({ ok: true, verified: false }), 2500)),
+    ]);
+    if (!match.ok) return { error: match.error, fields: { pincode: match.error } };
+    return { address: a, verified: !!match.verified };
+  } catch (err) {
+    return { address: a, verified: false };
+  }
+}
+
+/** Preview: re-prices the cart and validates the address, but creates no order. */
+router.post("/preview", requireCustomer, async (req, res) => {
+  try {
+    const built = await buildItems(Array.isArray(req.body.items) ? req.body.items : []);
+    if (built.error) return res.status(built.status).json({ error: built.error });
+
+    const addr = await checkAddress(req.body, { lookup: false });
+    if (addr.error) return res.status(400).json({ error: addr.error, fields: addr.fields });
+
+    const subtotal = built.items.reduce((s, i) => s + i.lineTotal, 0);
+    res.json({
+      items: built.items,
+      subtotal,
+      total: subtotal,
+      shippingAddress: addr.address,
+      notes: String(req.body.notes || "").trim().slice(0, 500),
+    });
+  } catch (err) {
+    console.error("Order preview error", err);
+    res.status(500).json({ error: "Could not prepare your order" });
+  }
+});
 
 /** Create order from cart - prices revalidated from DB */
 router.post("/", requireCustomer, async (req, res) => {
@@ -59,70 +159,33 @@ router.post("/", requireCustomer, async (req, res) => {
       return res.status(401).json({ error: "Login required" });
     }
 
-    const rawItems = Array.isArray(req.body.items) ? req.body.items : [];
-    if (!rawItems.length) {
-      return res.status(400).json({ error: "Cart is empty" });
-    }
-    if (rawItems.length > 50) {
-      return res.status(400).json({ error: "Too many items in cart" });
-    }
+    const built = await buildItems(Array.isArray(req.body.items) ? req.body.items : []);
+    if (built.error) return res.status(built.status).json({ error: built.error });
+    const items = built.items;
 
-    const items = [];
-    for (const row of rawItems) {
-      const productId = String(row.productId || row.id || "").trim();
-      const qty = Math.max(1, Math.min(99, Number(row.qty) || 1));
-      const sizeLabel = String(row.size || "").trim();
-      if (!productId) continue;
+    const addr = await checkAddress(req.body);
+    if (addr.error) return res.status(400).json({ error: addr.error, fields: addr.fields });
+    const shippingAddress = addr.address;
 
-      const product =
-        (await Product.findOne({ slug: productId })) ||
-        (await Product.findById(productId).catch(() => null));
-      if (!product) {
-        return res.status(400).json({ error: `Product not found: ${productId}` });
-      }
-      const status = product.status || (product.active === false ? "unavailable" : "available");
-      if (status !== "available") {
-        return res.status(400).json({ error: `${product.name} is currently unavailable` });
-      }
-
-      let unitPrice = Number(product.price) || 0;
-      let size = sizeLabel || product.netQuantity || product.unit || "1 pack";
-      if (Array.isArray(product.sizes) && product.sizes.length) {
-        const match =
-          product.sizes.find((s) => s.label === sizeLabel) || product.sizes[0];
-        if (match) {
-          unitPrice = Number(match.price != null ? match.price : product.price) || 0;
-          size = match.label || size;
-        }
-      }
-      if (unitPrice <= 0) {
-        return res.status(400).json({ error: `${product.name} has no valid price` });
-      }
-
-      items.push({
-        productId: product.slug,
-        name: product.name,
-        sku: product.sku || "",
-        size,
-        qty,
-        unitPrice,
-        lineTotal: Math.round(unitPrice * qty),
-        image: product.image || "",
-      });
-    }
-
-    if (!items.length) {
-      return res.status(400).json({ error: "No valid items to order" });
+    if (req.body.saveAddress) {
+      customer.phone = shippingAddress.phone;
+      customer.address = {
+        line1: shippingAddress.line1,
+        line2: shippingAddress.line2,
+        city: shippingAddress.city,
+        state: shippingAddress.state,
+        pincode: shippingAddress.pincode,
+      };
+      await customer.save();
     }
 
     const subtotal = items.reduce((s, i) => s + i.lineTotal, 0);
-    const shippingAddress = {
-      line1: String((req.body.shippingAddress && req.body.shippingAddress.line1) || customer.address?.line1 || "").trim(),
-      line2: String((req.body.shippingAddress && req.body.shippingAddress.line2) || customer.address?.line2 || "").trim(),
-      city: String((req.body.shippingAddress && req.body.shippingAddress.city) || customer.address?.city || "").trim(),
-      state: String((req.body.shippingAddress && req.body.shippingAddress.state) || customer.address?.state || "").trim(),
-      pincode: String((req.body.shippingAddress && req.body.shippingAddress.pincode) || customer.address?.pincode || "").trim(),
-    };
+
+    // "upi" = pay online through YouPI-PG; anything else keeps the WhatsApp / COD flow.
+    const payOnline = String(req.body.paymentMethod || "") === "upi";
+    if (payOnline && !(config.youpiHost && config.youpiPublicKey)) {
+      return res.status(400).json({ error: "Online payment is not available right now" });
+    }
 
     const order = await Order.create({
       orderNumber: await nextOrderNumber(),
@@ -142,8 +205,8 @@ router.post("/", requireCustomer, async (req, res) => {
       shippingAddress,
       status: "pending",
       paymentStatus: "unpaid",
-      paymentMethod: "whatsapp_cod",
-      channel: "whatsapp",
+      paymentMethod: payOnline ? "upi_youpi" : "whatsapp_cod",
+      channel: payOnline ? "web" : "whatsapp",
       notes: String(req.body.notes || "").trim().slice(0, 500),
     });
 
@@ -233,6 +296,20 @@ router.patch("/admin/:id", requireAdmin, async (req, res) => {
   }
 });
 
+/** Public PIN lookup: used by the delivery form to auto-fill city/state. */
+router.get("/pincode/:pin", async (req, res) => {
+  const pin = String(req.params.pin || "").replace(/\D/g, "");
+  if (!/^[1-9]\d{5}$/.test(pin)) {
+    return res.status(400).json({ ok: false, error: "Enter a valid 6-digit PIN code" });
+  }
+  try {
+    const result = await publicLookup(pin);
+    res.status(result.ok ? 200 : 404).json(result);
+  } catch (err) {
+    res.json({ ok: true, verified: false });
+  }
+});
+
 /** Customer order history */
 router.get("/", requireCustomer, async (req, res) => {
   try {
@@ -242,6 +319,37 @@ router.get("/", requireCustomer, async (req, res) => {
     res.json({ orders: orders.map((o) => o.toPublic()) });
   } catch (err) {
     res.status(500).json({ error: "Could not load orders" });
+  }
+});
+
+/** Customer tapped Send on WhatsApp — mark this order confirmed and stay on the same page. */
+router.post("/:id/whatsapp-sent", requireCustomer, async (req, res) => {
+  try {
+    const order =
+      (await Order.findOne({
+        customer: req.customer.id,
+        orderNumber: req.params.id,
+      })) ||
+      (await Order.findOne({
+        customer: req.customer.id,
+        _id: req.params.id,
+      }).catch(() => null));
+    if (!order) return res.status(404).json({ error: "Order not found" });
+    if (order.status === "cancelled") {
+      return res.status(400).json({ error: "This order was cancelled" });
+    }
+    // A UPI order is confirmed by the verified payment webhook, never by a WhatsApp tap.
+    if (order.paymentMethod === "upi_youpi" && order.paymentStatus !== "paid") {
+      return res.json({ order: order.toPublic() });
+    }
+    if (order.status === "pending") {
+      order.status = "confirmed";
+      await order.save();
+    }
+    res.json({ order: order.toPublic() });
+  } catch (err) {
+    console.error("WhatsApp sent update error", err);
+    res.status(500).json({ error: "Could not update order" });
   }
 });
 

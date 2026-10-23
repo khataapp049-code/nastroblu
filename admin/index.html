@@ -7,7 +7,7 @@
   <title>Nastro Blu Admin</title>
   <meta name="robots" content="noindex,nofollow" />
   <link rel="icon" href="/assets/logo.png" />
-  <link rel="stylesheet" href="/admin/admin.css?v=20260718a" />
+  <link rel="stylesheet" href="/admin/admin.css?v=20261014h" />
   <style>
     /* Weights & prices editor (kept here so admin.css stays untouched) */
     .sizes-editor {
@@ -109,6 +109,7 @@
       <button type="button" class="admin-tab" data-tab="orders">Orders</button>
       <button type="button" class="admin-tab" data-tab="customers">Customers</button>
       <button type="button" class="admin-tab" data-tab="special">Today's Special</button>
+      <button type="button" class="admin-tab" data-tab="hampers">Hampers</button>
     </nav>
 
     <main class="layout" id="panelProducts" data-panel="products">
@@ -361,8 +362,45 @@
         </div>
       </section>
     </main>
+
+    <main class="special-layout is-hidden" id="panelHampers" data-panel="hampers">
+      <section class="special-panel">
+        <h2>Gift hamper items</h2>
+        <p class="hint">These products appear on the Hampers page. Add or remove them the same way you add extra weights on a product — pick a catalog item, optional pack size, then save.</p>
+        <form id="hamperForm" class="special-form">
+          <label>Hamper title<input id="hamperTitle" placeholder="Nastro Blu Gift Hamper" /></label>
+          <label>Short description<textarea id="hamperBlurb" rows="2" placeholder="Shown under the title on the Hampers page"></textarea></label>
+          <div class="sizes-editor" id="hamperEditor">
+            <h3>Items in the hamper</h3>
+            <p class="hint">The table already has the gift-hamper list. Click “+ Add item” to add another product (it will not wipe pantry / dry fruits / mithai). Remove a row only if you want that product off the Hampers page. Then Save hamper.</p>
+            <div class="sizes-tools">
+              <button type="button" id="btnAddHamperItem">+ Add item</button>
+            </div>
+            <div class="sizes-table-wrap">
+              <table class="sizes-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Group</th>
+                    <th>Pack note</th>
+                    <th>Price</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="hamperRows"></tbody>
+              </table>
+            </div>
+            <p id="hamperSizeMsg" class="msg is-hidden"></p>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary">Save hamper</button>
+            <p id="hamperMsg" class="msg is-hidden"></p>
+          </div>
+        </form>
+      </section>
+    </main>
   </div>
 
-  <script src="/admin/admin.js?v=20261008a"></script>
+  <script src="/admin/admin.js?v=20261017d"></script>
 </body>
 </html>

@@ -25,10 +25,9 @@
     href="https://nastroblu.in/account.html"
   />
 
-  <link
-    rel="icon"
-    href="assets/brand/Nastro%20Blu_Square%20Logo%20-%20JPEG.jpg"
-  />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png" />
 
   <meta
     name="theme-color"
@@ -116,9 +115,10 @@
           Beliefs
         </a>
 
-        <a href="index.html#shop">
+        <a href="index.html#categories">
           Shop
         </a>
+        <a href="hampers.html">Hampers</a>
 
         <a href="about.html#about-us">
           About
@@ -166,7 +166,7 @@
       >
 
         <a
-          href="index.html#shop"
+          href="index.html#categories"
           class="nav__cart"
           aria-label="Cart"
         >
@@ -315,18 +315,7 @@
             </label>
 
 
-            <label>
-              Password
-
-              <input
-                id="loginPassword"
-                type="password"
-                required
-                autocomplete="current-password"
-                minlength="8"
-              />
-
-            </label>
+            <p class="form-hint">We'll email you a 6-digit code.</p>
 
 
             <p
@@ -341,7 +330,7 @@
               class="btn btn--wine btn--block"
               id="loginSubmitBtn"
             >
-              Sign in
+              Email me a code
             </button>
 
           </form>
@@ -431,7 +420,7 @@
               class="btn btn--wine btn--block"
               id="verifyLoginOtpBtn"
             >
-              Verify and sign in
+              Verify and continue
             </button>
 
 
@@ -516,25 +505,7 @@
             </label>
 
 
-            <label>
-              Password
-
-              <input
-                id="regPassword"
-                type="password"
-                required
-                autocomplete="new-password"
-                minlength="8"
-                placeholder="At least 8 characters, letters + numbers"
-              />
-
-            </label>
-
-
-            <p class="form-hint">
-              We use industry-standard password hashing.
-              Your password is never stored in plain text.
-            </p>
+            <p class="form-hint">We'll email you a 6-digit code to verify your email.</p>
 
 
             <p
@@ -548,7 +519,7 @@
               type="submit"
               class="btn btn--wine btn--block"
             >
-              Create account
+              Email me a code
             </button>
 
           </form>
@@ -654,8 +625,7 @@
                ORDERS
                ===================================== -->
 
-          <section class="account-orders">
-
+          <section class="account-orders" id="orders">
             <h2 class="account-section-title">
               Your orders
             </h2>
@@ -815,94 +785,13 @@
 
 
           <!-- =====================================
-               CHANGE PASSWORD
-               ===================================== -->
-
-          <form
-            id="passwordForm"
-            class="account-form"
-            style="margin-top:2rem"
-          >
-
-            <h2 class="account-section-title">
-              Change password
-            </h2>
-
-
-            <div class="form-grid">
-
-              <label>
-                Current password
-
-                <input
-                  id="currentPassword"
-                  type="password"
-                  required
-                  autocomplete="current-password"
-                />
-
-              </label>
-
-
-              <label>
-                New password
-
-                <input
-                  id="newPassword"
-                  type="password"
-                  required
-                  autocomplete="new-password"
-                  minlength="8"
-                />
-
-              </label>
-
-
-              <label>
-                Confirm new password
-
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  required
-                  autocomplete="new-password"
-                  minlength="8"
-                />
-
-              </label>
-
-            </div>
-
-
-            <p
-              class="form-msg"
-              id="passwordMsg"
-              hidden
-            ></p>
-
-
-            <button
-              type="submit"
-              class="btn btn--ghost"
-              style="
-                border-color:var(--wine);
-                color:var(--wine)
-              "
-            >
-              Update password
-            </button>
-
-          </form>
-
-
-          <!-- =====================================
                ACCOUNT ACTIONS
                ===================================== -->
 
           <div class="account-actions">
 
             <a
-              href="index.html#shop"
+              href="index.html#categories"
               class="btn btn--gold"
             >
               Continue shopping
@@ -967,7 +856,7 @@
   <script src="wishlist.js?v=20260718a"></script>
 
   <!-- OTP login flow -->
-  <script src="account.js?v=20260930-otp-required"></script>
+  <script src="account.js?v=20261014-waiting"></script>
 
   <script src="todays-special.js?v=20260716a"></script>
 

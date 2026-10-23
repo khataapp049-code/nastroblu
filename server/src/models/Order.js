@@ -16,6 +16,8 @@ const orderItemSchema = new mongoose.Schema(
 
 const addressSchema = new mongoose.Schema(
   {
+    name: { type: String, default: "" },
+    phone: { type: String, default: "" },
     line1: { type: String, default: "" },
     line2: { type: String, default: "" },
     city: { type: String, default: "" },
@@ -61,6 +63,13 @@ const orderSchema = new mongoose.Schema(
     },
     paymentMethod: { type: String, default: "whatsapp_cod" },
     channel: { type: String, default: "whatsapp", index: true },
+    payment: {
+      gateway: { type: String, default: "" },
+      paymentId: { type: String, default: "" },
+      utr: { type: String, default: "" },
+      amountPaise: { type: Number, default: 0 },
+      paidAt: { type: Date },
+    },
     notes: { type: String, default: "" },
     whatsappMessage: { type: String, default: "" },
   },
@@ -85,6 +94,10 @@ orderSchema.methods.toPublic = function toPublic() {
     status: this.status,
     paymentStatus: this.paymentStatus,
     paymentMethod: this.paymentMethod,
+    payment: {
+      utr: (this.payment && this.payment.utr) || "",
+      paidAt: (this.payment && this.payment.paidAt) || null,
+    },
     channel: this.channel,
     notes: this.notes,
     customer: this.customerSnapshot,

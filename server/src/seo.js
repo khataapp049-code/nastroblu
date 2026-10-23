@@ -95,7 +95,7 @@ function websiteJsonLd() {
     publisher: { "@id": `${SITE}/#business` },
     potentialAction: {
       "@type": "SearchAction",
-      target: `${SITE}/?q={search_term_string}#shop`,
+      target: `${SITE}/category.html?cat=all&q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
@@ -223,12 +223,11 @@ function injectHead(html, { title, description, canonical, image, jsonLd, keywor
 }
 
 async function buildSitemapXml() {
+  // Note: "#" fragments (e.g. /#shop, /#visit) are ignored by search engines,
+  // so only real pages are listed here.
   const urls = [
     { loc: `${SITE}/`, changefreq: "daily", priority: "1.0" },
     { loc: `${SITE}/about.html`, changefreq: "monthly", priority: "0.8" },
-    { loc: `${SITE}/#shop`, changefreq: "daily", priority: "0.9" },
-    { loc: `${SITE}/#visit`, changefreq: "monthly", priority: "0.7" },
-    { loc: `${SITE}/#google-reviews`, changefreq: "weekly", priority: "0.6" },
     { loc: `${SITE}/terms.html`, changefreq: "yearly", priority: "0.3" },
     { loc: `${SITE}/privacy.html`, changefreq: "yearly", priority: "0.3" },
     { loc: `${SITE}/shipping.html`, changefreq: "monthly", priority: "0.4" },

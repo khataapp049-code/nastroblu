@@ -1,4 +1,8 @@
-require("dotenv").config();
+const path = require("path");
+// Root .env is the Hostinger template (production CORS). server/.env is local
+// Atlas / JWT / admin — it must win, otherwise localhost admin login is blocked.
+require("dotenv").config({ path: path.join(__dirname, "../../.env") });
+require("dotenv").config({ path: path.join(__dirname, "../.env"), override: true });
 
 const nodeEnv = process.env.NODE_ENV || "development";
 const isProd = nodeEnv === "production";
@@ -33,6 +37,10 @@ module.exports = {
   nodeEnv,
   googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || "",
   googlePlaceId: process.env.GOOGLE_PLACE_ID || "",
+  // YouPI-PG (self-hosted UPI gateway). Leave YOUPI_HOST empty to keep online payment switched off.
+  youpiHost: (process.env.YOUPI_HOST || "").replace(/\/+$/, ""),
+  youpiPublicKey: process.env.YOUPI_PUBLIC_KEY || "",
+  youpiWebhookSecret: process.env.YOUPI_WEBHOOK_SECRET || "",
   googleMapsUrl:
     process.env.GOOGLE_MAPS_URL || "https://www.google.com/maps?cid=11786458721880673435",
   googleReviewsUrl:

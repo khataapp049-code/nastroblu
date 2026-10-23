@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Festive &amp; Corporate Hampers | Nastro Blu Hyderabad</title>
+ <meta name="description" content="Nastro Blu gift hampers and corporate gifting in Hyderabad. Pick a ready-made hamper or build your own." />
+ <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+ <link rel="stylesheet" href="styles.css?v=20261023" />
+ <link rel="stylesheet" href="hampers.css?v=8" />
+</head>
+<body>
+ <header class="nav solid" id="nav">
+ <div class="wrap nav__inner">
+ <a href="index.html" class="brand" aria-label="Nastro Blu home">
+ <span class="brand__mark">
+ <img class="brand__logo" src="assets/logo.png" alt="Nastro Blu Logo" />
+ </span>
+ <span class="brand__text">
+ <span class="brand__name">Nastro Blu</span>
+ <span class="brand__sub">Eat Better</span>
+ </span>
+ </a>
+ <nav class="nav__links" id="navLinks">
+ <a href="index.html">Home</a>
+
+        <a href="index.html#story">Our Story</a>
+ <a href="index.html#believe">Beliefs</a>
+ <a href="index.html#categories">Shop</a>
+        <a href="hampers.html" class="is-active">Hampers</a>
+ <a href="about.html#about-us">About</a>
+ <a href="index.html#visit">Visit</a>
+ <a href="account.html#wishlist">Wishlist</a>
+ <a href="account.html" data-account-label>Login</a>
+ <a href="https://www.instagram.com/nastroblu.eatbetter/" target="_blank" rel="noopener">Instagram</a>
+ <a href="https://wa.me/919063048255?text=Hi%20Nastro%20Blu!%20I'd%20like%20to%20place%20an%20order." class="btn btn--gold nav__cta">Order on WhatsApp</a>
+ </nav>
+ <div style="display:flex;align-items:center;gap:.7rem">
+ <button type="button" class="nav__cart" id="cartBtn" aria-label="Open cart">
+ <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L5 3H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.3" fill="currentColor"/><circle cx="18" cy="20" r="1.3" fill="currentColor"/></svg>
+ <span class="cart-count" id="cartCount">0</span>
+ </button>
+ <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+ </div>
+ </div>
+ </header>
+
+  <section class="hb-hero">
+    <div class="wrap hb-hero__in">
+      <div>
+        <span class="eyebrow">Festive &amp; corporate gifting</span>
+        <h1 class="display">Gifts that brighten every <em>festival</em> and every team.</h1>
+        <p class="lede">A hand-picked hamper of elaichi, honey, squash, ghee, Kashmiri dry fruits and festive mithai — not the whole shop, just the gift list.</p>
+        <a class="btn btn--gold" href="#corporate">Enquire now</a>
+      </div>
+      <div class="hb-hero__art" id="hb-hero-art"></div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <h2 class="display hb-block-title" id="hb-list-title">What’s in the hamper</h2>
+    <p class="lede hb-list-sub" id="hb-list-sub">Add only from this list. We pack what you pick and add up the prices.</p>
+    <div class="hb-tiles" id="hb-tiles"></div>
+
+    <div id="hb-browse"></div>
+
+    <div class="hb-banner">
+      <div><h2>Build your own hamper</h2><div>Add to hamper keeps a separate basket. It does not mix with Add to cart.</div></div>
+      <a class="btn btn--gold" href="#hb-tiles">Start building</a>
+    </div>
+  </main>
+
+  <section class="hb-corp" id="corporate">
+    <div class="wrap">
+      <h2 class="display">Corporate gifting made easy.</h2>
+      <p class="lede">Custom hampers, branded packaging and bulk delivery for your team, clients and partners.</p>
+      <form class="hb-form" id="hb-corp-form">
+        <label>Name*<input type="text" name="name" required></label>
+        <label>Phone*<input type="tel" name="phone" required></label>
+        <label>Email*<input type="email" name="email" required></label>
+        <label>Company name*<input type="text" name="company" required></label>
+        <div class="full"><label style="margin-bottom:.4rem">Min order qty*</label>
+          <div class="hb-radios">
+            <label><input type="radio" name="qty" value="50-100" required> 50 – 100</label>
+            <label><input type="radio" name="qty" value="100-200"> 100 – 200</label>
+            <label><input type="radio" name="qty" value="200+"> 200+</label></div></div>
+        <div class="full"><label style="margin-bottom:.4rem">Delivery locations*</label>
+          <div class="hb-radios">
+            <label><input type="radio" name="loc" value="Single" required> Single location</label>
+            <label><input type="radio" name="loc" value="Multiple"> Multiple locations</label></div></div>
+        <button class="btn btn--wine full" type="submit" style="justify-content:center">Get a call back</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="hb-float" id="hb-float" style="display:none"></div>
+
+  <div class="overlay" id="overlay"></div>
+
+ <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+ <div class="modal__panel">
+ <div class="modal__media"><img id="modalImg" src="" alt="" /></div>
+ <div class="modal__body">
+ <button type="button" class="modal__close" id="closeModal" aria-label="Close">×</button>
+ <div id="modalRating" style="font-size:.85rem;color:var(--ink-soft)"></div>
+ <h2 id="modalName"></h2>
+ <p class="modal__blurb" id="modalBlurb"></p>
+ <p class="modal__desc" id="modalDesc"></p>
+ <div class="sizes" id="modalSizes"></div>
+ <div class="modal__price" id="modalPrice"></div>
+ <div class="qty">
+ <button type="button" id="qtyMinus" aria-label="Decrease">−</button>
+ <span id="modalQty">1</span>
+ <button type="button" id="qtyPlus" aria-label="Increase">+</button>
+ </div>
+ <button type="button" class="btn btn--wine btn--block" id="modalAdd">Add to cart</button>
+ </div>
+ </div>
+ </div>
+
+ <aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+ <div class="drawer__head">
+ <h3>Your cart</h3>
+ <button type="button" class="modal__close" id="closeCart" aria-label="Close cart">×</button>
+ </div>
+ <div class="drawer__body" id="cartBody"></div>
+ <div class="drawer__foot">
+ <div class="drawer__total"><span>Total</span><span id="cartTotal">₹0</span></div>
+ <p class="checkout-note" id="checkoutNote">Sign in required to place an order. Your order is saved to your account, then confirmed on WhatsApp.</p>
+ <button type="button" class="btn btn--gold btn--block" id="checkoutWa">Checkout</button>
+ </div>
+ </aside>
+
+ <div class="toast" id="toast" role="status"></div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <footer class="foot">
+    <div class="wrap foot__bottom" style="border:0;padding-top:0">
+      <span class="foot__tag">Nastro Blu · Eat Better</span>
+      <span><a href="index.html#categories" style="color:inherit">← Browse all categories</a></span>
+    </div>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="wishlist.js?v=20260718a"></script>
+  <script src="app.js?v=20261005"></script>
+  <script src="checkout-flow.js?v=20261014c"></script>
+  <script src="delivery-info.js?v=20260804b"></script>
+  <script src="hampers.js?v=12"></script>
+</body>
+</html>

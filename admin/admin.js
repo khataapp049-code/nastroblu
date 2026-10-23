@@ -419,6 +419,7 @@
           (p.cost ? " · Cost ₹" + p.cost : "") +
           margin +
           (sizeCount > 1 ? " · " + sizeCount + " weights" : "") +
+          (p.priceMismatch ? " · PRICE MISMATCH" : "") +
           " · " +
           escapeHtml(p.sku || p.id) +
           (p.tag ? " · " + p.tag : "") +
@@ -569,7 +570,11 @@
         $("productList").innerHTML = '<p class="meta">Signed in. No products yet - click + Add product.</p>';
       }
     } catch (err) {
-      $("loginError").textContent = err.message || "Login failed";
+      var msg = err && err.message ? err.message : "Login failed";
+      if (msg === "Failed to fetch" || (err && err.name === "TypeError")) {
+        msg = "Cannot reach the API on this page. Keep this tab on http://localhost:4000/admin/ and restart npm run dev if port 4000 was already in use.";
+      }
+      $("loginError").textContent = msg;
       $("loginError").classList.remove("is-hidden");
       $("loginError").hidden = false;
       showApp(false);
@@ -787,6 +792,7 @@
       fillSpecialProductSelect();
       loadSpecial();
     }
+    if (tab === "hampers") loadHamper();
   }
 
   async function loadCustomers() {
@@ -1464,6 +1470,373 @@
       } finally {
         btn.disabled = false;
         btn.textContent = prev;
+      }
+    });
+  }
+
+  /* ---------- hamper items editor (same pattern as extra weights) ---------- */
+  var hamperItems = [];
+  var HAMPER_GROUPS = [
+    { id: "pantry", label: "Pantry" },
+    { id: "dryfruits", label: "Dry fruits" },
+    { id: "sweets", label: "Mithai" },
+  ];
+  var DEFAULT_HAMPER_ITEMS = [
+    { productId: "palakudi-cardamom-25g", group: "pantry", sizeLabel: "25 g" },
+    { productId: "raw-honey-250g", group: "pantry", sizeLabel: "250 g" },
+    { productId: "mango-squash-1l", group: "pantry", sizeLabel: "500 ml" },
+    { productId: "desi-cow-ghee-250g", group: "pantry", sizeLabel: "250 g" },
+    { productId: "walnuts-250g", group: "dryfruits", sizeLabel: "" },
+    { productId: "desi-mamra-badam-250g", group: "dryfruits", sizeLabel: "" },
+    { productId: "konkan-cashew-250g", group: "dryfruits", sizeLabel: "" },
+    { productId: "anjeer-fig-250g", group: "dryfruits", sizeLabel: "" },
+    { productId: "apricot-250g", group: "dryfruits", sizeLabel: "" },
+    { productId: "dry-fruit-mixture-250g", group: "dryfruits", sizeLabel: "" },
+    { productId: "plain-mota-bhujia-250g", group: "pantry", sizeLabel: "" },
+    { productId: "futana-dal-500g", group: "pantry", sizeLabel: "" },
+    { productId: "saffron-1g", group: "pantry", sizeLabel: "1 g" },
+    { productId: "kaju-katli-250g", group: "sweets", sizeLabel: "" },
+    { productId: "motichoor-laddu-250g", group: "sweets", sizeLabel: "" },
+    { productId: "ajmeri-kalakand-jaggery-250g", group: "sweets", sizeLabel: "" },
+    { productId: "mamra-badam-anjeer-barfi-250g", group: "sweets", sizeLabel: "" },
+    { productId: "dry-fruit-choco-delight-250g", group: "sweets", sizeLabel: "" },
+    { productId: "kaju-delight-assorted-250g", group: "sweets", sizeLabel: "" },
+    { productId: "anjeer-dry-fruit-roll-250g", group: "sweets", sizeLabel: "" },
+    { productId: "kaju-anjeer-roll-250g", group: "sweets", sizeLabel: "" },
+    { productId: "desi-mamra-badam-katli-250g", group: "sweets", sizeLabel: "" },
+    { productId: "mava-choco-barfi-250g", group: "sweets", sizeLabel: "" },
+  ];
+
+  function productOptionsHtml(selected) {
+    return (
+      '<option value="">Select a product…</option>' +
+      products
+        .filter(function (p) {
+          var st = p.status || (p.active === false ? "unavailable" : "available");
+          return st !== "archived" && p.id !== "gift-hamper";
+        })
+        .slice()
+        .sort(function (a, b) {
+          return (a.name || "").localeCompare(b.name || "");
+        })
+        .map(function (p) {
+          return (
+            '<option value="' +
+            escapeHtml(p.id) +
+            '"' +
+            (p.id === selected ? " selected" : "") +
+            ">" +
+            escapeHtml(p.name) +
+            " — ₹" +
+            p.price +
+            "</option>"
+          );
+        })
+        .join("")
+    );
+  }
+
+  function hamperProductPrice(id) {
+    var p = products.find(function (x) {
+      return x.id === id;
+    });
+    return p ? "₹" + Number(p.price).toLocaleString("en-IN") : "—";
+  }
+
+  function renderHamperRows() {
+    var body = $("hamperRows");
+    if (!body) return;
+    if (!hamperItems.length) {
+      body.innerHTML =
+        '<tr><td colspan="5" class="meta">No hamper items yet. Click "+ Add item" and pick a product.</td></tr>';
+      return;
+    }
+    body.innerHTML = hamperItems
+      .map(function (it, i) {
+        var groupOpts = HAMPER_GROUPS.map(function (g) {
+          return (
+            '<option value="' +
+            g.id +
+            '"' +
+            (it.group === g.id ? " selected" : "") +
+            ">" +
+            g.label +
+            "</option>"
+          );
+        }).join("");
+        return (
+          '<tr data-hi="' +
+          i +
+          '">' +
+          '<td><select data-hf="productId">' +
+          productOptionsHtml(it.productId) +
+          "</select></td>" +
+          '<td><select data-hf="group">' +
+          groupOpts +
+          "</select></td>" +
+          '<td><input data-hf="sizeLabel" value="' +
+          escapeHtml(it.sizeLabel || "") +
+          '" placeholder="250 g / 500 ml" /></td>' +
+          '<td class="size-per">' +
+          escapeHtml(hamperProductPrice(it.productId)) +
+          "</td>" +
+          '<td><button type="button" class="danger" data-hdel="' +
+          i +
+          '" aria-label="Remove this hamper item">✕</button></td>' +
+          "</tr>"
+        );
+      })
+      .join("");
+  }
+
+  function showHamperMsg(text, isError, elId) {
+    var el = $(elId || "hamperMsg");
+    if (!el) return;
+    el.textContent = text || "";
+    el.classList.toggle("is-hidden", !text);
+    el.hidden = !text;
+    el.style.color = isError ? "#9b1c1c" : "";
+  }
+
+  function giftHamperProduct() {
+    return products.find(function (p) {
+      return p.id === "gift-hamper";
+    });
+  }
+
+  function isHamperMetaLine(line) {
+    var s = String(line || "");
+    return (
+      s.indexOf("NB_HAMPER_TITLE|") === 0 ||
+      s.indexOf("NB_HAMPER_BLURB|") === 0 ||
+      s.indexOf("NB_HAMPER_REPLACE|") === 0 ||
+      s.indexOf("NB_HAMPER_ITEM|") === 0
+    );
+  }
+
+  function parseHamperProduct(p) {
+    var title = "";
+    var blurb = "";
+    var items = [];
+    var replaceAll = false;
+    ((p && p.packagingText) || []).forEach(function (line) {
+      var s = String(line || "");
+      if (s.indexOf("NB_HAMPER_TITLE|") === 0) title = s.slice("NB_HAMPER_TITLE|".length);
+      else if (s.indexOf("NB_HAMPER_BLURB|") === 0) blurb = s.slice("NB_HAMPER_BLURB|".length);
+      else if (s.indexOf("NB_HAMPER_REPLACE|") === 0) replaceAll = s.slice("NB_HAMPER_REPLACE|".length) === "1";
+      else if (s.indexOf("NB_HAMPER_ITEM|") === 0) {
+        var parts = s.slice("NB_HAMPER_ITEM|".length).split("|");
+        if (parts[0]) {
+          items.push({
+            productId: parts[0],
+            group: parts[1] || "pantry",
+            sizeLabel: parts[2] || "",
+            note: parts[3] || "",
+          });
+        }
+      }
+    });
+    if (!title && !blurb && !items.length) return null;
+    return { title: title, blurb: blurb, items: items, replaceAll: replaceAll };
+  }
+
+  function mergeDefaultHamperItems(saved, replaceAll) {
+    saved = saved || [];
+    if (replaceAll && saved.length) return saved.slice();
+    var byId = {};
+    DEFAULT_HAMPER_ITEMS.forEach(function (it) {
+      byId[it.productId] = {
+        productId: it.productId,
+        group: it.group,
+        sizeLabel: it.sizeLabel || "",
+        note: "",
+      };
+    });
+    saved.forEach(function (it) {
+      var id = it.productId;
+      if (!id) return;
+      var prev = byId[id] || {};
+      byId[id] = {
+        productId: id,
+        group: it.group || prev.group || "pantry",
+        sizeLabel: it.sizeLabel != null && it.sizeLabel !== "" ? it.sizeLabel : prev.sizeLabel || "",
+        note: it.note || "",
+      };
+    });
+    var out = [];
+    var seen = {};
+    DEFAULT_HAMPER_ITEMS.forEach(function (it) {
+      out.push(byId[it.productId]);
+      seen[it.productId] = true;
+    });
+    saved.forEach(function (it) {
+      if (it.productId && !seen[it.productId]) {
+        out.push(byId[it.productId]);
+        seen[it.productId] = true;
+      }
+    });
+    return out;
+  }
+
+  function hamperPackagingLines(payload, existing) {
+    var lines = (existing || []).filter(function (line) {
+      return !isHamperMetaLine(line);
+    });
+    lines.push("NB_HAMPER_TITLE|" + String(payload.title || "").slice(0, 120));
+    lines.push("NB_HAMPER_BLURB|" + String(payload.blurb || "").slice(0, 280));
+    (payload.items || []).forEach(function (it) {
+      lines.push(
+        "NB_HAMPER_ITEM|" +
+          [it.productId, it.group || "pantry", it.sizeLabel || "", it.note || ""].join("|")
+      );
+    });
+    return lines;
+  }
+
+  function applyHamperForm(h) {
+    h = h || {};
+    if ($("hamperTitle")) $("hamperTitle").value = h.title || "Nastro Blu Gift Hamper";
+    if ($("hamperBlurb")) $("hamperBlurb").value = h.blurb || "";
+    hamperItems = Array.isArray(h.items) ? h.items.slice() : [];
+    renderHamperRows();
+  }
+
+  async function saveHamperViaProduct(payload) {
+    var p = giftHamperProduct();
+    var lines = hamperPackagingLines(payload, p && p.packagingText);
+    if (p && p.id) {
+      await api("/products/" + encodeURIComponent(p.id), {
+        method: "PUT",
+        body: JSON.stringify({ packagingText: lines }),
+      });
+    } else {
+      await api("/products", {
+        method: "POST",
+        body: JSON.stringify({
+          name: "Gift Hamper",
+          slug: "gift-hamper",
+          category: "produce",
+          price: 0,
+          mrp: 0,
+          description: "Customisable hamper of Nastro Blu products.",
+          unit: "Customisable",
+          netQuantity: "Customisable",
+          packagingText: lines,
+          tags: ["Gift Hampers"],
+          sizes: [{ label: "Customisable", price: 0, sku: "NB-142" }],
+        }),
+      });
+    }
+    await loadProducts();
+  }
+
+  async function loadHamper() {
+    if (!$("hamperForm")) return;
+    var saved = parseHamperProduct(giftHamperProduct());
+    var apiHamper = null;
+    try {
+      var data = await api("/hampers/admin");
+      apiHamper = data.hamper || null;
+    } catch (e) {}
+    var items = (saved && saved.items) || (apiHamper && apiHamper.items) || [];
+    applyHamperForm({
+      title: (saved && saved.title) || (apiHamper && apiHamper.title) || "Nastro Blu Gift Hamper",
+      blurb: (saved && saved.blurb) || (apiHamper && apiHamper.blurb) || "",
+      items: mergeDefaultHamperItems(items, false),
+    });
+    showHamperMsg("", false);
+    showHamperMsg("", false, "hamperSizeMsg");
+  }
+
+  if ($("hamperRows")) {
+    $("hamperRows").addEventListener("input", function (e) {
+      var field = e.target.closest("[data-hf]");
+      if (!field) return;
+      var tr = field.closest("tr[data-hi]");
+      if (!tr) return;
+      var i = Number(tr.dataset.hi);
+      if (!hamperItems[i]) return;
+      hamperItems[i][field.dataset.hf] = field.value;
+      if (field.dataset.hf === "productId") {
+        var hint = tr.querySelector(".size-per");
+        if (hint) hint.textContent = hamperProductPrice(field.value);
+      }
+    });
+    $("hamperRows").addEventListener("change", function (e) {
+      var field = e.target.closest("[data-hf]");
+      if (!field) return;
+      var tr = field.closest("tr[data-hi]");
+      if (!tr) return;
+      var i = Number(tr.dataset.hi);
+      if (!hamperItems[i]) return;
+      hamperItems[i][field.dataset.hf] = field.value;
+      if (field.dataset.hf === "productId") {
+        var hint = tr.querySelector(".size-per");
+        if (hint) hint.textContent = hamperProductPrice(field.value);
+      }
+    });
+    $("hamperRows").addEventListener("click", function (e) {
+      var del = e.target.closest("[data-hdel]");
+      if (!del) return;
+      hamperItems.splice(Number(del.dataset.hdel), 1);
+      renderHamperRows();
+    });
+  }
+
+  if ($("btnAddHamperItem")) {
+    $("btnAddHamperItem").addEventListener("click", function () {
+      hamperItems.push({ productId: "", group: "pantry", sizeLabel: "", note: "" });
+      renderHamperRows();
+      var rows = $("hamperRows").querySelectorAll('select[data-hf="productId"]');
+      if (rows.length) rows[rows.length - 1].focus();
+    });
+  }
+
+  if ($("hamperForm")) {
+    $("hamperForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      var items = [];
+      var seen = {};
+      for (var i = 0; i < hamperItems.length; i++) {
+        var it = hamperItems[i];
+        var id = String(it.productId || "").trim();
+        if (!id) {
+          showHamperMsg("Row " + (i + 1) + " needs a product.", true);
+          showHamperMsg("Row " + (i + 1) + " needs a product.", true, "hamperSizeMsg");
+          return;
+        }
+        if (seen[id]) {
+          showHamperMsg("The same product is listed twice.", true);
+          showHamperMsg("The same product is listed twice.", true, "hamperSizeMsg");
+          return;
+        }
+        seen[id] = true;
+        items.push({
+          productId: id,
+          group: it.group || "pantry",
+          sizeLabel: String(it.sizeLabel || "").trim(),
+          note: String(it.note || "").trim(),
+        });
+      }
+      var payload = {
+        title: $("hamperTitle") ? $("hamperTitle").value : "",
+        blurb: $("hamperBlurb") ? $("hamperBlurb").value : "",
+        items: mergeDefaultHamperItems(items, false),
+      };
+      hamperItems = payload.items.slice();
+      try {
+        try {
+          await api("/hampers/admin", {
+            method: "PUT",
+            body: JSON.stringify(payload),
+          });
+        } catch (first) {
+          await saveHamperViaProduct(payload);
+        }
+        showHamperMsg("Hamper saved. Refresh the Hampers page to see these items.", false);
+        showHamperMsg("", false, "hamperSizeMsg");
+      } catch (err) {
+        showHamperMsg(err.message || "Save failed", true);
       }
     });
   }

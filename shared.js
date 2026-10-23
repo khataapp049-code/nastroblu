@@ -74,12 +74,26 @@
  }, 0);
  }
 
+ function alignProductPrice(p) {
+ if (!p) return p;
+ var price = Number(p.price);
+ if (!Number.isFinite(price) || price < 0) return p;
+ if (!Array.isArray(p.sizes) || !p.sizes.length) {
+ p.sizes = [{ label: p.netQuantity || p.unit || "1 pack", price: price, sku: p.sku || "" }];
+ return p;
+ }
+ var first = p.sizes[0] || {};
+ p.sizes[0] = Object.assign({}, first, { price: price });
+ return p;
+ }
+
  function findProduct(id) {
  var catalog = global.NASTRO_CATALOG;
  if (!catalog) return null;
- return catalog.products.find(function (p) {
- return p.id === id;
+ var p = catalog.products.find(function (x) {
+ return x.id === id;
  });
+ return alignProductPrice(p);
  }
 
  async function loadCatalogFromApi() {
@@ -88,6 +102,7 @@
  if (!res.ok) throw new Error("api");
  var data = await res.json();
  if (data && Array.isArray(data.products) && data.products.length) {
+ data.products.forEach(alignProductPrice);
  global.NASTRO_CATALOG = {
  categories: data.categories || (global.NASTRO_CATALOG && global.NASTRO_CATALOG.categories) || [],
  products: data.products,
@@ -209,38 +224,23 @@
  if (opts.onEmpty) opts.onEmpty();
  return null;
  }
- var customer = await ensureCustomerSession();
- if (!customer) {
- window.location.href = "account.html?next=checkout";
- return null;
- }
- var res = await fetch("/api/orders", {
- method: "POST",
- credentials: "include",
- headers: customerAuthHeaders(),
- body: JSON.stringify({
- items: cart.map(function (i) {
- return { productId: i.id, size: i.size, qty: i.qty };
- }),
- shippingAddress: customer.address || {},
- notes: "",
- }),
- });
- var data = {};
- try {
- data = await res.json();
- } catch (e) {}
- if (res.status === 401) {
- window.location.href = "account.html?next=checkout";
- return null;
- }
- if (!res.ok) throw new Error(data.error || "Could not place order");
+ if (window.NastroCheckout && typeof window.NastroCheckout.start === "function") {
+ window.NastroCheckout.start({
+ source: "cart",
+ getItems: function () {
+ return loadCart();
+ },
+ renderItems: opts.renderItems,
+ onSuccess: function () {
  saveCart([]);
  updateCartBadges();
- if (data.whatsappUrl) {
- window.open(data.whatsappUrl, "_blank", "noopener");
+ if (opts.onSuccess) opts.onSuccess();
+ },
+ });
+ return { started: true };
  }
- return data;
+ window.location.href = "account.html?next=checkout";
+ return null;
  }
 
  function updateCartBadges() {

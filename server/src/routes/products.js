@@ -58,8 +58,60 @@ function resolveStatus(body, existing) {
  return existing || "available";
 }
 
+/** Main selling price is the source of truth; sizes[0] must match it. */
+function alignMainSize(p) {
+  const price = Number(p.price) || 0;
+  const mrp = Number(p.mrp) || 0;
+  const label = p.netQuantity || p.unit || "1 pack";
+  const sku = p.sku || "";
+  const sizes = Array.isArray(p.sizes)
+    ? p.sizes.map((s) => (s && s.toObject ? s.toObject() : Object.assign({}, s)))
+    : [];
+  if (!sizes.length) {
+    if (price > 0) sizes.push({ label, price, sku });
+    return sizes;
+  }
+  sizes[0].price = price;
+  sizes[0].label = sizes[0].label || label;
+  sizes[0].sku = sizes[0].sku || sku;
+  if (mrp > 0) sizes[0].mrp = mrp;
+  return sizes;
+}
+
+function applyMainSizeToDoc(product) {
+  product.sizes = alignMainSize(product);
+  if (typeof product.markModified === "function") product.markModified("sizes");
+}
+
+function mainSizeDrifted(p) {
+  const s0 = Array.isArray(p.sizes) && p.sizes[0];
+  if (!s0) return false;
+  return Number(s0.price) !== Number(p.price);
+}
+
+let repairingPrices = false;
+async function repairDriftedMainSizes() {
+  if (repairingPrices) return;
+  repairingPrices = true;
+  try {
+    const all = await Product.find({ "sizes.0": { $exists: true } }).select("price mrp sku netQuantity unit sizes");
+    let n = 0;
+    for (const p of all) {
+      if (!mainSizeDrifted(p)) continue;
+      applyMainSizeToDoc(p);
+      await p.save();
+      n += 1;
+    }
+    if (n) console.log("Synced main size price on", n, "product(s)");
+  } catch (err) {
+    console.warn("Price repair skipped:", err.message);
+    repairingPrices = false;
+  }
+}
+
 function toPublic(doc, { includePrivate = false } = {}) {
  const p = doc.toObject ? doc.toObject() : doc;
+ const drifted = mainSizeDrifted(p);
  const status = p.status || (p.active === false ? "unavailable" : "available");
  const tags = Array.isArray(p.tags) ? p.tags : [];
  const out = {
@@ -83,7 +135,7 @@ function toPublic(doc, { includePrivate = false } = {}) {
  packagingText: p.packagingText || [],
  storage: p.storage,
  origin: p.origin,
- sizes: p.sizes || [],
+ sizes: alignMainSize(p),
  blurb: p.blurb,
  description: p.description,
  image: p.image,
@@ -98,6 +150,7 @@ function toPublic(doc, { includePrivate = false } = {}) {
  // Cost / costing is confidential - only for authenticated admin responses
  if (includePrivate) {
  out.cost = p.cost || 0;
+ if (drifted) out.priceMismatch = true;
  }
  return out;
 }
@@ -145,6 +198,7 @@ router.get("/", optionalAdmin, async (req, res) => {
  filter.category = req.query.category;
  }
  const products = await Product.find(filter).sort({ sortOrder: 1, updatedAt: -1 });
+ repairDriftedMainSizes();
  const includePrivate = Boolean(req.admin && includeAll);
  res.json({
  categories: CATEGORIES,
@@ -154,6 +208,25 @@ router.get("/", optionalAdmin, async (req, res) => {
  console.error(err);
  res.status(500).json({ error: "Could not load products" });
  }
+});
+
+router.get("/admin/price-mismatches", requireAdmin, async (_req, res) => {
+  try {
+    const products = await Product.find({}).select("name slug price mrp sku sizes");
+    const mismatches = products
+      .filter(mainSizeDrifted)
+      .map((p) => ({
+        id: p.slug,
+        name: p.name,
+        sku: p.sku || "",
+        sellingPrice: p.price,
+        sizePrice: p.sizes && p.sizes[0] ? p.sizes[0].price : null,
+        sizeLabel: p.sizes && p.sizes[0] ? p.sizes[0].label : "",
+      }));
+    res.json({ count: mismatches.length, products: mismatches });
+  } catch (err) {
+    res.status(500).json({ error: "Could not audit prices" });
+  }
 });
 
 router.get("/:id", optionalAdmin, async (req, res) => {
@@ -258,6 +331,8 @@ router.post("/", requireAdmin, async (req, res) => {
  active: status === "available",
  sortOrder: body.sortOrder != null ? Number(body.sortOrder) : 100,
  });
+ applyMainSizeToDoc(product);
+ await product.save();
  res.status(201).json({ product: toPublic(product, { includePrivate: true }) });
  } catch (err) {
  if (err && (err.code === 11000 || err.code === "E11000")) {
@@ -367,6 +442,8 @@ router.put("/:id", requireAdmin, async (req, res) => {
  }
  product.sizes = nextSizes;
  }
+
+ applyMainSizeToDoc(product);
 
  await product.save();
  res.json({ product: toPublic(product, { includePrivate: true }) });

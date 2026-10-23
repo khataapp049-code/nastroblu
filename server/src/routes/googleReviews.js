@@ -12,7 +12,7 @@ let cache = {
   data: null,
 };
 
-const CACHE_MS = 6 * 60 * 60 * 1000; // 6 hours
+const CACHE_MS = 30 * 60 * 1000; // 30 minutes — keep the homepage close to Google
 
 function loadFallback() {
   const raw = fs.readFileSync(FALLBACK_PATH, "utf8");
@@ -41,59 +41,85 @@ function shapePayload(source, fromApi) {
   };
 }
 
+function looksLikePlaceId(id) {
+  const s = String(id || "").trim();
+  if (!s || s.startsWith("AIza")) return false;
+  return /^ChIJ[A-Za-z0-9_-]+$/.test(s) || s.startsWith("places/");
+}
+
 async function fetchFromGooglePlaces() {
   const key = config.googleMapsApiKey;
-  if (!key) return null;
+  if (!key) {
+    console.warn("Google reviews: no GOOGLE_MAPS_API_KEY in .env");
+    return null;
+  }
 
-  let placeId = config.googlePlaceId;
+  let placeId = looksLikePlaceId(config.googlePlaceId) ? config.googlePlaceId.trim() : "";
+  if (placeId.startsWith("places/")) placeId = placeId.slice("places/".length);
+
   if (!placeId) {
-    const findUrl =
-      "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?" +
-      new URLSearchParams({
-        input: "NASTRO BLU Bagh Amberpet Hyderabad",
-        inputtype: "textquery",
-        fields: "place_id,name,rating,user_ratings_total",
-        key,
-      });
-    const findRes = await fetch(findUrl);
-    const findData = await findRes.json();
-    placeId = findData.candidates && findData.candidates[0] && findData.candidates[0].place_id;
+    const searchRes = await fetch("https://places.googleapis.com/v1/places:searchText", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": key,
+        "X-Goog-FieldMask": "places.id,places.displayName",
+      },
+      body: JSON.stringify({ textQuery: "NASTRO BLU Bagh Amberpet Hyderabad" }),
+    });
+    const searchData = await searchRes.json();
+    if (searchData.error) {
+      console.warn("Google Places search failed:", searchData.error.message || searchData.error.status);
+      return null;
+    }
+    placeId = searchData.places && searchData.places[0] && searchData.places[0].id;
+    if (placeId && placeId.startsWith("places/")) placeId = placeId.slice("places/".length);
     if (!placeId) return null;
   }
 
-  const detailsUrl =
-    "https://maps.googleapis.com/maps/api/place/details/json?" +
-    new URLSearchParams({
-      place_id: placeId,
-      fields: "name,rating,user_ratings_total,formatted_address,url,reviews",
-      reviews_sort: "newest",
-      key,
-    });
-  const detailsRes = await fetch(detailsUrl);
-  const detailsData = await detailsRes.json();
-  if (!detailsData.result) return null;
+  const detailsRes = await fetch("https://places.googleapis.com/v1/places/" + encodeURIComponent(placeId), {
+    headers: {
+      "X-Goog-Api-Key": key,
+      "X-Goog-FieldMask":
+        "id,displayName,rating,userRatingCount,formattedAddress,googleMapsUri,reviews",
+    },
+  });
+  const result = await detailsRes.json();
+  if (result.error) {
+    console.warn("Google Places details failed:", result.error.message || result.error.status);
+    return null;
+  }
+  if (result.rating == null && !(result.reviews && result.reviews.length)) return null;
 
-  const result = detailsData.result;
+  const reviews = (result.reviews || []).map((r) => ({
+    authorName: (r.authorAttribution && r.authorAttribution.displayName) || "Google user",
+    rating: r.rating,
+    relativeTime: r.relativePublishTimeDescription || "",
+    text: (r.text && r.text.text) || (r.originalText && r.originalText.text) || "",
+    profilePhotoUrl: (r.authorAttribution && r.authorAttribution.photoUri) || "",
+  }));
+
   const fallback = loadFallback();
   return shapePayload(
     {
-      placeName: result.name,
-      address: result.formatted_address,
+      placeName: (result.displayName && result.displayName.text) || "NASTRO BLU",
+      address: result.formattedAddress,
       rating: result.rating,
-      userRatingsTotal: result.user_ratings_total,
-      mapsUrl: result.url || fallback.mapsUrl,
+      userRatingsTotal: result.userRatingCount,
+      mapsUrl: result.googleMapsUri || fallback.mapsUrl,
       reviewsUrl: fallback.reviewsUrl,
       writeReviewUrl: fallback.writeReviewUrl,
-      reviews: result.reviews || fallback.reviews,
+      reviews,
     },
     true
   );
 }
 
-router.get("/", async (_req, res) => {
+router.get("/", async (req, res) => {
   try {
     const now = Date.now();
-    if (cache.data && now - cache.at < CACHE_MS) {
+    const force = req.query.refresh === "1";
+    if (!force && cache.data && now - cache.at < CACHE_MS) {
       return res.json(cache.data);
     }
 
@@ -106,14 +132,6 @@ router.get("/", async (_req, res) => {
 
     if (!payload) {
       payload = shapePayload(loadFallback(), false);
-    }
-
-    // If API returned rating but few/no reviews text, merge featured fallback texts
-    if (payload.source === "google" && (!payload.reviews || payload.reviews.length < 3)) {
-      const fb = loadFallback();
-      payload.reviews = shapePayload(fb, false).reviews;
-      if (!payload.rating) payload.rating = fb.rating;
-      if (!payload.userRatingsTotal) payload.userRatingsTotal = fb.userRatingsTotal;
     }
 
     cache = { at: now, data: payload };
